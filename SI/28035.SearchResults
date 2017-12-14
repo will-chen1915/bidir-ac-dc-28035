@@ -1,0 +1,4 @@
+---- IsrRamfuncsLoadStart Matches (3 in 3 files) ----
+DSP2803x_GlobalPrototypes.h (include):extern Uint16 IsrRamfuncsLoadStart;
+Flash2803x_API.h (include):extern Uint16 IsrRamfuncsLoadStart;
+Main.c (source):	MemCopy(&IsrRamfuncsLoadStart, &IsrRamfuncsLoadEnd, &IsrRamfuncsRunStart);
