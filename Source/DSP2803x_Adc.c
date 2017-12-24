@@ -22,17 +22,13 @@
 #define ADC_SOCPrity	0x01	// SOC0 are high priority, rest of channels are in round robin mode.
 
 
-#define DCVOLTFB		0x00
-#define DCVOLTOVP		0x03
-#define CSL_FB		    0x0B
+#define CSL_FB		    0x0F
 
-#define TEMP            0x0E
+#define TEMP            0x0C
 
-#define VHS             0x09
+#define VHS             0x07
 
-#define VL_FB		    0x00
-#define TEMPWATER		0x09
-#define TEMPAIR		    0x0A
+#define VL_FB		    0x0B
 
 void InitAdcAio()
 {
@@ -107,17 +103,16 @@ void InitAdc(void)
 	AdcRegs.ADCSOC2CTL.bit.TRIGSEL = EPWM2_TRIG;
 	AdcRegs.ADCSOC2CTL.bit.ACQPS = ADC_SHCLK;	
 	AdcRegs.ADCSOC2CTL.bit.CHSEL = VHS; 
-	 
-#if 0	
-	AdcRegs.ADCSOC4CTL.bit.TRIGSEL = ADC_TRIGER;
-	AdcRegs.ADCSOC4CTL.bit.ACQPS = ADC_SHCLK;	
-	AdcRegs.ADCSOC4CTL.bit.CHSEL = CSL_FB;
-#endif	
-	//CPU Timer 0, TINT0n, smaple window 7 cycles, temperature
+
+	//ePWM2, ADCSOCA, smaple window 7 cycles, temperature
 	AdcRegs.ADCSOC3CTL.bit.TRIGSEL = EPWM2_TRIG;
 	AdcRegs.ADCSOC3CTL.bit.ACQPS = ADC_SHCLK;	
 	AdcRegs.ADCSOC3CTL.bit.CHSEL = TEMP;
-
+	
+	//ePWM2, ADCSOCA , smaple window 7 cycles ,VH voltage sample
+	AdcRegs.ADCSOC4CTL.bit.TRIGSEL = ADC_TRIGER;
+	AdcRegs.ADCSOC4CTL.bit.ACQPS = ADC_SHCLK;	
+	AdcRegs.ADCSOC4CTL.bit.CHSEL = CSL_FB;
 	 
 	//round cycle, SOC15 is last, and SOC0 is highest round robin priority
 	AdcRegs.SOCPRICTL.bit.RRPOINTER = 0x0f;

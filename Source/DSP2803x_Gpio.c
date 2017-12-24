@@ -91,13 +91,23 @@ void InitGpio(void)
 //	GpioCtrlRegs.GPADIR.all = 0x0EE08000;
 //	GpioCtrlRegs.GPBDIR.all = 0x0000;
 
-	// GPIO12---LED1
+	// GPIO12---PFC_OK
 	GpioCtrlRegs.GPAMUX1.bit.GPIO12 = 0;	// GPIO12 as gpio 
-	GpioCtrlRegs.GPADIR.bit.GPIO12 = 1;	    // GPIO12 as Output
+	GpioCtrlRegs.GPADIR.bit.GPIO12 = 0;	    // GPIO12 as input
 	GpioCtrlRegs.GPAPUD.bit.GPIO12 = 0;	    // Pullup's enabled
 
-	// GPIO25---LED2
-	GpioCtrlRegs.GPAMUX2.bit.GPIO25 = 0;	// GPIO25 as gpio 
+	// GPIO17---LED1
+	GpioCtrlRegs.GPAMUX2.bit.GPIO17 = 0;	// GPIO12 as gpio 
+	GpioCtrlRegs.GPADIR.bit.GPIO17 = 1;	    // GPIO12 as output
+	GpioCtrlRegs.GPAPUD.bit.GPIO17 = 0;	    // Pullup's enabled
+
+	// GPIO18---LED2
+	GpioCtrlRegs.GPAMUX2.bit.GPIO18 = 0;	// GPIO18 as gpio 
+	GpioCtrlRegs.GPADIR.bit.GPIO18 = 1;	    // GPIO18 as output
+	GpioCtrlRegs.GPAPUD.bit.GPIO18 = 0;	    // Pullup's enabled
+
+	// GPIO25---LED3
+	GpioCtrlRegs.GPAMUX2.bit.GPIO16= 0;	// GPIO25 as gpio 
 	GpioCtrlRegs.GPADIR.bit.GPIO25 = 1;	    // GPIO25 as Output
 	GpioCtrlRegs.GPAPUD.bit.GPIO25 = 0;	    // Pullup's enabled
 
@@ -108,25 +118,11 @@ void InitGpio(void)
 	GpioCtrlRegs.GPBPUD.bit.GPIO44 = 0;	    // Pullup's enabled
     #endif
 	
-	// GPIO27---LED3
-	GpioCtrlRegs.GPAMUX2.bit.GPIO27 = 0;	// GPIO27 as gpio 
-	GpioCtrlRegs.GPADIR.bit.GPIO27 = 1;	    // GPIO27 as Output
-	GpioCtrlRegs.GPAPUD.bit.GPIO27 = 0;	    // Pullup's enabled
 
-    // GPIO21---24Wpd
-	GpioCtrlRegs.GPAMUX2.bit.GPIO21 = 0;    // GPIO21 as gpio
-	GpioCtrlRegs.GPADIR.bit.GPIO21 = 1;	    // GPIO21 as Input
-	GpioCtrlRegs.GPAPUD.bit.GPIO21 = 0;	    // Pullup's Disabled
-
-	// GPIO32---24SDAd
-	GpioCtrlRegs.GPBMUX1.bit.GPIO32 = 0;	// GPIO32 as gpio 
-	GpioCtrlRegs.GPBDIR.bit.GPIO32 = 1;	    // GPIO32 as Output
-	GpioCtrlRegs.GPBPUD.bit.GPIO32 = 1;	    // Pullup's Disabled
-	
-	// GPIO33---24SCLd
-	GpioCtrlRegs.GPBMUX1.bit.GPIO33 = 0;	// GPIO33 as gpio 
-	GpioCtrlRegs.GPBDIR.bit.GPIO33 = 1;	    // GPIO33 as Output
-	GpioCtrlRegs.GPBPUD.bit.GPIO33 = 1;	    // Pullup's Disabled
+    // GPIO23---24Wpd
+	GpioCtrlRegs.GPAMUX2.bit.GPIO23 = 0;    // GPIO23 as gpio
+	GpioCtrlRegs.GPADIR.bit.GPIO23 = 1;	    // GPIO23 as output
+	GpioCtrlRegs.GPAPUD.bit.GPIO23 = 0;	    // Pullup's Disabled
 	
 	EDIS;	
 }	

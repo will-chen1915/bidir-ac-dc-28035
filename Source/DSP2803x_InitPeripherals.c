@@ -26,8 +26,8 @@ void InitPeripherals(void)
 	InitAdc();
 	InitCpuTimers();
 //	InitECan();
-//	InitSci();
-//    InitI2C();
+	InitSci();
+    InitI2C();
 }
 
 //=========================================================
