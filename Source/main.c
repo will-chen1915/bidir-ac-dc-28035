@@ -57,12 +57,11 @@ void main(void)
 	//App_CputoClaVar_init();//cla
 	App_initStateCtrl();
 	EnableInterrupts();
-    EnableDog();
+    //EnableDog();
 
 	for(;;)
     {
         //App_CheckChrgDisChrg();
-		//App_WarnCtrl();
 		IO_UpdSignal();
 		analog_monitor();
 		App_StateCtrl();
@@ -70,16 +69,7 @@ void main(void)
 		
 		//Thermal_Main();// Temperature Monitor
 		//Fan_CtrlMain();
-		/*
-		App_MtimerTreat();			// main timer treatment		
-		App_SoftStartCtrl();		// soft start control
-		App_LINSCICommu();			// Lin_SCI Communication(1938)
-		App_SCICommu();				// SCI Communication(46K80)
-		App_CircuitCal();			// volt,curr,power calculation		
-		App_WarnCtrl();				// IO samp and control
-		App_CANCommu();				// CAN Communication
-		FlashUpdate();				// Flash Update
-		*/
+		//App_CANCommu();				// CAN Communication	
     }
 }
 

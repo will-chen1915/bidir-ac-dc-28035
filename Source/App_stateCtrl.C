@@ -34,6 +34,22 @@ void App_initStateCtrl(void)
 	//Load Timer here
 }
 
+void Disable_MainPWMCtrl(void)
+{
+	EALLOW;
+	EPwm1Regs.TZFRC.bit.OST = TZ_ENABLE;//	
+	EPwm2Regs.TZFRC.bit.OST = TZ_ENABLE;//
+	EDIS;
+}
+
+void Enable_MainPWMCtrl(void)
+{
+	EALLOW;
+	EPwm1Regs.TZCLR.bit.OST = TZ_ENABLE;//	
+	EPwm2Regs.TZCLR.bit.OST = TZ_ENABLE;//
+	EDIS;
+}
+
 
 /*******************************************************************************
  *Function name: App_StateCtrl()  
@@ -59,10 +75,12 @@ void App_StateCtrl(void)
 		}
 		case SHUT_DOWN:
 		{
+			Disable_MainPWMCtrl();
 			if((is_PFC_OK() == TRUE)&&(is_fault() == FALSE))
 			{
 				if (hptsc_IsTimerExpired(&ts_SmTimer))
 				{
+                    Enable_MainPWMCtrl();
 					PSUCharge_state = SOFT_START;
 					hptsc_LoadTimer(&ts_SmTimer, SOFT_START_TIME);
 				}

@@ -249,13 +249,12 @@ void InitEPwm(void)
 
 	SysCtrlRegs.PCLKCR0.bit.TBCLKSYNC = 0;      // Stop all the TB clocks
 	
-	InitEPWM1();//PWMC---DV3H---
-	InitEPWM2();//PWMA---DV1H---
-	InitEPWM5();//PWMD---DV4L---
-	InitEPWM6();//PWMB---DV2L---
-
-	InitEPWM3();//PWME---DVA  SYCH_A
-	InitEPWM4();//PWMF---DVB SYCH_B
+	InitEPWM1();//---DVH1----
+	InitEPWM2();//---DVL2----
+	InitEPWM3();//---DVL3----
+	InitEPWM4();//---DVH4----
+	InitEPWM5();//DVA  SYCH_A---
+	InitEPWM6();//DVB SYCH_B---
 	
 	 
 	SysCtrlRegs.PCLKCR0.bit.TBCLKSYNC = 1;      // Start all the timers synced
@@ -286,10 +285,10 @@ void InitEPWM1(void)
 	EPwm1Regs.TZCTL.bit.DCAEVT1 = TZ_FORCE_LO;           // EPWM1A will go low
 	#endif
 
-	#if 0
-	EPwm1Regs.TZSEL.bit.OSHT1 = TZ_ENABLE;			//Enable TZ1 as a OST trip source
-	EPwm1Regs.TZSEL.bit.OSHT2 = TZ_ENABLE;			//Enable TZ2 as a OST trip source
-	EPwm1Regs.TZSEL.bit.OSHT3 = TZ_ENABLE;			//Enable TZ3 as a OST trip source
+	#if 1
+//	EPwm1Regs.TZSEL.bit.OSHT1 = TZ_ENABLE;			//Enable TZ1 as a OST trip source
+//	EPwm1Regs.TZSEL.bit.OSHT2 = TZ_ENABLE;			//Enable TZ2 as a OST trip source
+//	EPwm1Regs.TZSEL.bit.OSHT3 = TZ_ENABLE;			//Enable TZ3 as a OST trip source
 	EPwm1Regs.TZCTL.bit.TZA = TZ_FORCE_LO;
 	EPwm1Regs.TZCTL.bit.TZB = TZ_NO_CHANGE;
 	EPwm1Regs.TZCLR.all = 0x0007;					//clear all TZFLAG
@@ -316,12 +315,12 @@ void InitEPWM1(void)
 	//Setup CC
 	EPwm1Regs.CMPCTL.bit.LOADAMODE = CC_CTR_ZERO;
 	EPwm1Regs.CMPCTL.bit.SHDWAMODE = CC_SHADOW;
-	EPwm1Regs.CMPA.half.CMPA = DC_DC_FREQUENCY_70KHZ - INITIAL_DUTY;
+	EPwm1Regs.CMPA.half.CMPA = INITIAL_DUTY;
 
     //Set pwm edge adjusting mode
-	EPwm1Regs.AQCTLA.bit.ZRO = AQ_CLEAR;              // ClearvPWM1A on Zero
+	EPwm1Regs.AQCTLA.bit.ZRO = AQ_SET;              // ClearvPWM1A on Zero
 	EPwm1Regs.AQCTLA.bit.CAD = AQ_CLEAR;
-	EPwm1Regs.AQCTLA.bit.PRD = AQ_SET;				  //Set PWM1A on Zero
+	EPwm1Regs.AQCTLA.bit.PRD = AQ_CLEAR;				  //Set PWM1A on Zero
 
    	EPwm1Regs.DBCTL.bit.OUT_MODE = DBB_ENABLE;
     EPwm1Regs.DBCTL.bit.POLSEL = DBA_ALL;			//Neither inverted
@@ -368,14 +367,14 @@ void InitEPWM2(void)
 	EPwm2Regs.TZCTL.bit.DCAEVT1 = TZ_FORCE_LO;           // EPWM2A will go low
 	#endif
 
-	#if 0
-	EPwm2Regs.TZSEL.bit.OSHT1 = TZ_ENABLE;			//Enable TZ1 as a OST trip source
-	EPwm2Regs.TZSEL.bit.OSHT2 = TZ_ENABLE;			//Enable TZ2 as a OST trip source
-	EPwm2Regs.TZSEL.bit.OSHT3 = TZ_ENABLE;			//Enable TZ3 as a OST trip source
+	#if 1
+	//EPwm2Regs.TZSEL.bit.OSHT1 = TZ_ENABLE;			//Enable TZ1 as a OST trip source
+	//EPwm2Regs.TZSEL.bit.OSHT2 = TZ_ENABLE;			//Enable TZ2 as a OST trip source
+	//EPwm2Regs.TZSEL.bit.OSHT3 = TZ_ENABLE;			//Enable TZ3 as a OST trip source
 	EPwm2Regs.TZCTL.bit.TZA = TZ_FORCE_LO;
 	EPwm2Regs.TZCTL.bit.TZB = TZ_NO_CHANGE;			//not used
 	EPwm2Regs.TZCLR.all = 0x0007;					//clear all TZFLAG
-	EPwm2Regs.TZEINT.bit.OST = 0;					//disable interrupt
+	EPwm2Regs.TZEINT.bit.OST = TZ_DISABLE;			//disable interrupt
 	#endif
 	
 	EPwm2Regs.TBCTR = 0;
@@ -396,12 +395,12 @@ void InitEPWM2(void)
 	
 	EPwm2Regs.CMPCTL.bit.LOADAMODE = CC_CTR_ZERO;
 	EPwm2Regs.CMPCTL.bit.SHDWAMODE = CC_SHADOW;
-	EPwm2Regs.CMPA.half.CMPA = INITIAL_DUTY;
+//	EPwm2Regs.CMPA.half.CMPA = INITIAL_DUTY;
 
-	EPwm2Regs.AQCTLA.bit.ZRO = AQ_SET;
-	EPwm2Regs.AQCTLA.bit.CAU = AQ_CLEAR;
+	EPwm2Regs.AQCTLA.bit.ZRO = AQ_CLEAR;
+//	EPwm2Regs.AQCTLA.bit.CAU = AQ_CLEAR;
 //	EPwm2Regs.AQCTLA.bit.CBU = AQ_CLEAR;
-	EPwm2Regs.AQCTLA.bit.PRD = AQ_CLEAR;
+	EPwm2Regs.AQCTLA.bit.PRD = AQ_SET;
 
    	EPwm2Regs.DBCTL.bit.OUT_MODE = DBB_ENABLE;
     EPwm2Regs.DBCTL.bit.POLSEL = DBA_ALL;			//Neither inverted
@@ -457,9 +456,9 @@ void InitEPWM3(void)
 	EPwm3Regs.CMPCTL.bit.SHDWAMODE = CC_SHADOW;
 //	EPwm3Regs.CMPA.half.CMPA = DC_DUTY_MIN;
 
-	EPwm3Regs.AQCTLA.bit.ZRO = AQ_CLEAR;
+	EPwm3Regs.AQCTLA.bit.ZRO = AQ_SET;
 //	EPwm3Regs.AQCTLA.bit.CAU = AQ_CLEAR;
-	EPwm3Regs.AQCTLA.bit.PRD = AQ_SET;				
+	EPwm3Regs.AQCTLA.bit.PRD = AQ_CLEAR;				
 
    	EPwm3Regs.DBCTL.bit.OUT_MODE = DBB_ENABLE;
     EPwm3Regs.DBCTL.bit.POLSEL = DBA_ALL;			//Neither inverted
@@ -507,11 +506,11 @@ void InitEPWM4(void)
 	
 	EPwm4Regs.CMPCTL.bit.LOADAMODE = CC_CTR_ZERO;
 	EPwm4Regs.CMPCTL.bit.SHDWAMODE = CC_SHADOW;
-//	EPwm4Regs.CMPA.half.CMPA = DC_PRD_Ts - DC_DUTY_MIN;
+	EPwm4Regs.CMPA.half.CMPA = DC_DC_FREQUENCY_70KHZ - INITIAL_DUTY;
 
-	EPwm4Regs.AQCTLA.bit.ZRO = AQ_SET;
-//	EPwm4Regs.AQCTLA.bit.PRD = AQ_SET;
-	EPwm4Regs.AQCTLA.bit.CAD = AQ_CLEAR;				
+	EPwm4Regs.AQCTLA.bit.ZRO = AQ_CLEAR;
+	EPwm4Regs.AQCTLA.bit.PRD = AQ_SET;
+	EPwm4Regs.AQCTLA.bit.CAD= AQ_CLEAR;
 
    	EPwm4Regs.DBCTL.bit.OUT_MODE = DBB_ENABLE;
     EPwm4Regs.DBCTL.bit.POLSEL = DBA_ALL;			//Neither inverted
@@ -553,10 +552,10 @@ void InitEPWM5(void)
 	EPwm5Regs.TZCTL.bit.DCAEVT1 = TZ_FORCE_LO;           // EPWM5A will go low
 	#endif
 
-	#if 0
-	EPwm5Regs.TZSEL.bit.OSHT1 = TZ_ENABLE;			//Enable TZ1 as a OST trip source	
-	EPwm5Regs.TZSEL.bit.OSHT2 = TZ_ENABLE;			//Enable TZ2 as a OST trip source	
-	EPwm5Regs.TZSEL.bit.OSHT3 = TZ_ENABLE;			//Enable TZ3 as a OST trip source
+	#if 1
+//	EPwm5Regs.TZSEL.bit.OSHT1 = TZ_ENABLE;			//Enable TZ1 as a OST trip source	
+//	EPwm5Regs.TZSEL.bit.OSHT2 = TZ_ENABLE;			//Enable TZ2 as a OST trip source	
+//	EPwm5Regs.TZSEL.bit.OSHT3 = TZ_ENABLE;			//Enable TZ3 as a OST trip source
 	EPwm5Regs.TZCTL.bit.TZA = TZ_FORCE_LO;
 	EPwm5Regs.TZCTL.bit.TZB = TZ_NO_CHANGE;
 	EPwm5Regs.TZEINT.bit.OST = 0;					//disable interrupt
@@ -583,9 +582,9 @@ void InitEPWM5(void)
 //	EPwm5Regs.CMPA.half.CMPA = DC_DUTY_MIN;
 	EPwm5Regs.CMPB = 0;
 
-	EPwm5Regs.AQCTLA.bit.ZRO = AQ_SET;
+	EPwm5Regs.AQCTLA.bit.ZRO = AQ_CLEAR;
 //	EPwm5Regs.AQCTLA.bit.CAU = AQ_CLEAR;
-	EPwm5Regs.AQCTLA.bit.PRD = AQ_CLEAR;	
+	EPwm5Regs.AQCTLA.bit.PRD = AQ_SET;	
 
 //	EPwm5Regs.AQCTLB.bit.CBU = AQ_CLEAR;
 //	EPwm5Regs.AQCTLB.bit.CBD = AQ_SET;
@@ -630,10 +629,10 @@ void InitEPWM6(void)
 	EPwm6Regs.TZCTL.bit.DCAEVT1 = TZ_FORCE_LO;           // EPWM6A will go low
 	#endif
 
-	#if 0
-	EPwm6Regs.TZSEL.bit.OSHT1 = TZ_ENABLE;			//Enable TZ1 as a OST trip source	
-	EPwm6Regs.TZSEL.bit.OSHT2 = TZ_ENABLE;			//Enable TZ2 as a OST trip source	
-	EPwm6Regs.TZSEL.bit.OSHT3 = TZ_ENABLE;			//Enable TZ3 as a OST trip source
+	#if 1
+//	EPwm6Regs.TZSEL.bit.OSHT1 = TZ_ENABLE;			//Enable TZ1 as a OST trip source	
+//	EPwm6Regs.TZSEL.bit.OSHT2 = TZ_ENABLE;			//Enable TZ2 as a OST trip source	
+//	EPwm6Regs.TZSEL.bit.OSHT3 = TZ_ENABLE;			//Enable TZ3 as a OST trip source
 	EPwm6Regs.TZCTL.bit.TZA = TZ_FORCE_LO;
 	EPwm6Regs.TZCTL.bit.TZB = TZ_NO_CHANGE;
 	EPwm6Regs.TZEINT.bit.OST = 0;					//disable interrupt
@@ -660,9 +659,9 @@ void InitEPWM6(void)
 	EPwm6Regs.CMPCTL.bit.SHDWAMODE = CC_SHADOW;
 //	EPwm6Regs.CMPA.half.CMPA = DC_PRD_Ts - DC_DUTY_MIN;
 
-	EPwm6Regs.AQCTLA.bit.ZRO = AQ_CLEAR;
+	EPwm6Regs.AQCTLA.bit.ZRO = AQ_SET;
 //	EPwm6Regs.AQCTLA.bit.CAD = AQ_CLEAR;
-	EPwm6Regs.AQCTLA.bit.PRD = AQ_SET;
+	EPwm6Regs.AQCTLA.bit.PRD = AQ_CLEAR;
 				
 	#ifdef DT_REG
    	EPwm6Regs.DBCTL.bit.OUT_MODE = DBB_ENABLE;

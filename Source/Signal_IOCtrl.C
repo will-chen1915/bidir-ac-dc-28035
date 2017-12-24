@@ -2,15 +2,10 @@
 
 #include "DSP2803x_Device.h"      // DSP2803x Headerfile Include File
 
-typedef enum tag_LogicState
-{
-    False = 0,
-    FalseWait = 1,
-    True = 2,
-    TrueWait = 3
-} LogicStateType;
+#define   K16_PFCOK_OFF_T     hptsc_MsToTicks(10)
+#define   K16_PFC_ON_T     hptsc_MsToTicks(10)
 
-LogicStateType PFCOK_State_e;
+LogicStateType PFCOK_State_e = False;
 
 T_LedState LED1State = LED_OFF;
 T_LedState LED2State = LED_OFF;
@@ -19,8 +14,7 @@ T_LedState LED3State = LED_OFF;
 
 
 
-#if 0
-void IO_UpdState(LogicStateType* StateName, uint16* StateCnt, Bool (*const ChkFunc)(), const uint16 T2Ftime, const uint16 F2Ttime, const uint16 DefState)
+void IO_UpdState(LogicStateType* StateName, Uint16* StateCnt, bool (*const ChkFunc)(), const Uint16 T2Ftime, const Uint16 F2Ttime, const Uint16 DefState)
 {
     switch (*StateName)
     {
@@ -79,15 +73,15 @@ void IO_UpdState(LogicStateType* StateName, uint16* StateCnt, Bool (*const ChkFu
 
 bool IO_ChkPFCOK(void)
 {
-	uint16 u16LpCnt = 0;
+	Uint16 u16LpCnt = 0;
 	   do
 	   {
 		   u16LpCnt++;
-		   if (i1pin_PFCOK == LOW && i1pin_PFCOK == LOW && i1pin_PFCOK == LOW)
+		   if (getPin_PFCOK() == LOW && getPin_PFCOK() == LOW && getPin_PFCOK() == LOW)
 		   {
 			   return TRUE; // return TRUE if it is low for 3 times
 		   }
-		   if (i1pin_PFCOK == HIGH && i1pin_PFCOK == HIGH && i1pin_PFCOK == HIGH)
+		   if (getPin_PFCOK() == HIGH && getPin_PFCOK() == HIGH && getPin_PFCOK() == HIGH)
 		   {
 			   return FALSE; //    return FALSE if it is high for 3 times
 		   }
@@ -97,10 +91,10 @@ bool IO_ChkPFCOK(void)
 }
 void IO_UpdInput_PFCOK(void)
 {
-	static uint16 u16PFCOK_StateCnt = 0;
+	static Uint16 u16PFCOK_StateCnt = 0;
 	IO_UpdState(&PFCOK_State_e, &u16PFCOK_StateCnt, &IO_ChkPFCOK, K16_PFCOK_OFF_T, K16_PFC_ON_T, False);
 }
-#endif
+
 
 
 bool LEDCtrl_LED1OnCond(void)
@@ -249,7 +243,8 @@ void IO_UpdOutput_LED3(void)
 
 void IO_UpdSignal(void)
 {
-	//IO_UpdInput_PFCOK();
+	IO_UpdInput_PFCOK();
+	
 	IO_UpdOutput_LED1();
 	IO_UpdOutput_LED2();
 	IO_UpdOutput_LED3();

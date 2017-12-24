@@ -19,6 +19,8 @@
 #define HIGH     1
 #define true     1
 #define false    0
+#define SUCCESS  1
+#define ERROR    0
 
 
 #endif

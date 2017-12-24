@@ -51,41 +51,51 @@ void analog_ChkHVOVP(void)
 	static HptscTicks_t ts_HVOVP_CLR_ElapsedTicket = 0;
 	
 	if(u16FaultReg.bit.HVOVP== FALSE)
+	{
+		ts_HVOVP_CLR_ElapsedTicket = 0;
+		ts_ticketHVOVPClrSum= 0;
+		if(u16HVoltInst > K16_HVOVP_TH)
 		{
-			ts_HVOVP_CLR_ElapsedTicket = 0;
-			ts_ticketHVOVPClrSum= 0;
-			if(u16HVoltInst > K16_HVOVP_TH)
+			if(ts_ticketHVOVPSum > K32_HVOVP_TIME)
 			{
-				if(ts_ticketHVOVPSum > K32_HVOVP_TIME)
-				{
-					u16FaultReg.bit.HVOVP= TRUE;
-					ts_HVOVP_ElapsedTicket = 0;
-					ts_ticketHVOVPSum= 0;
-				}
-				else
-				{
-					ts_ticketHVOVPSum += hptsc_ElapsedTicket(&ts_HVOVP_ElapsedTicket);
-				}
+				u16FaultReg.bit.HVOVP= TRUE;
+				ts_HVOVP_ElapsedTicket = 0;
+				ts_ticketHVOVPSum= 0;
+			}
+			else
+			{
+				ts_ticketHVOVPSum += hptsc_ElapsedTicket(&ts_HVOVP_ElapsedTicket);
 			}
 		}
 		else
 		{
-			if(u16HVoltInst < K16_HVOVP_RECOVERY_TH)
+        	ts_HVOVP_ElapsedTicket = 0;
+			ts_ticketHVOVPSum= 0;    
+		}
+	}
+	else
+	{
+		ts_HVOVP_ElapsedTicket = 0;
+		ts_ticketHVOVPSum= 0;
+		if(u16HVoltInst < K16_HVOVP_RECOVERY_TH)
+		{
+			if(ts_ticketHVOVPSum > K32_HVOVP_RCOVERY_TIME)
 			{
-				ts_HVOVP_ElapsedTicket = 0;
-				ts_ticketHVOVPSum= 0;
-				if(ts_ticketHVOVPSum > K32_HVOVP_RCOVERY_TIME)
-				{
-					u16FaultReg.bit.HVOVP= FALSE;
-					ts_HVOVP_CLR_ElapsedTicket = 0;
-					ts_ticketHVOVPClrSum= 0;
-				}
-				else
-				{
-					ts_ticketHVOVPClrSum += hptsc_ElapsedTicket(&ts_HVOVP_CLR_ElapsedTicket);
-				}
+				u16FaultReg.bit.HVOVP= FALSE;
+				ts_HVOVP_CLR_ElapsedTicket = 0;
+				ts_ticketHVOVPClrSum= 0;
+			}
+			else
+			{
+				ts_ticketHVOVPClrSum += hptsc_ElapsedTicket(&ts_HVOVP_CLR_ElapsedTicket);
 			}
 		}
+		else
+		{
+			ts_HVOVP_CLR_ElapsedTicket = 0;
+		    ts_ticketHVOVPClrSum= 0;
+		}
+	}
 
 }
 
@@ -112,13 +122,18 @@ void analog_ChkHVUVP(void)
 					ts_ticketHVUVPSum += hptsc_ElapsedTicket(&ts_HVUVP_ElapsedTicket);
 				}
 			}
+			else
+			{
+			    ts_HVUVP_ElapsedTicket = 0;
+			    ts_ticketHVUVPSum= 0;
+			}
 		}
 		else
 		{
+			ts_HVUVP_ElapsedTicket = 0;
+			ts_ticketHVUVPSum= 0;
 			if(u16HVoltInst < K16_HVUVP_RECOVERY_TH)
 			{
-				ts_HVUVP_ElapsedTicket = 0;
-				ts_ticketHVUVPSum= 0;
 				if(ts_ticketHVUVPSum > K32_HVUVP_RCOVERY_TIME)
 				{
 					u16FaultReg.bit.HVUVP= FALSE;
@@ -129,6 +144,11 @@ void analog_ChkHVUVP(void)
 				{
 					ts_ticketHVUVPClrSum += hptsc_ElapsedTicket(&ts_HVUVP_CLR_ElapsedTicket);
 				}
+			}
+			else
+			{
+				ts_HVUVP_CLR_ElapsedTicket = 0;
+				ts_ticketHVUVPClrSum= 0;
 			}
 		}
 }
@@ -157,13 +177,18 @@ void analog_ChkLVOVP(void)
 				ts_ticketLVOVPSum += hptsc_ElapsedTicket(&ts_LVOVP_ElapsedTicket);
 			}
 		}
-	}
-	else
-	{
-		if(u16LVoltInst < K16_LVOVP_RECOVERY_TH)
+		else
 		{
 			ts_LVOVP_ElapsedTicket = 0;
 			ts_ticketLVOVPSum= 0;
+		}
+	}
+	else
+	{
+		ts_LVOVP_ElapsedTicket = 0;
+		ts_ticketLVOVPSum= 0;
+		if(u16LVoltInst < K16_LVOVP_RECOVERY_TH)
+		{
 			if(ts_ticketLVOVPClrSum > K32_LVOVP_RCOVERY_TIME)
 			{
 				u16FaultReg.bit.LVOVP = FALSE;
@@ -174,6 +199,11 @@ void analog_ChkLVOVP(void)
 			{
 				ts_ticketLVOVPClrSum += hptsc_ElapsedTicket(&ts_LVOVP_CLR_ElapsedTicket);
 			}
+		}
+		else
+		{
+			ts_LVOVP_CLR_ElapsedTicket = 0;
+			ts_ticketLVOVPClrSum= 0;
 		}
 	}
 }
@@ -201,6 +231,11 @@ void analog_ChkLVUVP(void)
 				ts_ticketLVUVPSum += hptsc_ElapsedTicket(&ts_LVUVP_ElapsedTicket);
 			}
 		}
+		else
+		{
+			ts_LVUVP_ElapsedTicket = 0;
+			ts_ticketLVUVPSum= 0;
+		}
 	}
 	else
 	{
@@ -219,6 +254,11 @@ void analog_ChkLVUVP(void)
 				ts_ticketLVUVPClrSum += hptsc_ElapsedTicket(&ts_LVUVP_CLR_ElapsedTicket);
 			}
 		}
+		else
+		{
+			ts_LVUVP_CLR_ElapsedTicket = 0;
+			ts_ticketLVUVPClrSum= 0;
+		}
 	}
 
 }
@@ -235,7 +275,10 @@ void analog_monitor(void)
 
 bool is_PFC_OK(void)
 {
-return 0;
+	if (PFCOK_State_e == True || PFCOK_State_e == TrueWait)
+		return TRUE;
+	else
+		return FALSE;
 }
 
 bool is_fault(void)
