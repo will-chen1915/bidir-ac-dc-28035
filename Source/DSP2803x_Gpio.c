@@ -81,8 +81,8 @@ void InitGpio(void)
 	GpioCtrlRegs.GPBQSEL1.all = 0x00000000;    // GPIO32-GPIO34 Synch to SYSCLKOUT 
 
     GpioCtrlRegs.GPAQSEL1.bit.GPIO12 = 2;    // GPIO12 Synch to 6*Samples = 5*2*18*SYSCLKOUT
-    GpioCtrlRegs.GPAQSEL2.bit.GPIO16 = 2;    // GPIO16 Synch to 6*Samples = 5*2*18*SYSCLKOUT
-    GpioCtrlRegs.GPAQSEL2.bit.GPIO17 = 2;    // GPIO17 Synch to 6*Samples = 5*2*18*SYSCLKOUT
+//    GpioCtrlRegs.GPAQSEL2.bit.GPIO16 = 2;    // GPIO16 Synch to 6*Samples = 5*2*18*SYSCLKOUT
+//    GpioCtrlRegs.GPAQSEL2.bit.GPIO17 = 2;    // GPIO17 Synch to 6*Samples = 5*2*18*SYSCLKOUT
 
    	//0 Configures the GPIO pin as an input.
 	//1 Configures the GPIO pin as an output
@@ -91,14 +91,19 @@ void InitGpio(void)
 //	GpioCtrlRegs.GPADIR.all = 0x0EE08000;
 //	GpioCtrlRegs.GPBDIR.all = 0x0000;
 
+    // GPIO7---discharg-ON
+	GpioCtrlRegs.GPAMUX1.bit.GPIO7 = 0;	// GPIO7 as gpio 
+	GpioCtrlRegs.GPADIR.bit.GPIO7 = 1;	    // GPIO7 as input
+	GpioCtrlRegs.GPAPUD.bit.GPIO7= 0;	    // Pullup's enabled
+    
 	// GPIO12---PFC_OK
 	GpioCtrlRegs.GPAMUX1.bit.GPIO12 = 0;	// GPIO12 as gpio 
 	GpioCtrlRegs.GPADIR.bit.GPIO12 = 0;	    // GPIO12 as input
 	GpioCtrlRegs.GPAPUD.bit.GPIO12 = 0;	    // Pullup's enabled
 
 	// GPIO17---LED1
-	GpioCtrlRegs.GPAMUX2.bit.GPIO17 = 0;	// GPIO12 as gpio 
-	GpioCtrlRegs.GPADIR.bit.GPIO17 = 1;	    // GPIO12 as output
+	GpioCtrlRegs.GPAMUX2.bit.GPIO17 = 0;	// GPIO17 as gpio 
+	GpioCtrlRegs.GPADIR.bit.GPIO17 = 1;	    // GPIO17 as output
 	GpioCtrlRegs.GPAPUD.bit.GPIO17 = 0;	    // Pullup's enabled
 
 	// GPIO18---LED2
