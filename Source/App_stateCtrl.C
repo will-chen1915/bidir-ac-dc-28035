@@ -6,12 +6,19 @@
 #define SOFT_START_TIME             hptsc_MsToTicks(130)
 #define STABILIZITING_TIME          hptsc_MsToTicks(30)
 
+#define MAX_STATE_SIZE              3
+
+
+PSUModeType         PSUMode;
+
+PSU_StateType PSUCharge_state;
+PSU_StateType PSUDischarge_state;
+static hptsc_DefineTimer(HptscTicks_t, ts_ChgTimer) //General purpose
+static hptsc_DefineTimer(HptscTicks_t, ts_DischgTimer) //General purpose
 
 
 
-PSUCharge_StateType PSUCharge_state;
-static hptsc_DefineTimer(HptscTicks_t, ts_SmTimer) //General purpose
-
+//void *PSU_state_Machine[MAX_STATE_SIZE] = {&PSUChargeStateCtrl,&}; 
 
 /*******************************************************************************
 * void app_initStateCtrl(void);
@@ -25,12 +32,21 @@ static hptsc_DefineTimer(HptscTicks_t, ts_SmTimer) //General purpose
 *  
 * Notes:This subroutine should be run in main loop
 ******************************************************************************/
-void App_initStateCtrl(void)
+void initPSUChargeStateCtrl(void)
 {
 	PSUCharge_state = POWER_UP;
 	
 	//#define DEVICE_POWER_UP_TIME     hptsc_MsToTicks(12)
-	hptsc_LoadTimer(&ts_SmTimer, POWER_UP_TIME);
+	hptsc_LoadTimer(&ts_ChgTimer, POWER_UP_TIME);
+	//Load Timer here
+}
+
+void initPSUDischargeStateCtrl(void)
+{
+	PSUDischarge_state = POWER_UP;
+	
+	//#define DEVICE_POWER_UP_TIME     hptsc_MsToTicks(12)
+	hptsc_LoadTimer(&ts_DischgTimer, POWER_UP_TIME);
 	//Load Timer here
 }
 
@@ -50,26 +66,17 @@ void Enable_MainPWMCtrl(void)
 	EDIS;
 }
 
-
-/*******************************************************************************
- *Function name: App_StateCtrl()  
- *Description :  PSU state control                                                    
- *input:         void                                 
- *global vars:   g_u16RunFlag.bit.WARN: run flag, 10ms once               
- *output:        void 
- *CALLED BY:     main()
- ******************************************************************************/
-void App_StateCtrl(void)
+void PSUChargeStateCtrl(void)
 {
-	hptsc_UpdateTimer(&ts_SmTimer);
+	hptsc_UpdateTimer(&ts_ChgTimer);
 	switch(PSUCharge_state)
     {
         case POWER_UP:
 		{
-			if (hptsc_IsTimerExpired(&ts_SmTimer))
+			if (hptsc_IsTimerExpired(&ts_ChgTimer))
 			{
 				PSUCharge_state = SHUT_DOWN;
-				hptsc_LoadTimer(&ts_SmTimer, SHUTDOWN_TIME);
+				hptsc_LoadTimer(&ts_ChgTimer, SHUTDOWN_TIME);
 			}
 			break;
 		}
@@ -78,11 +85,11 @@ void App_StateCtrl(void)
 			Disable_MainPWMCtrl();
 			if((is_PFC_OK() == TRUE)&&(is_fault() == FALSE))
 			{
-				if (hptsc_IsTimerExpired(&ts_SmTimer))
+				if (hptsc_IsTimerExpired(&ts_ChgTimer))
 				{
                     Enable_MainPWMCtrl();
 					PSUCharge_state = SOFT_START;
-					hptsc_LoadTimer(&ts_SmTimer, SOFT_START_TIME);
+					hptsc_LoadTimer(&ts_ChgTimer, SOFT_START_TIME);
 				}
 			}
 			break;
@@ -103,10 +110,10 @@ void App_StateCtrl(void)
 			}
 			else if(is_softStartFinished() == TRUE)
 			{
-				if (hptsc_IsTimerExpired(&ts_SmTimer))
+				if (hptsc_IsTimerExpired(&ts_ChgTimer))
 				{
 					PSUCharge_state = STABILIZITING;
-					hptsc_LoadTimer(&ts_SmTimer, STABILIZITING_TIME);
+					hptsc_LoadTimer(&ts_ChgTimer, STABILIZITING_TIME);
 				}
 			}
 			break;
@@ -125,10 +132,10 @@ void App_StateCtrl(void)
 			{
 				;
 			}
-			if (hptsc_IsTimerExpired(&ts_SmTimer))
+			if (hptsc_IsTimerExpired(&ts_ChgTimer))
 			{
 				PSUCharge_state = NORMAL_OPERATION;
-				//hptsc_LoadTimer(&ts_SmTimer, NORMAL_OPERATION_TIME);
+				//hptsc_LoadTimer(&ts_ChgTimer, NORMAL_OPERATION_TIME);
 			}
 			break;
 		}	
@@ -148,8 +155,176 @@ void App_StateCtrl(void)
 			}
 			break;
 		}
+		default:
+		{
+		    PSUCharge_state = SHUT_DOWN;
+			hptsc_LoadTimer(&ts_ChgTimer, SHUTDOWN_TIME);	    
+		}	
+    }
+
+}
+
+
+void PSUDischargeStateCtrl(void)
+{
+	hptsc_UpdateTimer(&ts_DischgTimer);
+	switch(PSUDischarge_state)
+    {
+        case POWER_UP:
+		{
+			if (hptsc_IsTimerExpired(&ts_DischgTimer))
+			{
+				PSUDischarge_state = SHUT_DOWN;
+				hptsc_LoadTimer(&ts_DischgTimer, SHUTDOWN_TIME);
+			}
+			break;
+		}
+		case SHUT_DOWN:
+		{
+			Disable_MainPWMCtrl();
+			if((is_PFC_OK() == TRUE)&&(is_fault() == FALSE))
+			{
+				if (hptsc_IsTimerExpired(&ts_DischgTimer))
+				{
+                    Enable_MainPWMCtrl();
+					PSUDischarge_state = SOFT_START;
+					hptsc_LoadTimer(&ts_DischgTimer, SOFT_START_TIME);
+				}
+			}
+			break;
+		}
+		case SOFT_START:
+		{
+			if(is_OCP() == TRUE)
+			{
+				;
+			}
+			else if(is_LVOVP() == TRUE)
+			{
+				;
+			}
+			else if(isHV_OVP() == TRUE)
+			{
+				;
+			}
+			else if(is_softStartFinished() == TRUE)
+			{
+				if (hptsc_IsTimerExpired(&ts_DischgTimer))
+				{
+					PSUDischarge_state = STABILIZITING;
+					hptsc_LoadTimer(&ts_DischgTimer, STABILIZITING_TIME);
+				}
+			}
+			break;
+		}
+		case STABILIZITING:
+		{
+			if(is_OCP() == TRUE)
+			{
+				;
+			}
+			else if(is_LVOVP() == TRUE)
+			{
+				;
+			}
+			else if(isHV_OVP() == TRUE)
+			{
+				;
+			}
+			if (hptsc_IsTimerExpired(&ts_DischgTimer))
+			{
+				PSUDischarge_state = NORMAL_OPERATION;
+				//hptsc_LoadTimer(&ts_ChgTimer, NORMAL_OPERATION_TIME);
+			}
+			break;
+		}	
+		case NORMAL_OPERATION:
+		{
+			if(is_OCP() == TRUE)
+			{
+				;
+			}
+			else if(is_LVOVP() == TRUE)
+			{
+				;			
+			}
+			else if(isHV_OVP() == TRUE)
+			{
+				;			
+			}
+			break;
+		}
+		default:
+		{
+		    PSUDischarge_state = SHUT_DOWN;
+			hptsc_LoadTimer(&ts_DischgTimer, SHUTDOWN_TIME);	    
+		}	
 			
     }
+
 }
+
+void App_initStateCtrl(void)
+{
+	PSUMode = STANDBY_MODE;
+}
+
+/*******************************************************************************
+ *Function name: App_StateCtrl()  
+ *Description :  PSU state control                                                    
+ *input:         void                                 
+ *global vars:   g_u16RunFlag.bit.WARN: run flag, 10ms once               
+ *output:        void 
+ *CALLED BY:     main()
+ ******************************************************************************/
+void App_StateCtrl(void)
+{
+    //void(*ptr_stateMachine)(void);
+	//ptr_stateMachine = PSU_state_Machine[];
+	switch(PSUMode)
+	{
+        case STANDBY_MODE:
+		{
+            if(1)
+            {
+                initPSUChargeStateCtrl();
+			    PSUMode = CHARGE_MODE;
+			}
+			else if(1)
+			{
+			    initPSUDischargeStateCtrl();
+			    PSUMode = DISCHARGE_MODE;
+			}
+			else
+				Disable_MainPWMCtrl();
+			break;
+		}
+
+		case CHARGE_MODE:
+		{
+            if(0)
+            {
+			    PSUMode = STANDBY_MODE;
+            }
+			else
+				PSUChargeStateCtrl();
+			break;	
+		}
+		
+		case DISCHARGE_MODE:
+		{
+            if(0)
+            {
+			    PSUMode = STANDBY_MODE;
+            }
+			else
+				PSUDischargeStateCtrl();
+			break;	
+		}
+		
+		default:PSUMode = STANDBY_MODE;
+	}
+}
+
 
 

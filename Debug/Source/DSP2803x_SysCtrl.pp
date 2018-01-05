@@ -53,6 +53,7 @@ Source/DSP2803x_SysCtrl.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/
 Source/DSP2803x_SysCtrl.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/analogChk_control.h
 Source/DSP2803x_SysCtrl.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/Signal_IOCtrl.h
 Source/DSP2803x_SysCtrl.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/main.h
+Source/DSP2803x_SysCtrl.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/SCICommu_Ctrl.h
 Source/DSP2803x_SysCtrl.obj: D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/stdint.h
 Source/DSP2803x_SysCtrl.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/Cla.h
 Source/DSP2803x_SysCtrl.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/DSP2803x_Examples.h
@@ -111,6 +112,7 @@ E:/project/git_workspace/bidir-ac-dc-28035/Include/DSP28x_project.h:
 E:/project/git_workspace/bidir-ac-dc-28035/Include/analogChk_control.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/Signal_IOCtrl.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/main.h: 
+E:/project/git_workspace/bidir-ac-dc-28035/Include/SCICommu_Ctrl.h: 
 D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/stdint.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/Cla.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/DSP2803x_Examples.h: 

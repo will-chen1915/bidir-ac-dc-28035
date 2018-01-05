@@ -6,14 +6,30 @@
 
 #define DC_DC_FREQUENCY(x)      (CPU_SYSCLK / ((UINT32)x*1000)) 
 
-#define DC_DC_FREQUENCY_70KHZ   DC_DC_FREQUENCY(70)
+#define DC_DC_FREQUENCY_75KHZ   DC_DC_FREQUENCY(75)
 
-#define DUTY(x)                 (DC_DC_FREQUENCY_70KHZ*(UINT32)x/100)
+#define DUTY(x)                 (DC_DC_FREQUENCY_75KHZ*(UINT32)x/100)
 #define INITIAL_DUTY            DUTY(25)   
 
 #define	DEAD_TIME				((INT32)15)							//250ns
 
+typedef struct
+{
+	signed short int inter_A1;
+	signed short int inter_A2;
+	signed short int inter_A3;
+	signed short int error_z1;
+	signed short int error_z2;
+	long Uout_z1;
+
+
+}	CTRL2P2Z_coeff;
+
+
 extern Uint16 u16LVoltInst;
+
+extern bool Flag_Txd;
+
 
 extern __interrupt void adc_isr(void);
 extern void PwmCtrl_SetPwmGain(void);

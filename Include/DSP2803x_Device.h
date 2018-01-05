@@ -224,7 +224,9 @@ typedef union
 #include "App_stateCtrl.h"
 #include "power_loopCtrl.h"
 #include "Signal_IOCtrl.h"
+#include "config.h"
 #include "main.h"
+#include "SCICommu_Ctrl.h"
 #include <stdbool.h>
 #include <stdint.h>
 

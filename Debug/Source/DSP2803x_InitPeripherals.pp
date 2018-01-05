@@ -54,6 +54,7 @@ Source/DSP2803x_InitPeripherals.obj: E:/project/git_workspace/bidir-ac-dc-28035/
 Source/DSP2803x_InitPeripherals.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/analogChk_control.h
 Source/DSP2803x_InitPeripherals.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/Signal_IOCtrl.h
 Source/DSP2803x_InitPeripherals.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/main.h
+Source/DSP2803x_InitPeripherals.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/SCICommu_Ctrl.h
 Source/DSP2803x_InitPeripherals.obj: D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/stdint.h
 Source/DSP2803x_InitPeripherals.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/Cla.h
 
@@ -111,5 +112,6 @@ E:/project/git_workspace/bidir-ac-dc-28035/Include/DSP2803x_I2c_defines.h:
 E:/project/git_workspace/bidir-ac-dc-28035/Include/analogChk_control.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/Signal_IOCtrl.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/main.h: 
+E:/project/git_workspace/bidir-ac-dc-28035/Include/SCICommu_Ctrl.h: 
 D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/stdint.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/Cla.h: 

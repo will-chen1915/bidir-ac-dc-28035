@@ -61,7 +61,6 @@ void main(void)
 
 	for(;;)
     {
-        //App_CheckChrgDisChrg();
 		IO_UpdSignal();
 		analog_monitor();
 		App_StateCtrl();

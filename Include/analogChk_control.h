@@ -44,6 +44,8 @@ extern bool is_PFC_OK(void);
 
 
 
+
+
 extern bool is_fault(void);
 extern bool is_OCP(void);
 extern bool is_LVOVP(void);

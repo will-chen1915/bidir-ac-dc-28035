@@ -29,6 +29,7 @@ C_SRCS += \
 ../Source/DSP2803x_Spi.c \
 ../Source/DSP2803x_SysCtrl.c \
 ../Source/Interrupt_Ctrl.c \
+../Source/SCICommu_Ctrl.c \
 ../Source/main.c 
 
 OBJS += \
@@ -50,6 +51,7 @@ OBJS += \
 ./Source/DSP2803x_SysCtrl.obj \
 ./Source/DSP280x_usDelay.obj \
 ./Source/Interrupt_Ctrl.obj \
+./Source/SCICommu_Ctrl.obj \
 ./Source/Signal_IOCtrl.obj \
 ./Source/analogChk_control.obj \
 ./Source/main.obj \
@@ -75,6 +77,7 @@ C_DEPS += \
 ./Source/DSP2803x_Spi.pp \
 ./Source/DSP2803x_SysCtrl.pp \
 ./Source/Interrupt_Ctrl.pp \
+./Source/SCICommu_Ctrl.pp \
 ./Source/main.pp 
 
 C_UPPER_DEPS += \
@@ -99,6 +102,7 @@ C_DEPS__QUOTED += \
 "Source\DSP2803x_Spi.pp" \
 "Source\DSP2803x_SysCtrl.pp" \
 "Source\Interrupt_Ctrl.pp" \
+"Source\SCICommu_Ctrl.pp" \
 "Source\main.pp" 
 
 C_UPPER_DEPS__QUOTED += \
@@ -126,6 +130,7 @@ OBJS__QUOTED += \
 "Source\DSP2803x_SysCtrl.obj" \
 "Source\DSP280x_usDelay.obj" \
 "Source\Interrupt_Ctrl.obj" \
+"Source\SCICommu_Ctrl.obj" \
 "Source\Signal_IOCtrl.obj" \
 "Source\analogChk_control.obj" \
 "Source\main.obj" \
@@ -157,6 +162,7 @@ C_SRCS__QUOTED += \
 "../Source/DSP2803x_Spi.c" \
 "../Source/DSP2803x_SysCtrl.c" \
 "../Source/Interrupt_Ctrl.c" \
+"../Source/SCICommu_Ctrl.c" \
 "../Source/main.c" 
 
 ASM_SRCS__QUOTED += \

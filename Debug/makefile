@@ -26,6 +26,7 @@ $(GEN_CMDS__FLAG) \
 "./Source/DSP2803x_SysCtrl.obj" \
 "./Source/DSP280x_usDelay.obj" \
 "./Source/Interrupt_Ctrl.obj" \
+"./Source/SCICommu_Ctrl.obj" \
 "./Source/Signal_IOCtrl.obj" \
 "./Source/analogChk_control.obj" \
 "./Source/main.obj" \
@@ -164,9 +165,9 @@ all: 28035_v01.out
 # Other Targets
 clean:
 	-$(RM) $(EXE_OUTPUTS__QUOTED)$(BIN_OUTPUTS__QUOTED)
-	-$(RM) "Source\DSP2803x_Adc.pp" "Source\DSP2803x_CpuTimers.pp" "Source\DSP2803x_DefaultIsr.pp" "Source\DSP2803x_ECan.pp" "Source\DSP2803x_EPwm.pp" "Source\DSP2803x_GlobalVariableDefs.pp" "Source\DSP2803x_Gpio.pp" "Source\DSP2803x_I2C.pp" "Source\DSP2803x_InitPeripherals.pp" "Source\DSP2803x_PieCtrl.pp" "Source\DSP2803x_PieVect.pp" "Source\DSP2803x_Sci.pp" "Source\DSP2803x_Spi.pp" "Source\DSP2803x_SysCtrl.pp" "Source\Interrupt_Ctrl.pp" "Source\main.pp" 
+	-$(RM) "Source\DSP2803x_Adc.pp" "Source\DSP2803x_CpuTimers.pp" "Source\DSP2803x_DefaultIsr.pp" "Source\DSP2803x_ECan.pp" "Source\DSP2803x_EPwm.pp" "Source\DSP2803x_GlobalVariableDefs.pp" "Source\DSP2803x_Gpio.pp" "Source\DSP2803x_I2C.pp" "Source\DSP2803x_InitPeripherals.pp" "Source\DSP2803x_PieCtrl.pp" "Source\DSP2803x_PieVect.pp" "Source\DSP2803x_Sci.pp" "Source\DSP2803x_Spi.pp" "Source\DSP2803x_SysCtrl.pp" "Source\Interrupt_Ctrl.pp" "Source\SCICommu_Ctrl.pp" "Source\main.pp" 
 	-$(RM) "Source\App_stateCtrl.pp" "Source\Signal_IOCtrl.pp" "Source\analogChk_control.pp" "Source\power_loopCtrl.pp" 
-	-$(RM) "Source\App_stateCtrl.obj" "Source\DSP2803x_Adc.obj" "Source\DSP2803x_CSMPasswords.obj" "Source\DSP2803x_CpuTimers.obj" "Source\DSP2803x_DefaultIsr.obj" "Source\DSP2803x_ECan.obj" "Source\DSP2803x_EPwm.obj" "Source\DSP2803x_GlobalVariableDefs.obj" "Source\DSP2803x_Gpio.obj" "Source\DSP2803x_I2C.obj" "Source\DSP2803x_InitPeripherals.obj" "Source\DSP2803x_PieCtrl.obj" "Source\DSP2803x_PieVect.obj" "Source\DSP2803x_Sci.obj" "Source\DSP2803x_Spi.obj" "Source\DSP2803x_SysCtrl.obj" "Source\DSP280x_usDelay.obj" "Source\Interrupt_Ctrl.obj" "Source\Signal_IOCtrl.obj" "Source\analogChk_control.obj" "Source\main.obj" "Source\power_loopCtrl.obj" 
+	-$(RM) "Source\App_stateCtrl.obj" "Source\DSP2803x_Adc.obj" "Source\DSP2803x_CSMPasswords.obj" "Source\DSP2803x_CpuTimers.obj" "Source\DSP2803x_DefaultIsr.obj" "Source\DSP2803x_ECan.obj" "Source\DSP2803x_EPwm.obj" "Source\DSP2803x_GlobalVariableDefs.obj" "Source\DSP2803x_Gpio.obj" "Source\DSP2803x_I2C.obj" "Source\DSP2803x_InitPeripherals.obj" "Source\DSP2803x_PieCtrl.obj" "Source\DSP2803x_PieVect.obj" "Source\DSP2803x_Sci.obj" "Source\DSP2803x_Spi.obj" "Source\DSP2803x_SysCtrl.obj" "Source\DSP280x_usDelay.obj" "Source\Interrupt_Ctrl.obj" "Source\SCICommu_Ctrl.obj" "Source\Signal_IOCtrl.obj" "Source\analogChk_control.obj" "Source\main.obj" "Source\power_loopCtrl.obj" 
 	-$(RM) "Source\DSP2803x_CSMPasswords.pp" "Source\DSP280x_usDelay.pp" 
 	-@echo 'Finished clean'
 	-@echo ' '
