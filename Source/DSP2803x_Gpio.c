@@ -31,9 +31,9 @@ void InitGpio(void)
 	// c) peripheral function 2
 	// d) peripheral function 3
 	// By default, all are GPIO Inputs 
-	GpioCtrlRegs.GPAMUX1.all = 0x1000;     // GPIO functionality GPIO0-GPIO15
-	GpioCtrlRegs.GPAMUX2.all = 0x0000;     // GPIO functionality GPIO16-GPIO31
-	GpioCtrlRegs.GPBMUX1.all = 0x0000;     // GPIO functionality GPIO32-GPIO44
+//	GpioCtrlRegs.GPAMUX1.all = 0x1000;     // GPIO functionality GPIO0-GPIO15
+//	GpioCtrlRegs.GPAMUX2.all = 0x0000;     // GPIO functionality GPIO16-GPIO31
+//	GpioCtrlRegs.GPBMUX1.all = 0x0000;     // GPIO functionality GPIO32-GPIO44
 
 	// Pin:								44		43		42		41		40
 	// role:							/		TESTP2	SR_SD	/		YELLOW
@@ -63,24 +63,24 @@ void InitGpio(void)
 	// Pull-ups can be enabled or disabled. 
 	//0 Enable the internal pullup on the specified pin.
 	//1 Disable the internal pullup on the specified pin.
-	GpioCtrlRegs.GPAPUD.all = 0xFDFFBFFF;	// 1:Pullup's disabled 0:enable
-	GpioCtrlRegs.GPBPUD.all = 0x1FF;		// 1:Pullup's disabled 0:enable
+//	GpioCtrlRegs.GPAPUD.all = 0xFDFFBFFF;	// 1:Pullup's disabled 0:enable
+//	GpioCtrlRegs.GPBPUD.all = 0x1FF;		// 1:Pullup's disabled 0:enable
 
 	//Specifies the qualification sampling period for GPIO
-	GpioCtrlRegs.GPACTRL.all = 0x00000000;		//QUALPRD = SYSCLKOUT
-	GpioCtrlRegs.GPBCTRL.bit.QUALPRD0 = 0x00;	//QUALPRD = SYSCLKOUT
+//	GpioCtrlRegs.GPACTRL.all = 0x00000000;		//QUALPRD = SYSCLKOUT
+//	GpioCtrlRegs.GPBCTRL.bit.QUALPRD0 = 0x00;	//QUALPRD = SYSCLKOUT
 
-    GpioCtrlRegs.GPACTRL.bit.QUALPRD2 = 0x12;	//QUALPRD = 2*18*SYSCLKOUT
+//    GpioCtrlRegs.GPACTRL.bit.QUALPRD2 = 0x12;	//QUALPRD = 2*18*SYSCLKOUT
    
 	// Each input can have different qualification
 	// a) input synchronized to SYSCLKOUT
 	// b) input qualified by a sampling window
 	// c) input sent asynchronously (valid for peripheral inputs only)
-	GpioCtrlRegs.GPAQSEL1.all = 0x00000000;    // GPIO0-GPIO15 Synch to SYSCLKOUT. 
-	GpioCtrlRegs.GPAQSEL2.all = 0x00000000;    // GPIO16-GPIO31 Synch to SYSCLKOUT
-	GpioCtrlRegs.GPBQSEL1.all = 0x00000000;    // GPIO32-GPIO34 Synch to SYSCLKOUT 
+//	GpioCtrlRegs.GPAQSEL1.all = 0x00000000;    // GPIO0-GPIO15 Synch to SYSCLKOUT. 
+//	GpioCtrlRegs.GPAQSEL2.all = 0x00000000;    // GPIO16-GPIO31 Synch to SYSCLKOUT
+//	GpioCtrlRegs.GPBQSEL1.all = 0x00000000;    // GPIO32-GPIO34 Synch to SYSCLKOUT 
 
-    GpioCtrlRegs.GPAQSEL1.bit.GPIO12 = 2;    // GPIO12 Synch to 6*Samples = 5*2*18*SYSCLKOUT
+//    GpioCtrlRegs.GPAQSEL1.bit.GPIO12 = 2;    // GPIO12 Synch to 6*Samples = 5*2*18*SYSCLKOUT
 //    GpioCtrlRegs.GPAQSEL2.bit.GPIO16 = 2;    // GPIO16 Synch to 6*Samples = 5*2*18*SYSCLKOUT
 //    GpioCtrlRegs.GPAQSEL2.bit.GPIO17 = 2;    // GPIO17 Synch to 6*Samples = 5*2*18*SYSCLKOUT
 

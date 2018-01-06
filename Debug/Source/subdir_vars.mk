@@ -23,6 +23,7 @@ C_SRCS += \
 ../Source/DSP2803x_Gpio.c \
 ../Source/DSP2803x_I2C.c \
 ../Source/DSP2803x_InitPeripherals.c \
+../Source/DSP2803x_MemCopy.c \
 ../Source/DSP2803x_PieCtrl.c \
 ../Source/DSP2803x_PieVect.c \
 ../Source/DSP2803x_Sci.c \
@@ -44,6 +45,7 @@ OBJS += \
 ./Source/DSP2803x_Gpio.obj \
 ./Source/DSP2803x_I2C.obj \
 ./Source/DSP2803x_InitPeripherals.obj \
+./Source/DSP2803x_MemCopy.obj \
 ./Source/DSP2803x_PieCtrl.obj \
 ./Source/DSP2803x_PieVect.obj \
 ./Source/DSP2803x_Sci.obj \
@@ -71,6 +73,7 @@ C_DEPS += \
 ./Source/DSP2803x_Gpio.pp \
 ./Source/DSP2803x_I2C.pp \
 ./Source/DSP2803x_InitPeripherals.pp \
+./Source/DSP2803x_MemCopy.pp \
 ./Source/DSP2803x_PieCtrl.pp \
 ./Source/DSP2803x_PieVect.pp \
 ./Source/DSP2803x_Sci.pp \
@@ -96,6 +99,7 @@ C_DEPS__QUOTED += \
 "Source\DSP2803x_Gpio.pp" \
 "Source\DSP2803x_I2C.pp" \
 "Source\DSP2803x_InitPeripherals.pp" \
+"Source\DSP2803x_MemCopy.pp" \
 "Source\DSP2803x_PieCtrl.pp" \
 "Source\DSP2803x_PieVect.pp" \
 "Source\DSP2803x_Sci.pp" \
@@ -123,6 +127,7 @@ OBJS__QUOTED += \
 "Source\DSP2803x_Gpio.obj" \
 "Source\DSP2803x_I2C.obj" \
 "Source\DSP2803x_InitPeripherals.obj" \
+"Source\DSP2803x_MemCopy.obj" \
 "Source\DSP2803x_PieCtrl.obj" \
 "Source\DSP2803x_PieVect.obj" \
 "Source\DSP2803x_Sci.obj" \
@@ -156,6 +161,7 @@ C_SRCS__QUOTED += \
 "../Source/DSP2803x_Gpio.c" \
 "../Source/DSP2803x_I2C.c" \
 "../Source/DSP2803x_InitPeripherals.c" \
+"../Source/DSP2803x_MemCopy.c" \
 "../Source/DSP2803x_PieCtrl.c" \
 "../Source/DSP2803x_PieVect.c" \
 "../Source/DSP2803x_Sci.c" \

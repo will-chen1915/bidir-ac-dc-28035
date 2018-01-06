@@ -28,6 +28,11 @@ void main(void)
 	DisableDog();
 	InitSysCtrl();
 	InitGpio();
+
+	// Initialize other periphereral:detail info in DSP280x_InitPeripherals.c
+	InitPeripherals();
+
+	
 	IER = 0x00000000;
 	IFR = 0x00000000;
     //Initialize PIE control registers:detail info in DSP280x_PieCtrl.c file
@@ -38,20 +43,22 @@ void main(void)
     //ram initialize
 	//InitRAM(); //TODO
 
-	//MemCopy(&IsrRamfuncsLoadStart, &IsrRamfuncsLoadEnd, &IsrRamfuncsRunStart);
+//	MemCopy(&IsrRamfuncsLoadStart, &IsrRamfuncsLoadEnd, &IsrRamfuncsRunStart);
 
     //MemCopy(&AppRamfuncsLoadStart, &AppRamfuncsLoadEnd, &AppRamfuncsRunStart);
 
-	InitFlash();
+//	InitFlash();
+
+	memcpy(&RamfuncsRunStart,&RamfuncsLoadStart,&RamfuncsLoadEnd - &RamfuncsLoadStart);	InitFlash();
 
     // Initialize other periphereral:detail info in DSP280x_InitPeripherals.c
-	InitPeripherals();
+//	InitPeripherals();
 
 	StartCpuTimer0();
 
-	EALLOW;
-	EPwm1Regs.HRMSTEP = 113;
-	EDIS;
+	//EALLOW;
+	//EPwm1Regs.HRMSTEP = 113;
+	//EDIS;
 
  	//App_DataInit();
 	//App_CputoClaVar_init();//cla
@@ -63,7 +70,7 @@ void main(void)
     {
 		IO_UpdSignal();
 		analog_monitor();
-		App_StateCtrl();
+		//App_StateCtrl();
 		PwmCtrl_SetPwmGain();
 		
 		//Thermal_Main();// Temperature Monitor

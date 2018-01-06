@@ -4,14 +4,16 @@
 #include "DSP28x_project.h"
 #include "config.h"
 
-#define DC_DC_FREQUENCY(x)      (CPU_SYSCLK / ((UINT32)x*1000)) 
+#define DC_DC_FREQUENCY(x)      (CPU_SYSCLK / ((UINT32)x*2000)) 
 
 #define DC_DC_FREQUENCY_75KHZ   DC_DC_FREQUENCY(75)
 
 #define DUTY(x)                 (DC_DC_FREQUENCY_75KHZ*(UINT32)x/100)
 #define INITIAL_DUTY            DUTY(25)   
 
-#define	DEAD_TIME				((INT32)15)							//250ns
+
+#define	MAIN_DEAD_TIME				((INT16)24)							//400ns
+#define SYC_DEAD_TIME           ((INT16)9)                          //150ns
 
 typedef struct
 {

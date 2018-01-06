@@ -196,8 +196,8 @@ void InitPeripheralClocks(void)
 	
 	SysCtrlRegs.PCLKCR1.bit.EPWM1ENCLK = 1;		// ePWM1
 	SysCtrlRegs.PCLKCR1.bit.EPWM2ENCLK = 1;		// ePWM2
-	SysCtrlRegs.PCLKCR1.bit.EPWM3ENCLK = 0;		// ePWM3
-	SysCtrlRegs.PCLKCR1.bit.EPWM4ENCLK = 0;		// ePWM4
+	SysCtrlRegs.PCLKCR1.bit.EPWM3ENCLK = 1;		// ePWM3
+	SysCtrlRegs.PCLKCR1.bit.EPWM4ENCLK = 1;		// ePWM4
 	SysCtrlRegs.PCLKCR1.bit.EPWM5ENCLK = 1;		// ePWM5
 	SysCtrlRegs.PCLKCR1.bit.EPWM6ENCLK = 1;		// ePWM6
 	SysCtrlRegs.PCLKCR1.bit.EPWM7ENCLK = 0;		// ePWM7
@@ -301,7 +301,7 @@ void InitSysCtrl(void)
 
 	}
 	// Initialize the PLLCR to 0x6
-    InitPll(0x06,DSP28_DIVSEL);	   
+    InitPll(DSP28_PLLCR,DSP28_DIVSEL);
 	
 	// Initialize the peripheral clocks
 	InitPeripheralClocks();

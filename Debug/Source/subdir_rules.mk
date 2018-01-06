@@ -80,6 +80,13 @@ Source/DSP2803x_InitPeripherals.obj: ../Source/DSP2803x_InitPeripherals.c $(GEN_
 	@echo 'Finished building: $<'
 	@echo ' '
 
+Source/DSP2803x_MemCopy.obj: ../Source/DSP2803x_MemCopy.c $(GEN_OPTS) $(GEN_HDRS)
+	@echo 'Building file: $<'
+	@echo 'Invoking: C2000 Compiler'
+	"D:/TI/ccsv6/tools/compiler/c2000_6.2.7/bin/cl2000" -v28 -ml -mt --cla_support=cla0 --include_path="D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include" --include_path="E:/project/git_workspace/bidir-ac-dc-28035/Include" -g --diag_warning=225 --display_error_number --diag_wrap=off --preproc_with_compile --preproc_dependency="Source/DSP2803x_MemCopy.pp" --obj_directory="Source" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
 Source/DSP2803x_PieCtrl.obj: ../Source/DSP2803x_PieCtrl.c $(GEN_OPTS) $(GEN_HDRS)
 	@echo 'Building file: $<'
 	@echo 'Invoking: C2000 Compiler'

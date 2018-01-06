@@ -13,6 +13,6 @@ extern void InitPeripherals(void);
 
 extern void EnableDog(void);
 extern void Watch_Dog_Kick (void);
-//extern void MemCopy(UINT16* SourceAddr, UINT16* SourceEndAddr, UINT16* DestAddr);
+//extern void MemCopy(Uint16 *SourceAddr, Uint16* SourceEndAddr, Uint16* DestAddr);
 
 #endif /* MAIN_H_ */

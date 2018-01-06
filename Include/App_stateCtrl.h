@@ -6,7 +6,7 @@
 typedef enum tag_PSUModeType {
     STANDBY_MODE = 0,
     CHARGE_MODE = 1,
-    DISCHARGE_MODE = 2,
+    DISCHARGE_MODE = 2
 } PSUModeType;
 
 
@@ -36,6 +36,12 @@ typedef enum tag_DischgStateType {
 
 extern void App_initStateCtrl(void);
 extern void App_StateCtrl(void);
+
+
+extern void Enable_MainPWMCtrl(void);
+extern void Disable_MainPWMCtrl(void);
+extern void Disable_SYNCPWMCtrl(void);
+extern void Enable_SYNCPWMCtrl(void);
 
 
 

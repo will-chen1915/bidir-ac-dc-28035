@@ -66,6 +66,23 @@ void Enable_MainPWMCtrl(void)
 	EDIS;
 }
 
+void Disable_SYNCPWMCtrl(void)
+{
+	EALLOW;
+	EPwm5Regs.TZFRC.bit.OST = TZ_ENABLE;//	
+	EPwm6Regs.TZFRC.bit.OST = TZ_ENABLE;//
+	EDIS;
+}
+
+void Enable_SYNCPWMCtrl(void)
+{
+	EALLOW;
+	EPwm5Regs.TZCLR.bit.OST = TZ_ENABLE;//	
+	EPwm6Regs.TZCLR.bit.OST = TZ_ENABLE;//
+	EDIS;
+}
+
+
 void PSUChargeStateCtrl(void)
 {
 	hptsc_UpdateTimer(&ts_ChgTimer);
@@ -287,7 +304,7 @@ void App_StateCtrl(void)
 		{
             if(1)
             {
-                initPSUChargeStateCtrl();
+                //initPSUChargeStateCtrl();
 			    PSUMode = CHARGE_MODE;
 			}
 			else if(1)

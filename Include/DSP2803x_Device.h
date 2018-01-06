@@ -311,7 +311,7 @@ typedef union
 //#define DSP28_DIVSEL   3 // Enable /1 for SYSCLKOUT
 
 
-#define DSP28_PLLCR   6    // Uncomment for 60 MHz devices [60 MHz = (20MHz * 12)/2]
+#define DSP28_PLLCR   12    // Uncomment for 60 MHz devices [60 MHz = (10MHz * 12)/2]
 //#define DSP28_PLLCR   11
 //#define DSP28_PLLCR   10
 //#define DSP28_PLLCR    9

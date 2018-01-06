@@ -21,6 +21,9 @@ extern "C" {
 /*---- shared global function prototypes -----------------------------------*/
 extern void InitAdc(void);
 extern void InitAdcAio(void);
+extern void AdcOffsetSelfCal(void);
+//extern void AdcChanSelect();
+extern Uint16 AdcConversion (void);
 #if DSP28_ECANA
 extern void InitECan(void);
 extern void InitECana(void);
@@ -111,7 +114,7 @@ extern void SetDBGIER(Uint16 dbgier);
 // out of OTP/Flash will yield unpredictable results
 extern void InitFlash(void);
 
-extern void MemCopy(Uint16 *SourceAddr, Uint16* SourceEndAddr, Uint16* DestAddr);
+//extern void MemCopy(Uint16 *SourceAddr, Uint16* SourceEndAddr, Uint16* DestAddr);
 
 //---------------------------------------------------------------------------
 // External symbols created by the linker cmd file
@@ -130,6 +133,9 @@ extern Uint16 AppRamfuncsLoadStart;
 extern Uint16 AppRamfuncsLoadEnd;
 extern Uint16 AppRamfuncsRunStart;
 
+extern Uint16 RamfuncsLoadStart;
+extern Uint16 RamfuncsLoadEnd;
+extern Uint16 RamfuncsRunStart;
 #ifdef __cplusplus
 }
 #endif /* extern "C" */

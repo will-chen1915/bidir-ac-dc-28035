@@ -14,6 +14,7 @@
 #include "DSP2803x_Device.h"     // DSP280x Headerfile Include File
 #include "config.h"
 
+
 void InitEPWM1(void);
 void InitEPWM2(void);
 void InitEPWM3(void);
@@ -316,17 +317,18 @@ void InitEPWM1(void)
 	EPwm1Regs.CMPCTL.bit.LOADAMODE = CC_CTR_ZERO;
 	EPwm1Regs.CMPCTL.bit.SHDWAMODE = CC_SHADOW;
 	EPwm1Regs.CMPA.half.CMPA = INITIAL_DUTY;
+	EPwm1Regs.CMPB = (INITIAL_DUTY>>1);
 
     //Set pwm edge adjusting mode
 	EPwm1Regs.AQCTLA.bit.ZRO = AQ_SET;              // ClearvPWM1A on Zero
-	EPwm1Regs.AQCTLA.bit.CAD = AQ_CLEAR;
-	EPwm1Regs.AQCTLA.bit.PRD = AQ_CLEAR;				  //Set PWM1A on Zero
-
+	EPwm1Regs.AQCTLA.bit.CAU = AQ_CLEAR;
+	//EPwm1Regs.AQCTLA.bit.PRD = AQ_CLEAR;				  //Set PWM1A on Zero
+#if 1
+	EPwm1Regs.DBCTL.bit.IN_MODE = DBA_ALL;
    	EPwm1Regs.DBCTL.bit.OUT_MODE = DBB_ENABLE;
     EPwm1Regs.DBCTL.bit.POLSEL = DBA_ALL;			//Neither inverted
-    EPwm1Regs.DBRED = DEAD_TIME;
-    //EPwm1Regs.DBFED = DEAD_TIME;		
-
+    EPwm1Regs.DBRED = MAIN_DEAD_TIME;
+#endif
 	#if 0
 	EPwm1Regs.HRCNFG.all = 0x0;	
     EPwm1Regs.HRCNFG.bit.HRLOAD = HR_CTR_ZERO;
@@ -401,12 +403,12 @@ void InitEPWM2(void)
 //	EPwm2Regs.AQCTLA.bit.CAU = AQ_CLEAR;
 //	EPwm2Regs.AQCTLA.bit.CBU = AQ_CLEAR;
 	EPwm2Regs.AQCTLA.bit.PRD = AQ_SET;
-
+#if 0
    	EPwm2Regs.DBCTL.bit.OUT_MODE = DBB_ENABLE;
     EPwm2Regs.DBCTL.bit.POLSEL = DBA_ALL;			//Neither inverted
-    EPwm2Regs.DBRED = DEAD_TIME;
+    EPwm2Regs.DBRED = MAIN_DEAD_TIME;
     //EPwm2Regs.DBFED = DC_DB_TIME;		
-
+#endif
 	//ADC trigger source
 	EPwm2Regs.ETSEL.bit.SOCAEN	= 1;				// Enable SOC on A group
 	//EPwm2Regs.ETSEL.bit.SOCASEL	= ET_CTRU_CMPB;		// Select SOC from CPMB on upcount
@@ -438,7 +440,7 @@ void InitEPWM3(void)
 	
 	EPwm3Regs.TBCTR = 0;
 	EPwm3Regs.TBPHS.half.TBPHS = 0;	 
-	EPwm3Regs.TBCTL.bit.PHSEN = TB_ENABLE;
+	EPwm3Regs.TBCTL.bit.PHSEN = TB_DISABLE;
 	EPwm3Regs.TBCTL.bit.SYNCOSEL = TB_SYNC_IN;
 	EPwm3Regs.TBCTL.bit.PHSDIR = TB_UP;				//Phase Direction Down 
 	EPwm3Regs.TBCTL.bit.CTRMODE = TB_COUNT_UPDOWN; 
@@ -458,13 +460,15 @@ void InitEPWM3(void)
 
 	EPwm3Regs.AQCTLA.bit.ZRO = AQ_SET;
 //	EPwm3Regs.AQCTLA.bit.CAU = AQ_CLEAR;
-	EPwm3Regs.AQCTLA.bit.PRD = AQ_CLEAR;				
+	EPwm3Regs.AQCTLA.bit.PRD = AQ_CLEAR;		
 
+#if 0
    	EPwm3Regs.DBCTL.bit.OUT_MODE = DBB_ENABLE;
     EPwm3Regs.DBCTL.bit.POLSEL = DBA_ALL;			//Neither inverted
-    EPwm3Regs.DBRED = DEAD_TIME;
-  //  EPwm3Regs.DBFED = DEAD_TIME;		
-
+    EPwm3Regs.DBRED = MAIN_DEAD_TIME;
+  //  EPwm3Regs.DBFED = MAIN_DEAD_TIME;		
+#endif
+		
 	#if 0
 	EPwm3Regs.HRCNFG.all = 0x0;	
     EPwm3Regs.HRCNFG.bit.HRLOAD = HR_CTR_ZERO;
@@ -490,7 +494,7 @@ void InitEPWM4(void)
 
 	EPwm4Regs.TBCTR = 0;
 	EPwm4Regs.TBPHS.half.TBPHS = 0;	 
-	EPwm4Regs.TBCTL.bit.PHSEN = TB_ENABLE;
+	EPwm4Regs.TBCTL.bit.PHSEN = TB_DISABLE;
 	EPwm4Regs.TBCTL.bit.SYNCOSEL = TB_SYNC_IN;
 	EPwm4Regs.TBCTL.bit.PHSDIR = TB_UP;				//Phase Direction Down		 
 	EPwm4Regs.TBCTL.bit.CTRMODE = TB_COUNT_UPDOWN; 
@@ -508,14 +512,16 @@ void InitEPWM4(void)
 	EPwm4Regs.CMPCTL.bit.SHDWAMODE = CC_SHADOW;
 	EPwm4Regs.CMPA.half.CMPA = DC_DC_FREQUENCY_75KHZ - INITIAL_DUTY;
 
-	EPwm4Regs.AQCTLA.bit.ZRO = AQ_CLEAR;
+//	EPwm4Regs.AQCTLA.bit.ZRO = AQ_CLEAR;
 	EPwm4Regs.AQCTLA.bit.PRD = AQ_SET;
 	EPwm4Regs.AQCTLA.bit.CAD= AQ_CLEAR;
 
+#if 1
+	EPwm4Regs.DBCTL.bit.IN_MODE = DBA_ALL;
    	EPwm4Regs.DBCTL.bit.OUT_MODE = DBB_ENABLE;
     EPwm4Regs.DBCTL.bit.POLSEL = DBA_ALL;			//Neither inverted
-    EPwm4Regs.DBRED = DEAD_TIME;
- //   EPwm4Regs.DBFED = DC_DB_TIME;		
+    EPwm4Regs.DBRED = MAIN_DEAD_TIME;
+#endif
 	#if 0
 	EPwm4Regs.HRCNFG.all = 0x0;	
     EPwm4Regs.HRCNFG.bit.HRLOAD = HR_CTR_ZERO;
@@ -589,10 +595,10 @@ void InitEPWM5(void)
 //	EPwm5Regs.AQCTLB.bit.CBU = AQ_CLEAR;
 //	EPwm5Regs.AQCTLB.bit.CBD = AQ_SET;
 
+	EPwm5Regs.DBCTL.bit.IN_MODE = DBA_ALL;
    	EPwm5Regs.DBCTL.bit.OUT_MODE = DBB_ENABLE;
     EPwm5Regs.DBCTL.bit.POLSEL = DBA_ALL;			//Neither inverted
-    //EPwm5Regs.DBRED = DEAD_TIME;
-    EPwm5Regs.DBFED = DEAD_TIME;	
+    EPwm5Regs.DBRED = SYC_DEAD_TIME;	
 
 	#if 0
 	EPwm5Regs.HRCNFG.all = 0x0;	
@@ -662,13 +668,12 @@ void InitEPWM6(void)
 	EPwm6Regs.AQCTLA.bit.ZRO = AQ_SET;
 //	EPwm6Regs.AQCTLA.bit.CAD = AQ_CLEAR;
 	EPwm6Regs.AQCTLA.bit.PRD = AQ_CLEAR;
-				
-	#ifdef DT_REG
+
+	EPwm6Regs.DBCTL.bit.IN_MODE = DBA_ALL;
    	EPwm6Regs.DBCTL.bit.OUT_MODE = DBB_ENABLE;
     EPwm6Regs.DBCTL.bit.POLSEL = DBA_ALL;			//Neither inverted
-    EPwm6Regs.DBRED = DEAD_TIME;
-    //EPwm6Regs.DBFED = DC_DB_TIME;		
-	#endif
+    EPwm6Regs.DBRED = SYC_DEAD_TIME;
+
 
 	#if 0
 	EPwm6Regs.HRCNFG.all = 0x0;	

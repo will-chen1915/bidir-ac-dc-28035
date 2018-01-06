@@ -79,8 +79,8 @@ __interrupt void adc_isr ( void )
 	temp_duty_V = PI_LVolt ( i16LVoltError, ( 0x7FEE0000 ), &CTRL2P2Z_COEFF_VOLTAGE_LOOP, 0 );	//0x4E1FB1E0 = 20000*2^16
 
 	
-    EPwm1Regs.CMPA.half.CMPA = temp_duty_V;
-	EPwm4Regs.CMPA.half.CMPA = DC_DC_FREQUENCY_75KHZ - temp_duty_V;
+    //EPwm1Regs.CMPA.half.CMPA = temp_duty_V;
+	//EPwm4Regs.CMPA.half.CMPA = DC_DC_FREQUENCY_75KHZ - temp_duty_V;
 	if ( !Flag_Txd )
 	{
 #if 0
