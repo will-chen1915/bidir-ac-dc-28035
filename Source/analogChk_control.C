@@ -38,7 +38,7 @@ void analog_HVmetering(void)
 	
 	if (hptsc_IsElapsedRepetitive(&ts_HV, K32_HV_INTERVAL))
 	{
-		u16HVoltTemp = AdcResult.ADCRESULT2 << 3;//Q15
+		u16HVoltTemp = AdcResult.ADCRESULT1 << 3;//Q15
 		u16HVoltInst = (u16HVoltInst + u16HVoltTemp)>>1;//Q15		
 	}
 

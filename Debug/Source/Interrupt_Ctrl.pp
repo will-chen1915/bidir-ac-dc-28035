@@ -35,7 +35,6 @@ Source/Interrupt_Ctrl.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/SF
 Source/Interrupt_Ctrl.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/IQmathLib.h
 Source/Interrupt_Ctrl.obj: D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/limits.h
 Source/Interrupt_Ctrl.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/PubFunc.h
-Source/Interrupt_Ctrl.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/FlashUpdate.h
 Source/Interrupt_Ctrl.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/DSP2803x_GlobalPrototypes.h
 Source/Interrupt_Ctrl.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/CLAShared.h
 Source/Interrupt_Ctrl.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/App_stateCtrl.h
@@ -46,15 +45,17 @@ Source/Interrupt_Ctrl.obj: D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/stdarg
 Source/Interrupt_Ctrl.obj: D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/linkage.h
 Source/Interrupt_Ctrl.obj: D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/_lock.h
 Source/Interrupt_Ctrl.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/comdefs.h
+Source/Interrupt_Ctrl.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/analogChk_control.h
 Source/Interrupt_Ctrl.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/power_loopCtrl.h
 Source/Interrupt_Ctrl.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/DSP28x_project.h
 Source/Interrupt_Ctrl.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/DSP2803x_Cla_typedefs.h
 Source/Interrupt_Ctrl.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/DSP2803x_Examples.h
 Source/Interrupt_Ctrl.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/DSP2803x_I2c_defines.h
-Source/Interrupt_Ctrl.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/analogChk_control.h
 Source/Interrupt_Ctrl.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/Signal_IOCtrl.h
 Source/Interrupt_Ctrl.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/main.h
 Source/Interrupt_Ctrl.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/SCICommu_Ctrl.h
+Source/Interrupt_Ctrl.obj: D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/stdio.h
+Source/Interrupt_Ctrl.obj: D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/stdarg.h
 Source/Interrupt_Ctrl.obj: D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/stdint.h
 Source/Interrupt_Ctrl.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/Cla.h
 
@@ -93,7 +94,6 @@ E:/project/git_workspace/bidir-ac-dc-28035/Include/SFO_V6.h:
 E:/project/git_workspace/bidir-ac-dc-28035/Include/IQmathLib.h: 
 D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/limits.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/PubFunc.h: 
-E:/project/git_workspace/bidir-ac-dc-28035/Include/FlashUpdate.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/DSP2803x_GlobalPrototypes.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/CLAShared.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/App_stateCtrl.h: 
@@ -104,14 +104,16 @@ D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/stdarg.h:
 D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/linkage.h: 
 D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/_lock.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/comdefs.h: 
+E:/project/git_workspace/bidir-ac-dc-28035/Include/analogChk_control.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/power_loopCtrl.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/DSP28x_project.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/DSP2803x_Cla_typedefs.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/DSP2803x_Examples.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/DSP2803x_I2c_defines.h: 
-E:/project/git_workspace/bidir-ac-dc-28035/Include/analogChk_control.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/Signal_IOCtrl.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/main.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/SCICommu_Ctrl.h: 
+D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/stdio.h: 
+D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/stdarg.h: 
 D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/stdint.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/Cla.h: 

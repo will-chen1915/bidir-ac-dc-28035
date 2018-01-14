@@ -1,10 +1,10 @@
 ******************************************************************************
              TMS320C2000 Linker PC v6.2.7                      
 ******************************************************************************
->> Linked Sat Jan 06 18:06:21 2018
+>> Linked Sat Jan 13 21:11:17 2018
 
 OUTPUT FILE NAME:   <28035_v01.out>
-ENTRY POINT SYMBOL: "_c_int00"  address: 003f69a9
+ENTRY POINT SYMBOL: "_c_int00"  address: 003f6b28
 
 
 MEMORY CONFIGURATION
@@ -12,16 +12,16 @@ MEMORY CONFIGURATION
          name            origin    length      used     unused   attr    fill
 ----------------------  --------  ---------  --------  --------  ----  --------
 PAGE 0:
-  RAML0                 00008000   00000800  00000023  000007dd  RWIX
+  RAML0                 00008000   00000800  0000001f  000007e1  RWIX
   RAML1                 00008800   00000400  00000000  00000400  RWIX
   OTP                   003d7800   00000400  00000000  00000400  RWIX
   FLASHH                003e8000   00002000  00000000  00002000  RWIX
   FLASHG                003ea000   00002000  00000000  00002000  RWIX
   FLASHF                003ec000   00002000  00000000  00002000  RWIX
   FLASHE                003ee000   00002000  00000000  00002000  RWIX
-  FLASHD                003f0000   00002000  00000000  00002000  RWIX
+  FLASHD                003f0000   00002000  00000004  00001ffc  RWIX
   FLASHC                003f2000   00002000  00000000  00002000  RWIX
-  FLASHA                003f6000   00001f80  00000c9b  000012e5  RWIX
+  FLASHA                003f6000   00001f80  00000ddc  000011a4  RWIX
   CSM_RSVD              003f7f80   00000076  00000076  00000000  RWIX
   BEGIN                 003f7ff6   00000002  00000000  00000002  RWIX
   CSM_PWL_P0            003f7ff8   00000008  00000008  00000000  RWIX
@@ -33,8 +33,8 @@ PAGE 0:
   VECTORS               003fffc2   0000003e  00000000  0000003e  RWIX
 
 PAGE 1:
-  BOOT_RSVD             00000000   00000050  00000050  00000000  RWIX
-  RAMM0                 00000050   000003b0  00000342  0000006e  RWIX
+  BOOT_RSVD             00000000   00000050  00000000  00000050  RWIX
+  RAMM0                 00000050   000003b0  00000300  000000b0  RWIX
   RAMM1                 00000400   00000400  00000000  00000400  RWIX
   DEV_EMU               00000880   00000105  00000004  00000101  RWIX
   SYS_PWR_CTL           00000985   00000003  00000003  00000000  RWIX
@@ -46,7 +46,7 @@ PAGE 1:
   CPU_TIMER2            00000c10   00000008  00000008  00000000  RWIX
   PIE_CTRL              00000ce0   00000020  0000001a  00000006  RWIX
   PIE_VECT              00000d00   00000100  00000100  00000000  RWIX
-  CLA1                  00001400   00000080  00000040  00000040  RWIX
+  CLA1                  00001400   00000080  00000000  00000080  RWIX
   ECANA                 00006000   00000040  00000034  0000000c  RWIX
   ECANA_LAM             00006040   00000040  00000040  00000000  RWIX
   ECANA_MOTS            00006080   00000040  00000040  00000000  RWIX
@@ -78,7 +78,7 @@ PAGE 1:
   ADC                   00007100   00000080  00000050  00000030  RWIX
   SPIB                  00007740   00000010  00000010  00000000  RWIX
   I2CA                  00007900   00000040  00000022  0000001e  RWIX
-  RAML2                 00008c00   00000400  000003c0  00000040  RWIX
+  RAML2                 00008c00   00000400  000003c4  0000003c  RWIX
   RAML3                 00009000   00001000  00000000  00001000  RWIX
   PARTID                003d7e80   00000001  00000001  00000000  RWIX
   FLASHB                003f4000   00002000  00000000  00002000  RWIX
@@ -92,51 +92,48 @@ section   page    origin      length       input sections
 --------  ----  ----------  ----------   ----------------
 .pinit     0    003f6000    00000000     UNINITIALIZED
 
-ramfuncs   0    00008000    00000000     UNINITIALIZED
-
 AppRamfuncs 
-*          0    00008000    0000001f     
-                  00008000    0000001b     DSP2803x_SysCtrl.obj (AppRamfuncs)
-                  0000801b    00000004     DSP280x_usDelay.obj (AppRamfuncs)
+*          0    00008004    0000001b     
+                  00008004    0000001b     DSP2803x_SysCtrl.obj (AppRamfuncs)
 
-Flash2803xFunc 
-*          0    0000801f    00000004     
-                  0000801f    00000004     DSP280x_usDelay.obj (Flash2803xFunc)
+ramfuncs   0    003f0000    00000004     RUN ADDR = 00008000
+                  003f0000    00000004     DSP280x_usDelay.obj (ramfuncs)
 
-.text      0    003f6000    00000bfd     
-                  003f6000    00000241     DSP2803x_Adc.obj (.text)
-                  003f6241    00000210     DSP2803x_EPwm.obj (.text)
-                  003f6451    000001bc     App_stateCtrl.obj (.text)
-                  003f660d    000001a8     analogChk_control.obj (.text)
-                  003f67b5    000000fb     Signal_IOCtrl.obj (.text)
-                  003f68b0    000000f9     DSP2803x_SysCtrl.obj (.text)
-                  003f69a9    00000044     rts2800_ml.lib : boot.obj (.text)
-                  003f69ed    00000040     power_loopCtrl.obj (.text)
-                  003f6a2d    0000003c     DSP2803x_I2C.obj (.text)
-                  003f6a69    00000031     main.obj (.text)
-                  003f6a9a    00000031     power_loopCtrl.obj (.text:retain)
-                  003f6acb    0000002b     DSP2803x_Sci.obj (.text)
-                  003f6af6    0000002a     DSP2803x_Gpio.obj (.text)
-                  003f6b20    00000021     rts2800_ml.lib : memcpy_ff.obj (.text)
-                  003f6b41    0000001f     DSP2803x_PieCtrl.obj (.text)
-                  003f6b60    0000001e     DSP2803x_PieVect.obj (.text)
-                  003f6b7e    0000001c     DSP2803x_CpuTimers.obj (.text)
-                  003f6b9a    00000019     Interrupt_Ctrl.obj (.text)
-                  003f6bb3    00000019     rts2800_ml.lib : args_main.obj (.text)
-                  003f6bcc    00000019                    : exit.obj (.text)
-                  003f6be5    0000000b     DSP2803x_InitPeripherals.obj (.text)
-                  003f6bf0    00000009     rts2800_ml.lib : _lock.obj (.text)
-                  003f6bf9    00000004     DSP2803x_DefaultIsr.obj (.text:retain)
+.text      0    003f6000    00000d2e     
+                  003f6000    0000024c     DSP2803x_Adc.obj (.text)
+                  003f624c    00000210     DSP2803x_EPwm.obj (.text)
+                  003f645c    000001da     App_stateCtrl.obj (.text)
+                  003f6636    000001a8     analogChk_control.obj (.text)
+                  003f67de    00000107     DSP2803x_SysCtrl.obj (.text)
+                  003f68e5    000000fb     Signal_IOCtrl.obj (.text)
+                  003f69e0    0000007c     power_loopCtrl.obj (.text)
+                  003f6a5c    00000073     SCICommu_Ctrl.obj (.text)
+                  003f6acf    00000059     power_loopCtrl.obj (.text:retain)
+                  003f6b28    00000044     rts2800_ml.lib : boot.obj (.text)
+                  003f6b6c    0000003c     DSP2803x_I2C.obj (.text)
+                  003f6ba8    00000033     main.obj (.text)
+                  003f6bdb    0000002b     DSP2803x_Sci.obj (.text)
+                  003f6c06    0000002a     DSP2803x_Gpio.obj (.text)
+                  003f6c30    00000025     DSP2803x_PieVect.obj (.text)
+                  003f6c55    00000021     rts2800_ml.lib : memcpy_ff.obj (.text)
+                  003f6c76    0000001f     DSP2803x_PieCtrl.obj (.text)
+                  003f6c95    0000001e     DSP2803x_DefaultIsr.obj (.text:retain)
+                  003f6cb3    0000001c     DSP2803x_CpuTimers.obj (.text)
+                  003f6ccf    00000019     Interrupt_Ctrl.obj (.text)
+                  003f6ce8    00000019     rts2800_ml.lib : args_main.obj (.text)
+                  003f6d01    00000019                    : exit.obj (.text)
+                  003f6d1a    0000000b     DSP2803x_InitPeripherals.obj (.text)
+                  003f6d25    00000009     rts2800_ml.lib : _lock.obj (.text)
 
-.cinit     0    003f6bfd    0000009e     
-                  003f6bfd    00000035     analogChk_control.obj (.cinit)
-                  003f6c32    0000001c     power_loopCtrl.obj (.cinit)
-                  003f6c4e    00000015     SCICommu_Ctrl.obj (.cinit)
-                  003f6c63    00000014     Signal_IOCtrl.obj (.cinit)
-                  003f6c77    0000000e     App_stateCtrl.obj (.cinit)
-                  003f6c85    0000000a     rts2800_ml.lib : _lock.obj (.cinit)
-                  003f6c8f    0000000a                    : exit.obj (.cinit)
-                  003f6c99    00000002     --HOLE-- [fill = 0]
+.cinit     0    003f6d2e    000000ae     
+                  003f6d2e    00000035     analogChk_control.obj (.cinit)
+                  003f6d63    0000002c     power_loopCtrl.obj (.cinit)
+                  003f6d8f    00000015     SCICommu_Ctrl.obj (.cinit)
+                  003f6da4    00000014     Signal_IOCtrl.obj (.cinit)
+                  003f6db8    0000000e     App_stateCtrl.obj (.cinit)
+                  003f6dc6    0000000a     rts2800_ml.lib : _lock.obj (.cinit)
+                  003f6dd0    0000000a                    : exit.obj (.cinit)
+                  003f6dda    00000002     --HOLE-- [fill = 0]
 
 csm_rsvd   0    003f7f80    00000076     
                   003f7f80    00000076     DSP2803x_CSMPasswords.obj (csm_rsvd)
@@ -150,20 +147,8 @@ csmpasswds
 
 vectors    0    003fffc2    00000000     DSECT
 
-Cla1ToCpuMsgRAM 
-*          1    00000000    00000050     UNINITIALIZED
-                  00000000    00000050     DSP2803x_GlobalVariableDefs.obj (Cla1ToCpuMsgRAM)
-
 .stack     1    00000050    00000300     UNINITIALIZED
                   00000050    00000300     --HOLE--
-
-Cla1DataRam1 
-*          1    00000350    0000000e     UNINITIALIZED
-                  00000350    0000000e     DSP2803x_GlobalVariableDefs.obj (Cla1DataRam1)
-
-CpuToCla1MsgRAM 
-*          1    00000380    00000034     UNINITIALIZED
-                  00000380    00000034     DSP2803x_GlobalVariableDefs.obj (CpuToCla1MsgRAM)
 
 DevEmuRegsFile 
 *          1    00000880    00000004     UNINITIALIZED
@@ -218,10 +203,6 @@ FlashCallbackVar
 FlashScalingVar 
 *          1    00000d02    00000002     UNINITIALIZED
                   00000d02    00000002     DSP2803x_GlobalVariableDefs.obj (FlashScalingVar)
-
-Cla1RegsFile 
-*          1    00001400    00000040     UNINITIALIZED
-                  00001400    00000040     DSP2803x_GlobalVariableDefs.obj (Cla1RegsFile)
 
 ECanaRegsFile 
 *          1    00006000    00000034     UNINITIALIZED
@@ -343,16 +324,16 @@ I2caRegsFile
 *          1    00007900    00000022     UNINITIALIZED
                   00007900    00000022     DSP2803x_GlobalVariableDefs.obj (I2caRegsFile)
 
-.ebss      1    00008c00    000003c0     UNINITIALIZED
+.ebss      1    00008c00    000003c4     UNINITIALIZED
                   00008c00    00000360     SCICommu_Ctrl.obj (.ebss)
-                  00008f60    00000010     DSP2803x_CpuTimers.obj (.ebss)
-                  00008f70    00000010     power_loopCtrl.obj (.ebss)
+                  00008f60    00000014     power_loopCtrl.obj (.ebss)
+                  00008f74    0000000c     App_stateCtrl.obj (.ebss)
                   00008f80    00000026     analogChk_control.obj (.ebss)
-                  00008fa6    0000000c     App_stateCtrl.obj (.ebss)
-                  00008fb2    00000005     Signal_IOCtrl.obj (.ebss)
-                  00008fb7    00000001     --HOLE--
-                  00008fb8    00000004     rts2800_ml.lib : _lock.obj (.ebss)
-                  00008fbc    00000004                    : exit.obj (.ebss)
+                  00008fa6    00000010     DSP2803x_CpuTimers.obj (.ebss)
+                  00008fb6    00000005     Signal_IOCtrl.obj (.ebss)
+                  00008fbb    00000001     --HOLE--
+                  00008fbc    00000004     rts2800_ml.lib : _lock.obj (.ebss)
+                  00008fc0    00000004                    : exit.obj (.ebss)
 
 PartIdRegsFile 
 *          1    003d7e80    00000001     UNINITIALIZED
@@ -367,13 +348,7 @@ GLOBAL DATA SYMBOLS: SORTED BY DATA PAGE
 
 address     data page           name
 --------    ----------------    ----
-00000000       0 (00000000)     _ClatoCpuVar
-
 00000050       1 (00000040)     __stack
-
-00000350       d (00000340)     _ClaVar
-
-00000380       e (00000380)     _CputoClaVar
 
 00000880      22 (00000880)     _DevEmuRegs
 
@@ -394,8 +369,6 @@ address     data page           name
 00000d00      34 (00000d00)     _Flash_CallbackPtr
 00000d00      34 (00000d00)     _PieVectTable
 00000d02      34 (00000d00)     _Flash_CPUScaleFactor
-
-00001400      50 (00001400)     _Cla1Regs
 
 00006000     180 (00006000)     _ECanaRegs
 
@@ -453,36 +426,41 @@ address     data page           name
 00007900     1e4 (00007900)     _I2caRegs
 
 00008c00     230 (00008c00)     _KP_set
-00008c01     230 (00008c00)     _KI_set
+00008c01     230 (00008c00)     _Txd_Cnt
 00008c02     230 (00008c00)     _KD_set
-00008c03     230 (00008c00)     _Txd_Cnt
-00008c04     230 (00008c00)     _Rxd_buf
+00008c03     230 (00008c00)     _KI_set
+00008c06     230 (00008c00)     _Rxd_buf
 
 00008c40     231 (00008c40)     _Txd_buf
 
-00008f60     23d (00008f40)     _CpuTimer0
-00008f68     23d (00008f40)     _CpuTimer1
-00008f70     23d (00008f40)     _u16LVoltInst
-00008f71     23d (00008f40)     _u16Vol_K_I
-00008f72     23d (00008f40)     _u16Vol_K_D
-00008f73     23d (00008f40)     _Flag_Txd
-00008f74     23d (00008f40)     _Flag_Txd_cnt
-00008f76     23d (00008f40)     _u16Vol_K_P
-00008f78     23d (00008f40)     _CTRL2P2Z_COEFF_VOLTAGE_LOOP
+00008f60     23d (00008f40)     _u16Vol_K_P
+00008f61     23d (00008f40)     _u16LVoltInst
+00008f62     23d (00008f40)     _Flag_Txd
+00008f63     23d (00008f40)     _Flag_Txd_cnt
+00008f64     23d (00008f40)     _u16Vol_K_D
+00008f65     23d (00008f40)     _u16LVoutRefNormal
+00008f66     23d (00008f40)     _u16Vol_K_I
+00008f67     23d (00008f40)     _u16LVoutRef
+00008f68     23d (00008f40)     _bsoftStart
+00008f69     23d (00008f40)     _u8RampLVoltRef_Cnt
+00008f6c     23d (00008f40)     _CTRL2P2Z_COEFF_VOLTAGE_LOOP
+00008f74     23d (00008f40)     _PSUCharge_state
+00008f75     23d (00008f40)     _PSUDischarge_state
+00008f76     23d (00008f40)     _PSUMode
 
 00008f80     23e (00008f80)     _u16FaultReg
 00008f82     23e (00008f80)     _u16HVoltInst
-00008fa6     23e (00008f80)     _PSUCharge_state
-00008fa7     23e (00008f80)     _PSUMode
-00008fa8     23e (00008f80)     _PSUDischarge_state
-00008fb2     23e (00008f80)     _PFCOK_State_e
-00008fb4     23e (00008f80)     _LED2State
-00008fb5     23e (00008f80)     _LED1State
-00008fb6     23e (00008f80)     _LED3State
-00008fb8     23e (00008f80)     __unlock
-00008fba     23e (00008f80)     __lock
-00008fbc     23e (00008f80)     ___TI_cleanup_ptr
-00008fbe     23e (00008f80)     ___TI_dtors_ptr
+00008fa6     23e (00008f80)     _CpuTimer0
+00008fae     23e (00008f80)     _CpuTimer1
+00008fb6     23e (00008f80)     _PFCOK_State_e
+00008fb8     23e (00008f80)     _LED2State
+00008fb9     23e (00008f80)     _LED1State
+00008fba     23e (00008f80)     _LED3State
+00008fbc     23e (00008f80)     __unlock
+00008fbe     23e (00008f80)     __lock
+
+00008fc0     23f (00008fc0)     ___TI_cleanup_ptr
+00008fc2     23f (00008fc0)     ___TI_dtors_ptr
 
 003d7e80    f5fa (003d7e80)     _PartIdRegs
 
@@ -494,36 +472,31 @@ GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name
 address    name
 --------   ----
 003f6000   .text
-003f6bcc   C$$EXIT
+003f6d01   C$$EXIT
 003f600f   _AdcChanSelect
 003f60ab   _AdcConversion
 003f6084   _AdcOffsetSelfCal
 00007100   _AdcRegs
 00000b00   _AdcResult
-0000801b   _AppDSP28x_usDelay
-003f65f7   _App_StateCtrl
-003f65f3   _App_initStateCtrl
-00008f78   _CTRL2P2Z_COEFF_VOLTAGE_LOOP
-00001400   _Cla1Regs
-00000350   _ClaVar
-00000000   _ClatoCpuVar
+003f6612   _App_StateCtrl
+003f660e   _App_initStateCtrl
+00008f6c   _CTRL2P2Z_COEFF_VOLTAGE_LOOP
 00006400   _Comp1Regs
 00006420   _Comp2Regs
 00006440   _Comp3Regs
 003f61d1   _ConfigAdc
-00008f60   _CpuTimer0
+00008fa6   _CpuTimer0
 00000c00   _CpuTimer0Regs
-00008f68   _CpuTimer1
+00008fae   _CpuTimer1
 00000c08   _CpuTimer1Regs
 00000c10   _CpuTimer2Regs
-00000380   _CputoClaVar
 003f7ff8   _CsmPwl
 00000ae0   _CsmRegs
-0000801f   _DSP28x_usDelay
+00008000   _DSP28x_usDelay
 00000880   _DevEmuRegs
-003f68b0   _DisableDog
-003f6479   _Disable_MainPWMCtrl
-003f6491   _Disable_SYNCPWMCtrl
+003f67de   _DisableDog
+003f6491   _Disable_MainPWMCtrl
+003f64a9   _Disable_SYNCPWMCtrl
 00006040   _ECanaLAMRegs
 000060c0   _ECanaMOTORegs
 00006080   _ECanaMOTSRegs
@@ -538,148 +511,163 @@ address    name
 00006940   _EPwm6Regs
 00006980   _EPwm7Regs
 00006b00   _EQep1Regs
-003f6997   _EnableDog
-003f6ba7   _EnableInterrupts
-003f6485   _Enable_MainPWMCtrl
-003f649d   _Enable_SYNCPWMCtrl
-003f6974   _ExtOscSel
-00008f73   _Flag_Txd
-00008f74   _Flag_Txd_cnt
+003f68d3   _EnableDog
+003f6cdc   _EnableInterrupts
+003f649d   _Enable_MainPWMCtrl
+003f64b5   _Enable_SYNCPWMCtrl
+003f68b0   _ExtOscSel
+00008f62   _Flag_Txd
+00008f63   _Flag_Txd_cnt
 00000a80   _FlashRegs
 00000d02   _Flash_CPUScaleFactor
 00000d00   _Flash_CallbackPtr
+003f69ed   _Get_LVoltRef
 00006f80   _GpioCtrlRegs
 00006fc0   _GpioDataRegs
 00006fe0   _GpioIntRegs
 00006ac0   _HRCap1Regs
 00006ae0   _HRCap2Regs
 00007900   _I2caRegs
-003f6803   _IO_ChkPFCOK
-003f6827   _IO_UpdInput_PFCOK
-003f6841   _IO_UpdOutput_LED1
-003f6863   _IO_UpdOutput_LED2
-003f6885   _IO_UpdOutput_LED3
-003f68a7   _IO_UpdSignal
-003f67b5   _IO_UpdState
-003f6220   _InitAdc
+003f6933   _IO_ChkPFCOK
+003f6957   _IO_UpdInput_PFCOK
+003f6971   _IO_UpdOutput_LED1
+003f6993   _IO_UpdOutput_LED2
+003f69b5   _IO_UpdOutput_LED3
+003f69d7   _IO_UpdSignal
+003f68e5   _IO_UpdState
+003f622b   _InitAdc
 003f6000   _InitAdcAio
-003f6b7e   _InitCpuTimers
-003f62f3   _InitEPWM1
-003f6344   _InitEPWM2
-003f637c   _InitEPWM3
-003f63a3   _InitEPWM4
-003f63de   _InitEPWM5
-003f6418   _InitEPWM6
-003f62ca   _InitEPwm
-003f6241   _InitEPwm1Gpio
-003f624d   _InitEPwm2Gpio
-003f6259   _InitEPwm3Gpio
-003f626d   _InitEPwm4Gpio
-003f6281   _InitEPwm5Gpio
-003f628d   _InitEPwm6Gpio
-003f6299   _InitEPwm7Gpio
-00008000   _InitFlash
-003f6af6   _InitGpio
-003f6a43   _InitI2C
-003f6a2d   _InitI2CGpio
-003f691e   _InitPeripheralClocks
-003f6be5   _InitPeripherals
-003f6b41   _InitPieCtrl
-003f6b60   _InitPieVectTable
-003f68c8   _InitPll
-003f6acb   _InitSci
-003f6add   _InitSciGpio
-003f6ae0   _InitSciaGpio
-003f698a   _InitSysCtrl
-003f62ab   _InitTzGpio
-003f68b8   _IntOsc1Sel
-003f694c   _IntOsc2Sel
+003f6cb3   _InitCpuTimers
+003f62fe   _InitEPWM1
+003f634f   _InitEPWM2
+003f6387   _InitEPWM3
+003f63ae   _InitEPWM4
+003f63e9   _InitEPWM5
+003f6423   _InitEPWM6
+003f62d5   _InitEPwm
+003f624c   _InitEPwm1Gpio
+003f6258   _InitEPwm2Gpio
+003f6264   _InitEPwm3Gpio
+003f6278   _InitEPwm4Gpio
+003f628c   _InitEPwm5Gpio
+003f6298   _InitEPwm6Gpio
+003f62a4   _InitEPwm7Gpio
+00008004   _InitFlash
+003f6c06   _InitGpio
+003f6b82   _InitI2C
+003f6b6c   _InitI2CGpio
+003f684c   _InitPeripheralClocks
+003f6d1a   _InitPeripherals
+003f6c76   _InitPieCtrl
+003f6c30   _InitPieVectTable
+003f67f6   _InitPll
+003f6bdb   _InitSci
+003f6bed   _InitSciGpio
+003f6bf0   _InitSciaGpio
+003f68c6   _InitSysCtrl
+003f62b6   _InitTzGpio
+003f67e6   _IntOsc1Sel
+003f6888   _IntOsc2Sel
 00008c02   _KD_set
-00008c01   _KI_set
+00008c03   _KI_set
 00008c00   _KP_set
-00008fb5   _LED1State
-00008fb4   _LED2State
-00008fb6   _LED3State
-003f6838   _LEDCtrl_LED1OnCond
-003f683b   _LEDCtrl_LED2OnCond
-003f683e   _LEDCtrl_LED3OnCond
+00008fb9   _LED1State
+00008fb8   _LED2State
+00008fba   _LED3State
+003f6968   _LEDCtrl_LED1OnCond
+003f696b   _LEDCtrl_LED2OnCond
+003f696e   _LEDCtrl_LED3OnCond
 00006c00   _LinaRegs
-00008fb2   _PFCOK_State_e
-003f69ed   _PI_LVolt
-003f64a9   _PSUChargeStateCtrl
-00008fa6   _PSUCharge_state
-003f654e   _PSUDischargeStateCtrl
-00008fa8   _PSUDischarge_state
-00008fa7   _PSUMode
+00008fb6   _PFCOK_State_e
+003f69f1   _PI_LVolt
+003f64c1   _PSUChargeStateCtrl
+003f662e   _PSUChargeState_ChkState
+00008f74   _PSUCharge_state
+003f6569   _PSUDischargeStateCtrl
+003f6632   _PSUDischargeState_ChkState
+00008f75   _PSUDischarge_state
+00008f76   _PSUMode
+003f662a   _PSUMode_ChkMode
+003f6a3d   _ParametersCtrl
 003d7e80   _PartIdRegs
 00000ce0   _PieCtrlRegs
 00000d00   _PieVectTable
-003f6a2c   _PwmCtrl_SetPwmGain
-00008000   _RamfuncsLoadEnd
-00008000   _RamfuncsLoadStart
+003f0004   _RamfuncsLoadEnd
+003f0000   _RamfuncsLoadStart
 00008000   _RamfuncsRunStart
-00008c04   _Rxd_buf
+00008c06   _Rxd_buf
+003f6ac8   _SCICommu_Control
+003f6a5c   _SCI_DataRx
+003f6a7c   _SCI_DoRx
+003f6ab0   _SCI_DoTx
 00007050   _SciaRegs
+003f69e0   _Set_LVoltRef
 00007040   _SpiaRegs
 00007740   _SpibRegs
 00007010   _SysCtrlRegs
 00000985   _SysPwrCtrlRegs
-00008c03   _Txd_Cnt
+00008c01   _Txd_Cnt
 00008c40   _Txd_buf
-003f6bf9   _USER_ISR
-003f699f   _Watch_Dog_Kick
+003f6ca4   _USER_ISR
+003f68db   _Watch_Dog_Kick
 00007070   _XIntruptRegs
-003f6960   _XtalOscSel
+003f689c   _XtalOscSel
 00000350   __STACK_END
 00000300   __STACK_SIZE
 00000001   __TI_args_main
-00008fbc   ___TI_cleanup_ptr
-00008fbe   ___TI_dtors_ptr
+00008fc0   ___TI_cleanup_ptr
+00008fc2   ___TI_dtors_ptr
 ffffffff   ___binit__
 ffffffff   ___c_args__
-003f6bfd   ___cinit__
-003f6bfd   ___etext__
-003f6b20   ___memcpy_ff
+003f6d2e   ___cinit__
+003f6d2e   ___etext__
+003f6c55   ___memcpy_ff
 ffffffff   ___pinit__
 003f6000   ___text__
-003f6bb3   __args_main
-00008fba   __lock
-003f6bf8   __nop
-003f6bf4   __register_lock
-003f6bf0   __register_unlock
+003f6ce8   __args_main
+00008fbe   __lock
+003f6d2d   __nop
+003f6d29   __register_lock
+003f6d25   __register_unlock
 00000050   __stack
-00008fb8   __unlock
-003f6bcc   _abort
-003f6a9a   _adc_isr
-003f665f   _analog_ChkHVOVP
-003f669b   _analog_ChkHVUVP
-003f66d9   _analog_ChkLVOVP
-003f6721   _analog_ChkLVUVP
-003f664d   _analog_HVmetering
-003f676a   _analog_monitor
-003f69a9   _c_int00
-003f6bce   _exit
-003f6461   _initPSUChargeStateCtrl
-003f646d   _initPSUDischargeStateCtrl
-003f679f   _isHV_OVP
-003f67aa   _isHV_UVP
-003f6794   _isLV_UVP
-003f678a   _is_LVOVP
-003f6788   _is_OCP
-003f6775   _is_PFC_OK
-003f6780   _is_fault
-003f6a2a   _is_softStartFinished
-003f6a69   _main
+00008fbc   __unlock
+003f6d01   _abort
+003f6acf   _adc_isr
+003f6688   _analog_ChkHVOVP
+003f66c4   _analog_ChkHVUVP
+003f6702   _analog_ChkLVOVP
+003f674a   _analog_ChkLVUVP
+003f6676   _analog_HVmetering
+003f6793   _analog_monitor
+00008f68   _bsoftStart
+003f6b28   _c_int00
+003f6d03   _exit
+003f646d   _initPSUChargeStateCtrl
+003f647f   _initPSUDischargeStateCtrl
+003f67c8   _isHV_OVP
+003f67d3   _isHV_UVP
+003f67bd   _isLV_UVP
+003f67b3   _is_LVOVP
+003f67b1   _is_OCP
+003f679e   _is_PFC_OK
+003f67a9   _is_fault
+003f6a2e   _is_softStartFinished
+003f6ba8   _main
+003f6c95   _rsvd_ISR
+003f646c   _test1
 00008f80   _u16FaultReg
 00008f82   _u16HVoltInst
-00008f70   _u16LVoltInst
-00008f72   _u16Vol_K_D
-00008f71   _u16Vol_K_I
-00008f76   _u16Vol_K_P
-003f6b9a   _vInitialInterrupts
+00008f61   _u16LVoltInst
+00008f67   _u16LVoutRef
+00008f65   _u16LVoutRefNormal
+00008f64   _u16Vol_K_D
+00008f66   _u16Vol_K_I
+00008f60   _u16Vol_K_P
+00008f69   _u8RampLVoltRef_Cnt
+003f6ccf   _vInitialInterrupts
 ffffffff   binit
-003f6bfd   cinit
-003f6bfd   etext
+003f6d2e   cinit
+003f6d2e   etext
 ffffffff   pinit
 
 
@@ -687,13 +675,10 @@ GLOBAL SYMBOLS: SORTED BY Symbol Address
 
 address    name
 --------   ----
-00000000   _ClatoCpuVar
 00000001   __TI_args_main
 00000050   __stack
 00000300   __STACK_SIZE
-00000350   _ClaVar
 00000350   __STACK_END
-00000380   _CputoClaVar
 00000880   _DevEmuRegs
 00000985   _SysPwrCtrlRegs
 00000a80   _FlashRegs
@@ -706,7 +691,6 @@ address    name
 00000d00   _Flash_CallbackPtr
 00000d00   _PieVectTable
 00000d02   _Flash_CPUScaleFactor
-00001400   _Cla1Regs
 00006000   _ECanaRegs
 00006040   _ECanaLAMRegs
 00006080   _ECanaMOTSRegs
@@ -737,41 +721,44 @@ address    name
 00007100   _AdcRegs
 00007740   _SpibRegs
 00007900   _I2caRegs
-00008000   _InitFlash
-00008000   _RamfuncsLoadEnd
-00008000   _RamfuncsLoadStart
+00008000   _DSP28x_usDelay
 00008000   _RamfuncsRunStart
-0000801b   _AppDSP28x_usDelay
-0000801f   _DSP28x_usDelay
+00008004   _InitFlash
 00008c00   _KP_set
-00008c01   _KI_set
+00008c01   _Txd_Cnt
 00008c02   _KD_set
-00008c03   _Txd_Cnt
-00008c04   _Rxd_buf
+00008c03   _KI_set
+00008c06   _Rxd_buf
 00008c40   _Txd_buf
-00008f60   _CpuTimer0
-00008f68   _CpuTimer1
-00008f70   _u16LVoltInst
-00008f71   _u16Vol_K_I
-00008f72   _u16Vol_K_D
-00008f73   _Flag_Txd
-00008f74   _Flag_Txd_cnt
-00008f76   _u16Vol_K_P
-00008f78   _CTRL2P2Z_COEFF_VOLTAGE_LOOP
+00008f60   _u16Vol_K_P
+00008f61   _u16LVoltInst
+00008f62   _Flag_Txd
+00008f63   _Flag_Txd_cnt
+00008f64   _u16Vol_K_D
+00008f65   _u16LVoutRefNormal
+00008f66   _u16Vol_K_I
+00008f67   _u16LVoutRef
+00008f68   _bsoftStart
+00008f69   _u8RampLVoltRef_Cnt
+00008f6c   _CTRL2P2Z_COEFF_VOLTAGE_LOOP
+00008f74   _PSUCharge_state
+00008f75   _PSUDischarge_state
+00008f76   _PSUMode
 00008f80   _u16FaultReg
 00008f82   _u16HVoltInst
-00008fa6   _PSUCharge_state
-00008fa7   _PSUMode
-00008fa8   _PSUDischarge_state
-00008fb2   _PFCOK_State_e
-00008fb4   _LED2State
-00008fb5   _LED1State
-00008fb6   _LED3State
-00008fb8   __unlock
-00008fba   __lock
-00008fbc   ___TI_cleanup_ptr
-00008fbe   ___TI_dtors_ptr
+00008fa6   _CpuTimer0
+00008fae   _CpuTimer1
+00008fb6   _PFCOK_State_e
+00008fb8   _LED2State
+00008fb9   _LED1State
+00008fba   _LED3State
+00008fbc   __unlock
+00008fbe   __lock
+00008fc0   ___TI_cleanup_ptr
+00008fc2   ___TI_dtors_ptr
 003d7e80   _PartIdRegs
+003f0000   _RamfuncsLoadStart
+003f0004   _RamfuncsLoadEnd
 003f6000   .text
 003f6000   _InitAdcAio
 003f6000   ___text__
@@ -779,96 +766,107 @@ address    name
 003f6084   _AdcOffsetSelfCal
 003f60ab   _AdcConversion
 003f61d1   _ConfigAdc
-003f6220   _InitAdc
-003f6241   _InitEPwm1Gpio
-003f624d   _InitEPwm2Gpio
-003f6259   _InitEPwm3Gpio
-003f626d   _InitEPwm4Gpio
-003f6281   _InitEPwm5Gpio
-003f628d   _InitEPwm6Gpio
-003f6299   _InitEPwm7Gpio
-003f62ab   _InitTzGpio
-003f62ca   _InitEPwm
-003f62f3   _InitEPWM1
-003f6344   _InitEPWM2
-003f637c   _InitEPWM3
-003f63a3   _InitEPWM4
-003f63de   _InitEPWM5
-003f6418   _InitEPWM6
-003f6461   _initPSUChargeStateCtrl
-003f646d   _initPSUDischargeStateCtrl
-003f6479   _Disable_MainPWMCtrl
-003f6485   _Enable_MainPWMCtrl
-003f6491   _Disable_SYNCPWMCtrl
-003f649d   _Enable_SYNCPWMCtrl
-003f64a9   _PSUChargeStateCtrl
-003f654e   _PSUDischargeStateCtrl
-003f65f3   _App_initStateCtrl
-003f65f7   _App_StateCtrl
-003f664d   _analog_HVmetering
-003f665f   _analog_ChkHVOVP
-003f669b   _analog_ChkHVUVP
-003f66d9   _analog_ChkLVOVP
-003f6721   _analog_ChkLVUVP
-003f676a   _analog_monitor
-003f6775   _is_PFC_OK
-003f6780   _is_fault
-003f6788   _is_OCP
-003f678a   _is_LVOVP
-003f6794   _isLV_UVP
-003f679f   _isHV_OVP
-003f67aa   _isHV_UVP
-003f67b5   _IO_UpdState
-003f6803   _IO_ChkPFCOK
-003f6827   _IO_UpdInput_PFCOK
-003f6838   _LEDCtrl_LED1OnCond
-003f683b   _LEDCtrl_LED2OnCond
-003f683e   _LEDCtrl_LED3OnCond
-003f6841   _IO_UpdOutput_LED1
-003f6863   _IO_UpdOutput_LED2
-003f6885   _IO_UpdOutput_LED3
-003f68a7   _IO_UpdSignal
-003f68b0   _DisableDog
-003f68b8   _IntOsc1Sel
-003f68c8   _InitPll
-003f691e   _InitPeripheralClocks
-003f694c   _IntOsc2Sel
-003f6960   _XtalOscSel
-003f6974   _ExtOscSel
-003f698a   _InitSysCtrl
-003f6997   _EnableDog
-003f699f   _Watch_Dog_Kick
-003f69a9   _c_int00
-003f69ed   _PI_LVolt
-003f6a2a   _is_softStartFinished
-003f6a2c   _PwmCtrl_SetPwmGain
-003f6a2d   _InitI2CGpio
-003f6a43   _InitI2C
-003f6a69   _main
-003f6a9a   _adc_isr
-003f6acb   _InitSci
-003f6add   _InitSciGpio
-003f6ae0   _InitSciaGpio
-003f6af6   _InitGpio
-003f6b20   ___memcpy_ff
-003f6b41   _InitPieCtrl
-003f6b60   _InitPieVectTable
-003f6b7e   _InitCpuTimers
-003f6b9a   _vInitialInterrupts
-003f6ba7   _EnableInterrupts
-003f6bb3   __args_main
-003f6bcc   C$$EXIT
-003f6bcc   _abort
-003f6bce   _exit
-003f6be5   _InitPeripherals
-003f6bf0   __register_unlock
-003f6bf4   __register_lock
-003f6bf8   __nop
-003f6bf9   _USER_ISR
-003f6bfd   ___cinit__
-003f6bfd   ___etext__
-003f6bfd   cinit
-003f6bfd   etext
+003f622b   _InitAdc
+003f624c   _InitEPwm1Gpio
+003f6258   _InitEPwm2Gpio
+003f6264   _InitEPwm3Gpio
+003f6278   _InitEPwm4Gpio
+003f628c   _InitEPwm5Gpio
+003f6298   _InitEPwm6Gpio
+003f62a4   _InitEPwm7Gpio
+003f62b6   _InitTzGpio
+003f62d5   _InitEPwm
+003f62fe   _InitEPWM1
+003f634f   _InitEPWM2
+003f6387   _InitEPWM3
+003f63ae   _InitEPWM4
+003f63e9   _InitEPWM5
+003f6423   _InitEPWM6
+003f646c   _test1
+003f646d   _initPSUChargeStateCtrl
+003f647f   _initPSUDischargeStateCtrl
+003f6491   _Disable_MainPWMCtrl
+003f649d   _Enable_MainPWMCtrl
+003f64a9   _Disable_SYNCPWMCtrl
+003f64b5   _Enable_SYNCPWMCtrl
+003f64c1   _PSUChargeStateCtrl
+003f6569   _PSUDischargeStateCtrl
+003f660e   _App_initStateCtrl
+003f6612   _App_StateCtrl
+003f662a   _PSUMode_ChkMode
+003f662e   _PSUChargeState_ChkState
+003f6632   _PSUDischargeState_ChkState
+003f6676   _analog_HVmetering
+003f6688   _analog_ChkHVOVP
+003f66c4   _analog_ChkHVUVP
+003f6702   _analog_ChkLVOVP
+003f674a   _analog_ChkLVUVP
+003f6793   _analog_monitor
+003f679e   _is_PFC_OK
+003f67a9   _is_fault
+003f67b1   _is_OCP
+003f67b3   _is_LVOVP
+003f67bd   _isLV_UVP
+003f67c8   _isHV_OVP
+003f67d3   _isHV_UVP
+003f67de   _DisableDog
+003f67e6   _IntOsc1Sel
+003f67f6   _InitPll
+003f684c   _InitPeripheralClocks
+003f6888   _IntOsc2Sel
+003f689c   _XtalOscSel
+003f68b0   _ExtOscSel
+003f68c6   _InitSysCtrl
+003f68d3   _EnableDog
+003f68db   _Watch_Dog_Kick
+003f68e5   _IO_UpdState
+003f6933   _IO_ChkPFCOK
+003f6957   _IO_UpdInput_PFCOK
+003f6968   _LEDCtrl_LED1OnCond
+003f696b   _LEDCtrl_LED2OnCond
+003f696e   _LEDCtrl_LED3OnCond
+003f6971   _IO_UpdOutput_LED1
+003f6993   _IO_UpdOutput_LED2
+003f69b5   _IO_UpdOutput_LED3
+003f69d7   _IO_UpdSignal
+003f69e0   _Set_LVoltRef
+003f69ed   _Get_LVoltRef
+003f69f1   _PI_LVolt
+003f6a2e   _is_softStartFinished
+003f6a3d   _ParametersCtrl
+003f6a5c   _SCI_DataRx
+003f6a7c   _SCI_DoRx
+003f6ab0   _SCI_DoTx
+003f6ac8   _SCICommu_Control
+003f6acf   _adc_isr
+003f6b28   _c_int00
+003f6b6c   _InitI2CGpio
+003f6b82   _InitI2C
+003f6ba8   _main
+003f6bdb   _InitSci
+003f6bed   _InitSciGpio
+003f6bf0   _InitSciaGpio
+003f6c06   _InitGpio
+003f6c30   _InitPieVectTable
+003f6c55   ___memcpy_ff
+003f6c76   _InitPieCtrl
+003f6c95   _rsvd_ISR
+003f6ca4   _USER_ISR
+003f6cb3   _InitCpuTimers
+003f6ccf   _vInitialInterrupts
+003f6cdc   _EnableInterrupts
+003f6ce8   __args_main
+003f6d01   C$$EXIT
+003f6d01   _abort
+003f6d03   _exit
+003f6d1a   _InitPeripherals
+003f6d25   __register_unlock
+003f6d29   __register_lock
+003f6d2d   __nop
+003f6d2e   ___cinit__
+003f6d2e   ___etext__
+003f6d2e   cinit
+003f6d2e   etext
 003f7ff8   _CsmPwl
 ffffffff   ___binit__
 ffffffff   ___c_args__
@@ -876,4 +874,4 @@ ffffffff   ___pinit__
 ffffffff   binit
 ffffffff   pinit
 
-[188 symbols]
+[198 symbols]

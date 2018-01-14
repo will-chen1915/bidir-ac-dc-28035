@@ -8,14 +8,20 @@
 
 #define MAX_STATE_SIZE              3
 
+#define INIT_CHARGE_LV_REF          K16_LV_CHARGE_STEP_SIZE
+
+
 
 PSUModeType         PSUMode;
 
 PSU_StateType PSUCharge_state;
 PSU_StateType PSUDischarge_state;
-static hptsc_DefineTimer(HptscTicks_t, ts_ChgTimer) //General purpose
-static hptsc_DefineTimer(HptscTicks_t, ts_DischgTimer) //General purpose
 
+static hptsc_DefineTimer(HptscTicks_t, ts_ChgTimer)//; //General purpose
+static hptsc_DefineTimer(HptscTicks_t, ts_DischgTimer)//; //General purpose
+
+void test1(void)
+{;}
 
 
 //void *PSU_state_Machine[MAX_STATE_SIZE] = {&PSUChargeStateCtrl,&}; 
@@ -35,8 +41,8 @@ static hptsc_DefineTimer(HptscTicks_t, ts_DischgTimer) //General purpose
 void initPSUChargeStateCtrl(void)
 {
 	PSUCharge_state = POWER_UP;
-	
-	//#define DEVICE_POWER_UP_TIME     hptsc_MsToTicks(12)
+	u16LVoutRefNormal = K16_LVOLT_CHARGE_NORMAL;	
+
 	hptsc_LoadTimer(&ts_ChgTimer, POWER_UP_TIME);
 	//Load Timer here
 }
@@ -44,8 +50,8 @@ void initPSUChargeStateCtrl(void)
 void initPSUDischargeStateCtrl(void)
 {
 	PSUDischarge_state = POWER_UP;
-	
-	//#define DEVICE_POWER_UP_TIME     hptsc_MsToTicks(12)
+	u16LVoutRefNormal = K16_LVOLT_DISCHARGE_NORMAL;
+
 	hptsc_LoadTimer(&ts_DischgTimer, POWER_UP_TIME);
 	//Load Timer here
 }
@@ -82,6 +88,14 @@ void Enable_SYNCPWMCtrl(void)
 	EDIS;
 }
 
+#if 0
+void Volt_InitOpVolt(void)
+{
+    static Uint16 u16InitVoutRef = 0;
+	u16InitVoutRef = Get_LVolt();//softstart from current voltage
+    Set_LVoltRef(LV_VOLT(13));
+}
+#endif
 
 void PSUChargeStateCtrl(void)
 {
@@ -104,7 +118,9 @@ void PSUChargeStateCtrl(void)
 			{
 				if (hptsc_IsTimerExpired(&ts_ChgTimer))
 				{
-                    Enable_MainPWMCtrl();
+					Set_LVoltRef(INIT_CHARGE_LV_REF);
+					Enable_MainPWMCtrl();
+					//Volt_InitOpVolt()
 					PSUCharge_state = SOFT_START;
 					hptsc_LoadTimer(&ts_ChgTimer, SOFT_START_TIME);
 				}
@@ -296,15 +312,13 @@ void App_initStateCtrl(void)
  ******************************************************************************/
 void App_StateCtrl(void)
 {
-    //void(*ptr_stateMachine)(void);
-	//ptr_stateMachine = PSU_state_Machine[];
 	switch(PSUMode)
 	{
         case STANDBY_MODE:
 		{
             if(1)
             {
-                //initPSUChargeStateCtrl();
+                initPSUChargeStateCtrl();
 			    PSUMode = CHARGE_MODE;
 			}
 			else if(1)
@@ -343,5 +357,18 @@ void App_StateCtrl(void)
 	}
 }
 
+PSUModeType PSUMode_ChkMode(void)
+{
+    return PSUMode;
+}
 
+PSU_StateType PSUChargeState_ChkState(void)
+{
+    return PSUCharge_state;
+}
+
+PSU_StateType PSUDischargeState_ChkState(void)
+{
+    return PSUDischarge_state;
+}
 

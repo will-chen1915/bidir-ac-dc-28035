@@ -9,6 +9,7 @@
 #define SET_KI_CMD   0x1110
 #define SET_KD_CMD   0x1010
 
+#define K32_SCI_INTERVAL   hptsc_MsToTicks(10)
 
 Sci_packet_t* Rxd_buf = ( Sci_packet_t* ) NULL;
 Uint16 KP_set = 0;
@@ -82,17 +83,20 @@ void SCI_DoTx ( void )
 		SciaRegs.SCITXBUF = Txd_buf[Txd_Cnt++];
 //		SciaRegs.SCITXBUF = 0x54;
 	}
-	if (Txd_Cnt==798)
+	if (Txd_Cnt>=790)
 	{Txd_Cnt=0;
 	Flag_Txd=0;}
 
 }
 void SCICommu_Control ( void )
 {
-	SCI_DoRx();
+	//SCI_DoRx();
+	static HptscTicks_t ts_SCI = 0;
+//	if (hptsc_IsElapsedRepetitive(&ts_SCI, K32_SCI_INTERVAL))
+//	{
+		if(Flag_Txd)
+			{SCI_DoTx();}
+//	}
 
-
-	if(Flag_Txd)
-		{SCI_DoTx();}
 }
 

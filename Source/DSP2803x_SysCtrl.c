@@ -184,13 +184,19 @@ void InitPeripheralClocks(void)
 // Note: not all peripherals are available on all 280x derivates.
 // Refer to the datasheet for your particular device. 
 	SysCtrlRegs.PCLKCR0.bit.ADCENCLK = 1;		// ADC
+	SysCtrlRegs.PCLKCR3.bit.COMP1ENCLK = 1; 	// COMP1
+	SysCtrlRegs.PCLKCR3.bit.COMP2ENCLK = 1; 	// COMP2
+	SysCtrlRegs.PCLKCR3.bit.CPUTIMER0ENCLK = 1; // CPU Timer-0
+	SysCtrlRegs.PCLKCR3.bit.CPUTIMER1ENCLK = 1; // CPU Timer-1
+	SysCtrlRegs.PCLKCR3.bit.CPUTIMER2ENCLK = 1; // CPU Timer-2
+
 	SysCtrlRegs.PCLKCR0.bit.I2CAENCLK = 1;		// I2C
 	//SysCtrlRegs.PCLKCR0.bit.SPIAENCLK = 0;		// SPI-A
 	//SysCtrlRegs.PCLKCR0.bit.SPIBENCLK = 0;		// SPI-B
-	//SysCtrlRegs.PCLKCR0.bit.SCIAENCLK = 1;		// SCI-A
+	SysCtrlRegs.PCLKCR0.bit.SCIAENCLK = 1;		// SCI-A
 	//SysCtrlRegs.PCLKCR0.bit.ECANAENCLK = 1;		// eCAN-A
 	//SysCtrlRegs.PCLKCR0.bit.LINAENCLK = 1;		// LIN
-    //SysCtrlRegs.PCLKCR1.bit.ECAP1ENCLK = 1;		// eCAP1
+    SysCtrlRegs.PCLKCR1.bit.ECAP1ENCLK = 1;		// eCAP1
    	SysCtrlRegs.PCLKCR2.bit.HRCAP1ENCLK = 0;
     SysCtrlRegs.PCLKCR2.bit.HRCAP2ENCLK = 0;
 	
@@ -316,8 +322,10 @@ void InitSysCtrl(void)
 // This function MUST be executed out of RAM. Executing it
 // out of OTP/Flash will yield unpredictable results
 #pragma CODE_SECTION(InitFlash, "AppRamfuncs");
+//#pragma CODE_SECTION(InitFlash, "ramfuncs");
 void InitFlash(void)
 {
+#if 0
    EALLOW;
    //Enable Flash Pipeline mode to improve performance
    //of code executed from Flash.
@@ -347,6 +355,38 @@ void InitFlash(void)
    //the last register configured occurs before returning.  
 
    asm(" RPT #7 || NOP");
+   #else
+	 EALLOW;
+	 //Enable Flash Pipeline mode to improve performance
+	 //of code executed from Flash.
+	 FlashRegs.FOPT.bit.ENPIPE = 1;
+	
+	 // 			   CAUTION
+	 //Minimum waitstates required for the flash operating
+	 //at a given CPU rate must be characterized by TI.
+	 //Refer to the datasheet for the latest information.
+	
+	 //Set the Paged Waitstate for the Flash
+	 FlashRegs.FBANKWAIT.bit.PAGEWAIT = 2;
+	
+	 //Set the Random Waitstate for the Flash
+	 FlashRegs.FBANKWAIT.bit.RANDWAIT = 2;
+	
+	 //Set the Waitstate for the OTP
+	 FlashRegs.FOTPWAIT.bit.OTPWAIT = 2;
+	
+// 			   CAUTION
+	 //ONLY THE DEFAULT VALUE FOR THESE 2 REGISTERS SHOULD BE USED
+	 FlashRegs.FSTDBYWAIT.bit.STDBYWAIT = 0x01FF;
+	 FlashRegs.FACTIVEWAIT.bit.ACTIVEWAIT = 0x01FF;
+	 EDIS;
+	
+	 //Force a pipeline flush to ensure that the write to
+	 //the last register configured occurs before returning.
+	
+	 asm(" RPT #7 || NOP");
+
+   #endif
 }	
 
 

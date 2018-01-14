@@ -14,8 +14,8 @@
 #include "DSP2803x_Device.h"     // DSP280x Headerfile Include File
 #include "config.h"
 
-
-/*const struct PIE_VECT_TABLE PieVectTableInit = {
+/*
+const struct PIE_VECT_TABLE PieVectTableInit = {
 
       rsvd_ISR,  // 0  Reserved space
       rsvd_ISR,  // 1  Reserved space 
@@ -196,16 +196,28 @@ void InitPieVectTable(void)
 	EDIS;*/
 
 	int16	i;
-	Uint32 *Source = (void *) &USER_ISR;//USER_ISR;	 
+	//Uint32 *Source = (void *)&PieVectTableInit;
+	Uint32 *Source = (void *) &USER_ISR;//USER_ISR;
 	Uint32 *Dest = (void *) &PieVectTable;
-		
+#if 1
+    Source = Source + 3;
+    Dest = Dest + 3;
+
+    EALLOW;
+    for(i=0; i < 125; i++)
+        *Dest++ = *Source++;
+    EDIS;
+    //Enable the PIE Vector Table
+    PieCtrlRegs.PIECTRL.bit.ENPIE = 1;
+#else
+
 	EALLOW;	
 	for(i=0; i < 128; i++)
 		*Dest++ = (Uint32)Source;
 	EDIS;
 	// Enable the PIE Vector Table
 	PieCtrlRegs.PIECTRL.bit.ENPIE = 1;
-			
+#endif		
 }
 
 //===========================================================================

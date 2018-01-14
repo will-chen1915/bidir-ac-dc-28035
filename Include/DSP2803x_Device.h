@@ -212,22 +212,24 @@ typedef union
 //#include "VmaxPower_RS485.h"
 #include "PubFunc.h"
 //#include "VmaxPower_constant.h"
-#include "FlashUpdate.h"
+//#include "FlashUpdate.h"
 //#include "VmaxPower_main.h"
 #include "DSP2803x_GlobalPrototypes.h"             // Device Emulation Registers
 #include "CLAShared.h"
 //#include "VmaxPower_eeprom.h"
 #include "App_stateCtrl.h"
 #include "hptsc.h"
-#include "power_loopCtrl.h"
+
 #include "analogChk_control.h"
 #include "App_stateCtrl.h"
 #include "power_loopCtrl.h"
 #include "Signal_IOCtrl.h"
+#include "power_loopCtrl.h"
 #include "config.h"
 #include "main.h"
 #include "SCICommu_Ctrl.h"
 #include <stdbool.h>
+#include<stdio.h>
 #include <stdint.h>
 
 #include "Cla.h"
@@ -365,8 +367,8 @@ typedef union
 
 
 // DO NOT MODIFY THIS LINE.
-//#define DELAY_US(A)  DSP28x_usDelay(((((long double) A * 1000.0L) / (long double)CPU_RATE) - 9.0L) / 5.0L)
-#define DELAY_US(A)  AppDSP28x_usDelay(((((long double) A * 1000.0L) / (long double)CPU_RATE) - 9.0L) / 5.0L)
+#define DELAY_US(A)  DSP28x_usDelay(((((long double) A * 1000.0L) / (long double)CPU_RATE) - 9.0L) / 5.0L)
+//#define DELAY_US(A)  AppDSP28x_usDelay(((((long double) A * 1000.0L) / (long double)CPU_RATE) - 9.0L) / 5.0L)
 #ifdef __cplusplus
 }
 #endif /* extern "C" */

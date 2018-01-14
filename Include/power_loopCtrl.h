@@ -4,16 +4,27 @@
 #include "DSP28x_project.h"
 #include "config.h"
 
-#define DC_DC_FREQUENCY(x)      (CPU_SYSCLK / ((UINT32)x*2000)) 
+#define DC_DC_FREQUENCY_Khz(x)  (CPU_SYSCLK / ((UINT32)x*2000)) 
 
-#define DC_DC_FREQUENCY_75KHZ   DC_DC_FREQUENCY(75)
-
-#define DUTY(x)                 (DC_DC_FREQUENCY_75KHZ*(UINT32)x/100)
-#define INITIAL_DUTY            DUTY(25)   
+#define DC_DC_FREQUENCY         DC_DC_FREQUENCY_Khz(75)
 
 
-#define	MAIN_DEAD_TIME				((INT16)24)							//400ns
+
+#define DUTY(x)                 (DC_DC_FREQUENCY*(UINT32)x/50)
+#define INITIAL_DUTY            DUTY(44)
+
+
+#define	MAIN_DEAD_TIME			((INT16)24)							//400ns
 #define SYC_DEAD_TIME           ((INT16)9)                          //150ns
+
+#define INT_CNT                 10
+#define DC_DC_PERIOD            (DC_DC_FREQUENCY*16.667/1000)//us
+#define T_INTERUPT_ms(x)        ((Uint16)((float)x*1000/(DC_DC_PERIOD*INT_CNT)))//
+#define K16_LVOLT_RISETIME      T_INTERUPT_ms(26.0)//
+#define K16_LV_CHARGE_STEP_SIZE ((Uint16)(LV_VOLT(13)/K16_LVOLT_RISETIME))
+
+#define K16_LVOLT_CHARGE_NORMAL            LV_VOLT(13)
+#define K16_LVOLT_DISCHARGE_NORMAL         LV_VOLT(14)
 
 typedef struct
 {
@@ -31,11 +42,14 @@ typedef struct
 extern Uint16 u16LVoltInst;
 
 extern bool Flag_Txd;
+extern Uint16 u16LVoutRefNormal;
 
 
-extern __interrupt void adc_isr(void);
-extern void PwmCtrl_SetPwmGain(void);
+extern interrupt void adc_isr(void);
+extern void ParametersCtrl(void);
 extern bool is_softStartFinished(void);
+extern void Set_LVoltRef(Uint16 u16SetValue);
+extern Uint16 Get_LVoltRef(void);
 
 #endif
 

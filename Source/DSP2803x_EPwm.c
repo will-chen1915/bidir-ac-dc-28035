@@ -304,7 +304,7 @@ void InitEPWM1(void)
 	EPwm1Regs.TBCTL.bit.SYNCOSEL = TB_CTR_ZERO;		//Pass through 
 	EPwm1Regs.TBCTL.bit.CTRMODE = TB_COUNT_UPDOWN;  // Count up
 	EPwm1Regs.TBCTL.bit.PRDLD = TB_SHADOW;
-	EPwm1Regs.TBPRD = DC_DC_FREQUENCY_75KHZ;
+	EPwm1Regs.TBPRD = DC_DC_FREQUENCY;
 
 	EPwm1Regs.TBCTL.bit.CLKDIV = TB_DIV1;			//Timebase clock pre-scale
 	EPwm1Regs.TBCTL.bit.HSPCLKDIV = TB_DIV1;		//High speed time pre-scale
@@ -386,7 +386,7 @@ void InitEPWM2(void)
 	EPwm2Regs.TBCTL.bit.PHSDIR = TB_UP;				//Phase Direction Down
 	EPwm2Regs.TBCTL.bit.CTRMODE = TB_COUNT_UPDOWN;  // Count up
 	EPwm2Regs.TBCTL.bit.PRDLD = TB_SHADOW;
-	EPwm2Regs.TBPRD = DC_DC_FREQUENCY_75KHZ;
+	EPwm2Regs.TBPRD = DC_DC_FREQUENCY;
 
 	EPwm2Regs.TBCTL.bit.CLKDIV = TB_DIV1;			//Timebase clock pre-scale
 	EPwm2Regs.TBCTL.bit.HSPCLKDIV = TB_DIV1;		//High speed time pre-scale
@@ -445,7 +445,7 @@ void InitEPWM3(void)
 	EPwm3Regs.TBCTL.bit.PHSDIR = TB_UP;				//Phase Direction Down 
 	EPwm3Regs.TBCTL.bit.CTRMODE = TB_COUNT_UPDOWN; 
 	EPwm3Regs.TBCTL.bit.PRDLD = TB_SHADOW;
-	EPwm3Regs.TBPRD = DC_DC_FREQUENCY_75KHZ;
+	EPwm3Regs.TBPRD = DC_DC_FREQUENCY;
 
 	EPwm3Regs.TBCTL.bit.CLKDIV = TB_DIV1;			//Timebase clock pre-scale
 	EPwm3Regs.TBCTL.bit.HSPCLKDIV = TB_DIV1;		//High speed time pre-scale
@@ -499,7 +499,7 @@ void InitEPWM4(void)
 	EPwm4Regs.TBCTL.bit.PHSDIR = TB_UP;				//Phase Direction Down		 
 	EPwm4Regs.TBCTL.bit.CTRMODE = TB_COUNT_UPDOWN; 
 	EPwm4Regs.TBCTL.bit.PRDLD = TB_SHADOW;
-	EPwm4Regs.TBPRD = DC_DC_FREQUENCY_75KHZ;
+	EPwm4Regs.TBPRD = DC_DC_FREQUENCY;
 
 	EPwm4Regs.TBCTL.bit.CLKDIV = TB_DIV1;			//Timebase clock pre-scale
 	EPwm4Regs.TBCTL.bit.HSPCLKDIV = TB_DIV1;		//High speed time pre-scale
@@ -510,7 +510,7 @@ void InitEPWM4(void)
 	
 	EPwm4Regs.CMPCTL.bit.LOADAMODE = CC_CTR_ZERO;
 	EPwm4Regs.CMPCTL.bit.SHDWAMODE = CC_SHADOW;
-	EPwm4Regs.CMPA.half.CMPA = DC_DC_FREQUENCY_75KHZ - INITIAL_DUTY;
+	EPwm4Regs.CMPA.half.CMPA = DC_DC_FREQUENCY - INITIAL_DUTY;
 
 //	EPwm4Regs.AQCTLA.bit.ZRO = AQ_CLEAR;
 	EPwm4Regs.AQCTLA.bit.PRD = AQ_SET;
@@ -574,7 +574,7 @@ void InitEPWM5(void)
 	EPwm5Regs.TBCTL.bit.PHSDIR = TB_UP;				//Phase Direction Down 
 	EPwm5Regs.TBCTL.bit.CTRMODE = TB_COUNT_UPDOWN; 
 	EPwm5Regs.TBCTL.bit.PRDLD = TB_SHADOW;
-	EPwm5Regs.TBPRD = DC_DC_FREQUENCY_75KHZ;
+	EPwm5Regs.TBPRD = DC_DC_FREQUENCY;
 
 	EPwm5Regs.TBCTL.bit.CLKDIV = TB_DIV1;			//Timebase clock pre-scale
 	EPwm5Regs.TBCTL.bit.HSPCLKDIV = TB_DIV1;		//High speed time pre-scale
@@ -652,7 +652,7 @@ void InitEPWM6(void)
 		 
 	EPwm6Regs.TBCTL.bit.CTRMODE = TB_COUNT_UPDOWN; 
 	EPwm6Regs.TBCTL.bit.PRDLD = TB_SHADOW;
-	EPwm6Regs.TBPRD = DC_DC_FREQUENCY_75KHZ;
+	EPwm6Regs.TBPRD = DC_DC_FREQUENCY;
 
 	EPwm6Regs.TBCTL.bit.CLKDIV = TB_DIV1;			//Timebase clock pre-scale
 	EPwm6Regs.TBCTL.bit.HSPCLKDIV = TB_DIV1;		//High speed time pre-scale

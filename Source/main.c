@@ -13,12 +13,9 @@
 //#include "main.h"
 
 #include "DSP28x_Project.h"     // DSP28x Headerfile
-
 //#include "DSP2803x_Cla_defines.h"  
 //#include "Cla_shared.h" 
 //#include "DSP2803x_Device.h"		// DSP280x Headerfile Include File
-
-
 //  Main Function
 void main(void)
 
@@ -28,10 +25,6 @@ void main(void)
 	DisableDog();
 	InitSysCtrl();
 	InitGpio();
-
-	// Initialize other periphereral:detail info in DSP280x_InitPeripherals.c
-	InitPeripherals();
-
 	
 	IER = 0x00000000;
 	IFR = 0x00000000;
@@ -43,16 +36,18 @@ void main(void)
     //ram initialize
 	//InitRAM(); //TODO
 
+
+
 //	MemCopy(&IsrRamfuncsLoadStart, &IsrRamfuncsLoadEnd, &IsrRamfuncsRunStart);
 
     //MemCopy(&AppRamfuncsLoadStart, &AppRamfuncsLoadEnd, &AppRamfuncsRunStart);
 
 //	InitFlash();
+	memcpy(&RamfuncsRunStart,&RamfuncsLoadStart,&RamfuncsLoadEnd - &RamfuncsLoadStart);	
+	InitFlash();
 
-	memcpy(&RamfuncsRunStart,&RamfuncsLoadStart,&RamfuncsLoadEnd - &RamfuncsLoadStart);	InitFlash();
-
-    // Initialize other periphereral:detail info in DSP280x_InitPeripherals.c
-//	InitPeripherals();
+	// Initialize other periphereral:detail info in DSP280x_InitPeripherals.c
+	InitPeripherals();
 
 	StartCpuTimer0();
 
@@ -65,13 +60,15 @@ void main(void)
 	App_initStateCtrl();
 	EnableInterrupts();
     //EnableDog();
+	Disable_SYNCPWMCtrl();
 
 	for(;;)
     {
 		IO_UpdSignal();
 		analog_monitor();
+		SCICommu_Control();
 		//App_StateCtrl();
-		PwmCtrl_SetPwmGain();
+		//ParametersCtrl();
 		
 		//Thermal_Main();// Temperature Monitor
 		//Fan_CtrlMain();

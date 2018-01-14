@@ -37,7 +37,6 @@ Source/main.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/SFO_V6.h
 Source/main.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/IQmathLib.h
 Source/main.obj: D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/limits.h
 Source/main.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/PubFunc.h
-Source/main.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/FlashUpdate.h
 Source/main.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/DSP2803x_GlobalPrototypes.h
 Source/main.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/CLAShared.h
 Source/main.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/App_stateCtrl.h
@@ -48,12 +47,14 @@ Source/main.obj: D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/stdarg.h
 Source/main.obj: D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/linkage.h
 Source/main.obj: D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/_lock.h
 Source/main.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/comdefs.h
+Source/main.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/analogChk_control.h
 Source/main.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/power_loopCtrl.h
 Source/main.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/DSP28x_project.h
-Source/main.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/analogChk_control.h
 Source/main.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/Signal_IOCtrl.h
 Source/main.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/main.h
 Source/main.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/SCICommu_Ctrl.h
+Source/main.obj: D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/stdio.h
+Source/main.obj: D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/stdarg.h
 Source/main.obj: D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/stdint.h
 Source/main.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/Cla.h
 Source/main.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/DSP2803x_Examples.h
@@ -96,7 +97,6 @@ E:/project/git_workspace/bidir-ac-dc-28035/Include/SFO_V6.h:
 E:/project/git_workspace/bidir-ac-dc-28035/Include/IQmathLib.h: 
 D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/limits.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/PubFunc.h: 
-E:/project/git_workspace/bidir-ac-dc-28035/Include/FlashUpdate.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/DSP2803x_GlobalPrototypes.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/CLAShared.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/App_stateCtrl.h: 
@@ -107,12 +107,14 @@ D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/stdarg.h:
 D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/linkage.h: 
 D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/_lock.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/comdefs.h: 
+E:/project/git_workspace/bidir-ac-dc-28035/Include/analogChk_control.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/power_loopCtrl.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/DSP28x_project.h: 
-E:/project/git_workspace/bidir-ac-dc-28035/Include/analogChk_control.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/Signal_IOCtrl.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/main.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/SCICommu_Ctrl.h: 
+D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/stdio.h: 
+D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/stdarg.h: 
 D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/stdint.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/Cla.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/DSP2803x_Examples.h: 

@@ -30,15 +30,14 @@ typedef union {
 
 #define LV_VOLT(x)        ((Uint16)((double)x*RESOLUTION/LH_RANGE))
 
-extern Uint16 u16LVoltInst;
 
+extern void analog_HVmetering(void);
+extern void analog_monitor(void);
+extern void analog_ChkLVUVP(void);
+extern void analog_ChkLVOVP(void);
+extern void analog_ChkHVUVP(void);
+extern void analog_ChkHVOVP(void);
 
-void analog_HVmetering(void);
-void analog_monitor(void);
-void analog_ChkLVUVP(void);
-void analog_ChkLVOVP(void);
-void analog_ChkHVUVP(void);
-void analog_ChkHVOVP(void);
 extern bool is_PFC_OK(void);
 
 

@@ -12,7 +12,6 @@
 //###########################################################################
 
 #include "DSP2803x_Device.h"     // DSP2803x Headerfile Include File
-//#include "CLAShared.h"
 
 //---------------------------------------------------------------------------
 // Define Global Peripheral Variables:
@@ -145,6 +144,15 @@ volatile struct MOTS_REGS ECanaMOTSRegs;
 #endif
 volatile struct MOTO_REGS ECanaMOTORegs;
 
+
+//----------------------------------------
+#ifdef __cplusplus
+#pragma DATA_SECTION("Cla1RegsFile")
+#else
+#pragma DATA_SECTION(Cla1Regs,"Cla1RegsFile");
+#endif
+volatile struct CLA_REGS Cla1Regs;
+
 //----------------------------------------
 #ifdef __cplusplus
 #pragma DATA_SECTION("EPwm1RegsFile")
@@ -208,21 +216,7 @@ volatile struct EPWM_REGS EPwm7Regs;
 #pragma DATA_SECTION(ECap1Regs,"ECap1RegsFile");
 #endif
 volatile struct ECAP_REGS ECap1Regs;
-//----------------------------------------
-#ifdef __cplusplus
-#pragma DATA_SECTION("HRCap1RegsFile")
-#else
-#pragma DATA_SECTION(HRCap1Regs,"HRCap1RegsFile");
-#endif
-volatile struct HRCAP_REGS HRCap1Regs;
 
-//----------------------------------------
-#ifdef __cplusplus
-#pragma DATA_SECTION("HRCap2RegsFile")
-#else
-#pragma DATA_SECTION(HRCap2Regs,"HRCap2RegsFile");
-#endif
-volatile struct HRCAP_REGS HRCap2Regs;
 //----------------------------------------
 #ifdef __cplusplus
 #pragma DATA_SECTION("EQep1RegsFile")
@@ -262,6 +256,7 @@ volatile struct GPIO_DATA_REGS GpioDataRegs;
 #pragma DATA_SECTION(GpioIntRegs,"GpioIntRegsFile");
 #endif
 volatile struct GPIO_INT_REGS GpioIntRegs;
+
 //----------------------------------------
 #ifdef __cplusplus
 #pragma DATA_SECTION("I2caRegsFile")
@@ -271,12 +266,12 @@ volatile struct GPIO_INT_REGS GpioIntRegs;
 volatile struct I2C_REGS I2caRegs;
 
 //----------------------------------------
-/*#ifdef __cplusplus
+#ifdef __cplusplus
 #pragma DATA_SECTION("NmiIntruptRegsFile")
 #else
 #pragma DATA_SECTION(NmiIntruptRegs,"NmiIntruptRegsFile");
 #endif
-volatile struct NMIINTRUPT_REGS NmiIntruptRegs;*/
+volatile struct NMIINTRUPT_REGS NmiIntruptRegs;
 
 //----------------------------------------
 #ifdef __cplusplus
@@ -357,71 +352,23 @@ volatile struct FLASH_REGS FlashRegs;
 #endif
 volatile struct XINTRUPT_REGS XIntruptRegs;
 
-/*
 //----------------------------------------
-#ifdef __cplusplus 
-#pragma DATA_SECTION("IsrVariableFile") 
-#else
-#pragma DATA_SECTION(IsrVars,"IsrVariableFile");
-#endif
-volatile struct IsrVarsStruct IsrVars;
-*/
-
-//----------------------------------------
-#ifdef __cplusplus
-#pragma DATA_SECTION("Cla1RegsFile")
-#else
-#pragma DATA_SECTION(Cla1Regs,"Cla1RegsFile");
-#endif
-volatile struct CLA_REGS Cla1Regs;
-
-//----------------------------------------
-#ifdef __cplusplus 
-#pragma DATA_SECTION("CpuToCla1MsgRAM")
-#else
-#pragma DATA_SECTION(CputoClaVar,"CpuToCla1MsgRAM");
-volatile struct CputoClaVarStruct CputoClaVar;
-#endif
-
-//-------------------------------------------------
-#ifdef __cplusplus   
-#pragma DATA_SECTION("Cla1ToCpuMsgRAM")
-#else
-#pragma DATA_SECTION(ClatoCpuVar,"Cla1ToCpuMsgRAM");
-volatile struct ClatoCpuVarStruct ClatoCpuVar;
-#endif
-
-//-------------------------------------------------
-#ifdef __cplusplus   
-#pragma DATA_SECTION("Cla1DataRam1")
-#else
-#pragma DATA_SECTION(ClaVar,"Cla1DataRam1");
-volatile struct ClaVarStruct ClaVar;
-#endif
-
-/*
-//----------------------------------------
-//  BootRom 用做RAM
 #ifdef __cplusplus
 #pragma DATA_SECTION("EmuKeyVar");
 #else
 #pragma DATA_SECTION(EmuKey,"EmuKeyVar");
 #endif
-Uint16  EmuKey;
-
+Uint16 EmuKey;
 
 //----------------------------------------
-//BootRom 用做RAM
 #ifdef __cplusplus
 #pragma DATA_SECTION("EmuBModeVar");
 #else
 #pragma DATA_SECTION(EmuBMode,"EmuBModeVar");
 #endif
 Uint16 EmuBMode;
-*/
 
 //----------------------------------------
-//BootRom 用做RAM
 #ifdef __cplusplus
 #pragma DATA_SECTION("FlashScalingVar");
 #else
@@ -429,18 +376,13 @@ Uint16 EmuBMode;
 #endif
 Uint32 Flash_CPUScaleFactor;
 
-
 //----------------------------------------
-//BootRom 用做RAM
 #ifdef __cplusplus
 #pragma DATA_SECTION("FlashCallbackVar");
 #else
 #pragma DATA_SECTION(Flash_CallbackPtr, "FlashCallbackVar");
 #endif
 void (*Flash_CallbackPtr) (void);
-
-//----------------------------------------
-
 
 
 //===========================================================================

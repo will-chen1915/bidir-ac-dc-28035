@@ -23,18 +23,19 @@
 
 #include "DSP2803x_Device.h"     // DSP280x Headerfile Include File
 
-/*interrupt void rsvd_ISR(void)      // For test
+interrupt void rsvd_ISR(void)      // For test
 {
-	EPwm1Regs.AQCSFRC.all = 0x5;		//PWM1A,PWM1B force low
-	EPwm2Regs.AQCSFRC.all = 0x5;		//PWM2A,PWM2B force low
+	Disable_MainPWMCtrl();		
+	Disable_SYNCPWMCtrl();// close and PWM disable
+
 	
 	for(;;);
-}*/
+}
 
 interrupt void USER_ISR(void)       // Non-maskable interrupt
 {
-//	mOffDcdcPwm();		// close and PWM disable
-//	mOffPfcPwm();
+	Disable_MainPWMCtrl();		
+	Disable_SYNCPWMCtrl();// close and PWM disable
 	
 	for(;;);		// wait for watchdog
 }

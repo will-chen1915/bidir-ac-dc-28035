@@ -7,7 +7,7 @@
 
 #define CPU_SYSCLK (uint32_t)60000000
 
-
+#define DIVIDER_TIMER0(x)  (x-1)
 /*CPU timer0 clock frequency config*/
 #define CPU_TIMER0_DIVIDER              DIVIDER_TIMER0(200)
 #define CPU_TIME0_FREQUENCY            (Uint32)(CPU_SYSCLK/(CPU_TIMER0_DIVIDER+1))

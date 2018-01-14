@@ -34,6 +34,8 @@ typedef enum tag_DischgStateType {
 } PSUDischarge_StateType;
 */
 
+
+
 extern void App_initStateCtrl(void);
 extern void App_StateCtrl(void);
 
@@ -42,7 +44,9 @@ extern void Enable_MainPWMCtrl(void);
 extern void Disable_MainPWMCtrl(void);
 extern void Disable_SYNCPWMCtrl(void);
 extern void Enable_SYNCPWMCtrl(void);
-
+extern PSUModeType PSUMode_ChkMode(void);
+extern PSU_StateType PSUChargeState_ChkState(void);
+extern PSU_StateType PSUDischargeState_ChkState(void);
 
 
 #endif

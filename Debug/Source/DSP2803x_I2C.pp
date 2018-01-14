@@ -35,7 +35,6 @@ Source/DSP2803x_I2C.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/SFO_
 Source/DSP2803x_I2C.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/IQmathLib.h
 Source/DSP2803x_I2C.obj: D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/limits.h
 Source/DSP2803x_I2C.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/PubFunc.h
-Source/DSP2803x_I2C.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/FlashUpdate.h
 Source/DSP2803x_I2C.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/DSP2803x_GlobalPrototypes.h
 Source/DSP2803x_I2C.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/CLAShared.h
 Source/DSP2803x_I2C.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/App_stateCtrl.h
@@ -46,15 +45,17 @@ Source/DSP2803x_I2C.obj: D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/stdarg.h
 Source/DSP2803x_I2C.obj: D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/linkage.h
 Source/DSP2803x_I2C.obj: D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/_lock.h
 Source/DSP2803x_I2C.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/comdefs.h
+Source/DSP2803x_I2C.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/analogChk_control.h
 Source/DSP2803x_I2C.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/power_loopCtrl.h
 Source/DSP2803x_I2C.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/DSP28x_project.h
 Source/DSP2803x_I2C.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/DSP2803x_Cla_typedefs.h
 Source/DSP2803x_I2C.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/DSP2803x_Examples.h
 Source/DSP2803x_I2C.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/DSP2803x_I2c_defines.h
-Source/DSP2803x_I2C.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/analogChk_control.h
 Source/DSP2803x_I2C.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/Signal_IOCtrl.h
 Source/DSP2803x_I2C.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/main.h
 Source/DSP2803x_I2C.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/SCICommu_Ctrl.h
+Source/DSP2803x_I2C.obj: D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/stdio.h
+Source/DSP2803x_I2C.obj: D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/stdarg.h
 Source/DSP2803x_I2C.obj: D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/stdint.h
 Source/DSP2803x_I2C.obj: E:/project/git_workspace/bidir-ac-dc-28035/Include/Cla.h
 
@@ -93,7 +94,6 @@ E:/project/git_workspace/bidir-ac-dc-28035/Include/SFO_V6.h:
 E:/project/git_workspace/bidir-ac-dc-28035/Include/IQmathLib.h: 
 D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/limits.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/PubFunc.h: 
-E:/project/git_workspace/bidir-ac-dc-28035/Include/FlashUpdate.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/DSP2803x_GlobalPrototypes.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/CLAShared.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/App_stateCtrl.h: 
@@ -104,14 +104,16 @@ D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/stdarg.h:
 D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/linkage.h: 
 D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/_lock.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/comdefs.h: 
+E:/project/git_workspace/bidir-ac-dc-28035/Include/analogChk_control.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/power_loopCtrl.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/DSP28x_project.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/DSP2803x_Cla_typedefs.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/DSP2803x_Examples.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/DSP2803x_I2c_defines.h: 
-E:/project/git_workspace/bidir-ac-dc-28035/Include/analogChk_control.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/Signal_IOCtrl.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/main.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/SCICommu_Ctrl.h: 
+D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/stdio.h: 
+D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/stdarg.h: 
 D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include/stdint.h: 
 E:/project/git_workspace/bidir-ac-dc-28035/Include/Cla.h: 

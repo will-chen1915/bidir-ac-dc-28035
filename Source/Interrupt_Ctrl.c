@@ -11,7 +11,8 @@
  ******************************************************************************/
 void vInitialInterrupts(void)
 {
-    EALLOW;
+
+	EALLOW;
 	//PieVectTable.EPWM1_INT = &Epwm1_Isr;
 	//PieVectTable.EPWM1_TZINT = &epwm1_tzint_isr;	
    	//PieVectTable.CLA1_INT2 = &cla1_task2_isr;    
@@ -46,13 +47,12 @@ void EnableInterrupts(void)
 	//Cla1Regs.MIER.all = M_INT2;			// Enable Task 8,2,1
 	
     EDIS;
-
+	
+	IER |= M_INT1; 						// Enable CPU Interrupt 1
 	//IER |= M_INT2;						// Enable ePWM1 TZINT
 	//IER |= M_INT3;						// Enable ePWM1 INT	
-    IER |= M_INT11;						// Enable cla1 INT
+    //IER |= M_INT11;						// Enable cla1 INT
 	//IER |= M_INT4;						// Enable eCAP1 INT	
-	
-
 	// Enable global Interrupts and higher priority real-time debug events:
 	EINT;								// Enable Global interrupt INTM
 	ERTM;								// Enable Global realtime interrupt DBGM

@@ -208,12 +208,12 @@ Uint16 AdcConversion(void)
 
 void ConfigAdc(void)
 {
-#if 1
+#if 0
 	EALLOW;
-	AdcRegs.ADCCTL1.bit.INTPULSEPOS = 1;	// ADCINT trips before AdcResults latch
+	AdcRegs.ADCCTL1.bit.INTPULSEPOS = 1;	// ADCINT trips after AdcResults latch
 	AdcRegs.INTSEL1N2.bit.INT1E 	= 1;	// Enable ADCINT1
 	AdcRegs.INTSEL1N2.bit.INT1CONT	= 0;	// Disable ADCINT1 Continuous mode
-	AdcRegs.INTSEL1N2.bit.INT2CONT  = 0;	// Disable ADCINT1 Continuous mode
+	//AdcRegs.INTSEL1N2.bit.INT2CONT  = 0;	// Disable ADCINT1 Continuous mode
 	AdcRegs.INTSEL1N2.bit.INT1SEL	= 0;	// setup EOC0 to trigger ADCINT1 to fire
 
 	AdcRegs.ADCSAMPLEMODE.all = 0;			// Single sample mode
@@ -256,43 +256,59 @@ void ConfigAdc(void)
 	EDIS;
 #else
 	EALLOW;
-	// Configure ADC
-    AdcRegs.ADCSAMPLEMODE.bit.SIMULEN0 = ADC_SINGLE_SAMP;//ADC_SINGLE_SAMP
-    AdcRegs.INTSEL1N2.bit.INT1E     = 1;	//Enabled ADCINT1
-	AdcRegs.INTSEL1N2.bit.INT1CONT  = 0;	//Disable ADCINT1 Continuous mode
-//	AdcRegs.INTSEL1N2.bit.INT1SEL	= 1;	//setup EOC1 to trigger ADCINT1 to fire
+	//Disable ADCINT1 trigger firstly, or the TRIGSEL field is ignored.
+	AdcRegs.ADCINTSOCSEL1.all = 0;
+//	AdcRegs.ADCINTSOCSEL2.all = ADC_TRIGSEL_ENABLE;
 
-	AdcRegs.ADCSOC0CTL.bit.CHSEL 	= 4;	//set SOC0 channel select to ADCINAx(Vin)
-	AdcRegs.ADCSOC1CTL.bit.CHSEL 	= 6;	//set SOC1 channel select to ADCINAx(Vout)
-/*	AdcRegs.ADCSOC2CTL.bit.CHSEL 	= 6;	//set SOC2 channel select to ADCINA6
-	AdcRegs.ADCSOC3CTL.bit.CHSEL 	= 5;
-	AdcRegs.ADCSOC4CTL.bit.CHSEL 	= 5;
-	AdcRegs.ADCSOC5CTL.bit.CHSEL 	= 5;*/
+	AdcRegs.ADCSAMPLEMODE.bit.SIMULEN0	= 0;	//Single sample mode
+	AdcRegs.ADCSAMPLEMODE.bit.SIMULEN2	= 0;	//Single sample mode
+	AdcRegs.ADCSAMPLEMODE.bit.SIMULEN4	= 0;	//Single sample mode
+	AdcRegs.ADCSAMPLEMODE.bit.SIMULEN6	= 0;	//Single sample mode
+	AdcRegs.ADCSAMPLEMODE.bit.SIMULEN8	= 0;	//Single sample mode
+	AdcRegs.ADCSAMPLEMODE.bit.SIMULEN10 = 0;	//Single sample mode
+	AdcRegs.ADCSAMPLEMODE.bit.SIMULEN12 = 0;	//Single sample mode
+	AdcRegs.ADCSAMPLEMODE.bit.SIMULEN14 = 0;	//Single sample mode
 
-	AdcRegs.ADCSOC0CTL.bit.TRIGSEL 	= 1;	//1 set SOC0 start trigger on CPU Timer0, due to round-robin SOC0 converts first then SOC1
-	AdcRegs.ADCSOC1CTL.bit.TRIGSEL 	= 1;	//5 set SOC1 start trigger on EPWM1A, due to round-robin SOC0 converts first then SOC1
-/*	AdcRegs.ADCSOC2CTL.bit.TRIGSEL 	= 1;
-	AdcRegs.ADCSOC3CTL.bit.TRIGSEL 	= 5;
-	AdcRegs.ADCSOC4CTL.bit.TRIGSEL 	= 5;
-	AdcRegs.ADCSOC5CTL.bit.TRIGSEL 	= 5;*/
+	AdcRegs.SOCPRICTL.bit.SOCPRIORITY = 0x0;		//SOC priority is handled in round robin mode for all channels.
+	AdcRegs.ADCCTL2.bit.ADCNONOVERLAP = 0; // Enable non-overlap mode
+	AdcRegs.ADCCTL1.bit.INTPULSEPOS = 1;	// ADCINT1 trips after AdcResults latch
+	AdcRegs.INTSEL1N2.bit.INT1E 	= 1;	// Enabled ADCINT1
+	AdcRegs.INTSEL1N2.bit.INT1CONT	= 0;	// Disable ADCINT1 Continuous mode
+	AdcRegs.INTSEL1N2.bit.INT1SEL	= 0;	// setup EOC0 to trigger ADCINT1 to fire
 
-	AdcRegs.ADCSOC0CTL.bit.ACQPS 	= 6;	//6,set SOC0 S/H Window to 7 ADC Clock Cycles, (6 ACQPS plus 1)
-	AdcRegs.ADCSOC1CTL.bit.ACQPS 	= 6;	//set SOC1 S/H Window to 7 ADC Clock Cycles, (6 ACQPS plus 1)
-/*	AdcRegs.ADCSOC2CTL.bit.ACQPS 	= 6;
-	AdcRegs.ADCSOC3CTL.bit.ACQPS 	= 6;
-	AdcRegs.ADCSOC4CTL.bit.ACQPS 	= 6;
-	AdcRegs.ADCSOC5CTL.bit.ACQPS 	= 6;
-	AdcRegs.ADCCTL2.bit.CLKDIV2EN = ADC_CPUCLK_DIV1;
+	/*******************************************************
+	*
+	********************************************************/
 
-	AdcRegs.ADCSAMPLEMODE.bit.SIMULEN0 = ADC_SINGLE_SAMP;	//Single sample mode
-	AdcRegs.ADCSAMPLEMODE.bit.SIMULEN2 = ADC_SINGLE_SAMP;	//Single sample mode
-	AdcRegs.ADCSAMPLEMODE.bit.SIMULEN4 = ADC_SINGLE_SAMP;	//Single sample mode
-	AdcRegs.ADCSAMPLEMODE.bit.SIMULEN6 = ADC_SINGLE_SAMP;	//Single sample mode
-	AdcRegs.ADCSAMPLEMODE.bit.SIMULEN8 = ADC_SINGLE_SAMP;	//Single sample mode
-	AdcRegs.ADCSAMPLEMODE.bit.SIMULEN10 = ADC_SINGLE_SAMP;	//Single sample mode
-	AdcRegs.ADCSAMPLEMODE.bit.SIMULEN12 = ADC_SINGLE_SAMP;	//Single sample mode
-	AdcRegs.ADCSAMPLEMODE.bit.SIMULEN14 = ADC_SINGLE_SAMP;	//Single sample mode
-*/
+	AdcRegs.ADCSOC0CTL.bit.CHSEL	= 0;	// CSac-FB
+	AdcRegs.ADCSOC1CTL.bit.CHSEL	= 0;	//ACL-FB
+	AdcRegs.ADCSOC2CTL.bit.CHSEL	= 0;	//ACN-FB
+	AdcRegs.ADCSOC3CTL.bit.CHSEL	= 0;	//H-FB ĸ�ߵ�ѹ����
+	AdcRegs.ADCSOC4CTL.bit.CHSEL	= 0;	//REF3Vp
+//	AdcRegs.ADCSOC5CTL.bit.CHSEL	= ADC_IN_B2;	//
+//	AdcRegs.ADCSOC6CTL.bit.CHSEL	= ADC_IN_B4;	//
+//	AdcRegs.ADCSOC7CTL.bit.CHSEL	= ADC_IN_B0;	//
+//	AdcRegs.ADCSOC8CTL.bit.CHSEL	= ADC_IN_A5;	//
+
+	AdcRegs.ADCSOC0CTL.bit.TRIGSEL	= ADC_TRIGSEL_EPWM1_ADCSOCA;	// set SOC0 start trigger on EPWM5ADCSOCA, due to round-robin SOC0 converts first then SOC1
+	AdcRegs.ADCSOC1CTL.bit.TRIGSEL	= ADC_TRIGSEL_EPWM1_ADCSOCA;	//
+	AdcRegs.ADCSOC2CTL.bit.TRIGSEL	= ADC_TRIGSEL_EPWM1_ADCSOCA;	//
+	AdcRegs.ADCSOC3CTL.bit.TRIGSEL	= ADC_TRIGSEL_EPWM1_ADCSOCA;	//
+	AdcRegs.ADCSOC4CTL.bit.TRIGSEL	= ADC_TRIGSEL_EPWM1_ADCSOCA;	//
+//	AdcRegs.ADCSOC5CTL.bit.TRIGSEL	= ADC_TRIGSEL_EPWM5_ADCSOCA;	//
+//	AdcRegs.ADCSOC6CTL.bit.TRIGSEL	= ADC_TRIGSEL_EPWM6_ADCSOCA;	//
+//	AdcRegs.ADCSOC7CTL.bit.TRIGSEL	= ADC_TRIGSEL_EPWM6_ADCSOCA;	//
+//	AdcRegs.ADCSOC8CTL.bit.TRIGSEL	= ADC_TRIGSEL_EPWM1_ADCSOCA;	//
+
+	AdcRegs.ADCSOC0CTL.bit.ACQPS	= 6;	//Sample windowis 7 cycles long (6+1 clock cycles)
+	AdcRegs.ADCSOC1CTL.bit.ACQPS	= 6;	//Sample windowis 7 cycles long (6+1 clock cycles)
+	AdcRegs.ADCSOC2CTL.bit.ACQPS	= 6;	//Sample windowis 7 cycles long (6+1 clock cycles)
+	AdcRegs.ADCSOC3CTL.bit.ACQPS	= 6;	//Sample windowis 7 cycles long (6+1 clock cycles)
+	AdcRegs.ADCSOC4CTL.bit.ACQPS	= 6;	//Sample windowis 7 cycles long (6+1 clock cycles)
+//	AdcRegs.ADCSOC5CTL.bit.ACQPS	= 6;	//Sample windowis 7 cycles long (6+1 clock cycles)
+//	AdcRegs.ADCSOC6CTL.bit.ACQPS	= 6;	//Sample windowis 7 cycles long (6+1 clock cycles)
+//	AdcRegs.ADCSOC7CTL.bit.ACQPS	= 6;	//Sample windowis 7 cycles long (6+1 clock cycles)
+//	AdcRegs.ADCSOC8CTL.bit.ACQPS	= 6;	//Sample windowis 7 cycles long (6+1 clock cycles)
 	EDIS;
 #endif
 
@@ -326,7 +342,7 @@ void InitAdc(void)
 
     EALLOW;
 
-	AdcRegs.ADCCTL1.bit.ADCREFSEL = 0;		//1: Internal reference on ADCREFIN
+	AdcRegs.ADCCTL1.bit.ADCREFSEL = 0;		//0: Internal reference on ADCREFIN
 
 	AdcRegs.ADCCTL1.bit.ADCBGPWD  = 1;		// Power ADC BG
 	AdcRegs.ADCCTL1.bit.ADCREFPWD = 1;		// Power reference
