@@ -18,8 +18,6 @@
 extern "C" {
 #endif
 
-#include "config.h"
-
 //----------------------------------------------------
 // GPIO A control register bit definitions */
 struct GPACTRL_BITS {        // bits   description
@@ -30,7 +28,7 @@ struct GPACTRL_BITS {        // bits   description
 };
 
 union GPACTRL_REG {
-	Uint32            all;
+   Uint32              all;
    struct GPACTRL_BITS bit;
 };
 

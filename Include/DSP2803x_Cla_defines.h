@@ -116,11 +116,6 @@ extern "C" {
 #define Cla1ForceTask7()        asm("  IACK  #0x0040")
 #define Cla1ForceTask8()        asm("  IACK  #0x0080")
 
-#define CLARAM0_ENABLE		1
-#define CLARAM1_ENABLE		1
-#define CLARAM0_DISABLE	    0
-#define CLARAM1_DISABLE	    0
-
 #ifdef __cplusplus
 }
 #endif /* extern "C" */

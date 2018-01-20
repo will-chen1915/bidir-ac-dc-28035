@@ -254,10 +254,11 @@ void InitEPwm(void)
 	InitEPWM2();//---DVL2----
 	InitEPWM3();//---DVL3----
 	InitEPWM4();//---DVH4----
-	InitEPWM5();//DVA  SYCH_A---
-	InitEPWM6();//DVB SYCH_B---
-	
-	 
+//	InitEPWM5();//DVA  SYCH_A---
+//	InitEPWM6();//DVB SYCH_B---
+//	
+//	Disable_SYNCPWMCtrl();
+    //Disable_MainPWMCtrl();
 	SysCtrlRegs.PCLKCR0.bit.TBCLKSYNC = 1;      // Start all the timers synced
 	EPwm1Regs.TBCTL.bit.SWFSYNC = 1;
 	EDIS;
@@ -299,9 +300,8 @@ void InitEPWM1(void)
 	EPwm1Regs.TBCTR = 0;                            // Clear counter
 	EPwm1Regs.TBPHS.half.TBPHS = 0;	                // Set as master, phase =0
 	EPwm1Regs.TBCTL.bit.PHSEN = TB_DISABLE;
-	EPwm1Regs.TBCTL.bit.SYNCOSEL = TB_CTR_ZERO;
-	EPwm1Regs.TBCTL.bit.PHSDIR = TB_UP;				//Phase Direction Down 
 	EPwm1Regs.TBCTL.bit.SYNCOSEL = TB_CTR_ZERO;		//Pass through 
+	EPwm1Regs.TBCTL.bit.PHSDIR = TB_UP;				//Phase Direction Down 
 	EPwm1Regs.TBCTL.bit.CTRMODE = TB_COUNT_UPDOWN;  // Count up
 	EPwm1Regs.TBCTL.bit.PRDLD = TB_SHADOW;
 	EPwm1Regs.TBPRD = DC_DC_FREQUENCY;
@@ -380,9 +380,9 @@ void InitEPWM2(void)
 	#endif
 	
 	EPwm2Regs.TBCTR = 0;
-	EPwm2Regs.TBPHS.half.TBPHS = 0;	 
-	EPwm2Regs.TBCTL.bit.PHSEN = TB_DISABLE;
-	EPwm2Regs.TBCTL.bit.SYNCOSEL = TB_SYNC_IN;
+	EPwm2Regs.TBPHS.half.TBPHS = 0; 				// Set Phase register to zero
+	EPwm2Regs.TBCTL.bit.PHSEN = TB_ENABLE;
+	EPwm2Regs.TBCTL.bit.SYNCOSEL = TB_SYNC_IN; // sync flow-through
 	EPwm2Regs.TBCTL.bit.PHSDIR = TB_UP;				//Phase Direction Down
 	EPwm2Regs.TBCTL.bit.CTRMODE = TB_COUNT_UPDOWN;  // Count up
 	EPwm2Regs.TBCTL.bit.PRDLD = TB_SHADOW;
@@ -440,7 +440,7 @@ void InitEPWM3(void)
 	
 	EPwm3Regs.TBCTR = 0;
 	EPwm3Regs.TBPHS.half.TBPHS = 0;	 
-	EPwm3Regs.TBCTL.bit.PHSEN = TB_DISABLE;
+	EPwm3Regs.TBCTL.bit.PHSEN = TB_ENABLE;
 	EPwm3Regs.TBCTL.bit.SYNCOSEL = TB_SYNC_IN;
 	EPwm3Regs.TBCTL.bit.PHSDIR = TB_UP;				//Phase Direction Down 
 	EPwm3Regs.TBCTL.bit.CTRMODE = TB_COUNT_UPDOWN; 
@@ -494,7 +494,7 @@ void InitEPWM4(void)
 
 	EPwm4Regs.TBCTR = 0;
 	EPwm4Regs.TBPHS.half.TBPHS = 0;	 
-	EPwm4Regs.TBCTL.bit.PHSEN = TB_DISABLE;
+	EPwm4Regs.TBCTL.bit.PHSEN = TB_ENABLE;
 	EPwm4Regs.TBCTL.bit.SYNCOSEL = TB_SYNC_IN;
 	EPwm4Regs.TBCTL.bit.PHSDIR = TB_UP;				//Phase Direction Down		 
 	EPwm4Regs.TBCTL.bit.CTRMODE = TB_COUNT_UPDOWN; 
@@ -569,7 +569,7 @@ void InitEPWM5(void)
 
 	EPwm5Regs.TBCTR = 0;
 	EPwm5Regs.TBPHS.half.TBPHS = 0;	 
-	EPwm5Regs.TBCTL.bit.PHSEN = TB_DISABLE;
+	EPwm5Regs.TBCTL.bit.PHSEN = TB_ENABLE;
 	EPwm5Regs.TBCTL.bit.SYNCOSEL = TB_SYNC_IN;
 	EPwm5Regs.TBCTL.bit.PHSDIR = TB_UP;				//Phase Direction Down 
 	EPwm5Regs.TBCTL.bit.CTRMODE = TB_COUNT_UPDOWN; 
@@ -646,7 +646,7 @@ void InitEPWM6(void)
 	
 	EPwm6Regs.TBCTR = 0;
 	EPwm6Regs.TBPHS.half.TBPHS = 0;	 
-	EPwm6Regs.TBCTL.bit.PHSEN = TB_DISABLE;
+	EPwm6Regs.TBCTL.bit.PHSEN = TB_ENABLE;
 	EPwm6Regs.TBCTL.bit.SYNCOSEL = TB_SYNC_IN;
 	EPwm6Regs.TBCTL.bit.PHSDIR = TB_UP;				//Phase Direction Down
 		 

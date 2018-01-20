@@ -22,12 +22,12 @@ extern "C" {
 extern void InitAdc(void);
 extern void InitAdcAio(void);
 extern void AdcOffsetSelfCal(void);
-//extern void AdcChanSelect();
+extern void AdcChanSelect();
 extern Uint16 AdcConversion (void);
+extern void InitPeripherals(void);
 #if DSP28_ECANA
 extern void InitECan(void);
 extern void InitECana(void);
-extern void InitECanaID(void);
 extern void InitECanGpio(void);
 extern void InitECanaGpio(void);
 #endif // endif DSP28_ECANA
@@ -65,14 +65,13 @@ extern void InitEQepGpio(void);
 extern void InitEQep1Gpio(void);
 #endif // endif DSP28_EQEP1
 extern void InitGpio(void);
-extern void InitI2C(void);
 extern void InitI2CGpio(void);
-
+#if DSP28_LINA
 extern void InitLin(void);
 extern void InitLina(void);
 extern void InitLinGpio(void);
 extern void InitLinaGpio(void);
-
+#endif // endif DSP28_LINA
 extern void InitPieCtrl(void);
 extern void InitPieVectTable(void);
 extern void InitSci(void);
@@ -90,7 +89,7 @@ extern void InitXIntrupt(void);
 extern void InitPll(Uint16 pllcr, Uint16 clkindiv);
 extern void InitPeripheralClocks(void);
 extern void EnableInterrupts(void);
-extern void AppDSP28x_usDelay(Uint32 Count);
+extern void DSP28x_usDelay(Uint32 Count);
 #define KickDog ServiceDog     // For compatiblity with previous versions
 extern void ServiceDog(void);
 extern void DisableDog(void);
@@ -100,11 +99,11 @@ extern void IntOsc2Sel (void);
 extern void XtalOscSel (void);
 extern void ExtOscSel (void);
 
-extern void vInitialInterrupts(void);
-extern void InitECapAPWM(void);
-extern void InitHRCap1Gpio(void);
-extern void InitHRCapGpio(void);
-extern void InitHRCap(void);
+extern int16 GetTemperatureC(int16 sensorSample); // returns temp in deg. C
+extern int16 GetTemperatureK(int16 sensorSample); // returns temp in deg. K
+extern void Osc1Comp(int16 sensorSample);
+extern void Osc2Comp(int16 sensorSample);
+
 
 // DSP28_DBGIER.asm
 extern void SetDBGIER(Uint16 dbgier);
@@ -114,28 +113,17 @@ extern void SetDBGIER(Uint16 dbgier);
 // out of OTP/Flash will yield unpredictable results
 extern void InitFlash(void);
 
-//extern void MemCopy(Uint16 *SourceAddr, Uint16* SourceEndAddr, Uint16* DestAddr);
+void MemCopy(Uint16 *SourceAddr, Uint16* SourceEndAddr, Uint16* DestAddr);
 
 //---------------------------------------------------------------------------
 // External symbols created by the linker cmd file
 // DSP28 examples will use these to relocate code from one LOAD location
 // in Flash to a different RUN location in internal
 // RAM
-extern Uint16 IsrRamfuncsLoadStart;
-extern Uint16 IsrRamfuncsLoadEnd;
-extern Uint16 IsrRamfuncsRunStart;
-
-extern Uint16 BootRamfuncsLoadStart;
-extern Uint16 BootRamfuncsLoadEnd;
-extern Uint16 BootRamfuncsRunStart;
-
-extern Uint16 AppRamfuncsLoadStart;
-extern Uint16 AppRamfuncsLoadEnd;
-extern Uint16 AppRamfuncsRunStart;
-
 extern Uint16 RamfuncsLoadStart;
 extern Uint16 RamfuncsLoadEnd;
 extern Uint16 RamfuncsRunStart;
+
 #ifdef __cplusplus
 }
 #endif /* extern "C" */

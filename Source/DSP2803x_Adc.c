@@ -208,7 +208,7 @@ Uint16 AdcConversion(void)
 
 void ConfigAdc(void)
 {
-#if 0
+#if 1
 	EALLOW;
 	AdcRegs.ADCCTL1.bit.INTPULSEPOS = 1;	// ADCINT trips after AdcResults latch
 	AdcRegs.INTSEL1N2.bit.INT1E 	= 1;	// Enable ADCINT1

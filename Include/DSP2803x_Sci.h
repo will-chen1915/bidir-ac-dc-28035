@@ -218,7 +218,7 @@ struct  SCI_REGS {
 // SCI External References & Function Declarations:
 //
 extern volatile struct SCI_REGS SciaRegs;
-void InitSci(void);
+
 #ifdef __cplusplus
 }
 #endif /* extern "C" */

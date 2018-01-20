@@ -2,14 +2,14 @@
 
 
 /******************************************************************************
- *Function name: vInitialInterrupts() 
+ *Function name: InitialInterrupts()
  *Description :  enables the  the PIE  interrupts                                                     
  *input:         void                                 
  *global vars:   void                
  *output:        void  
  *CALLED BY:     main()
  ******************************************************************************/
-void vInitialInterrupts(void)
+void InitialInterrupts(void)
 {
 
 	EALLOW;
@@ -18,6 +18,7 @@ void vInitialInterrupts(void)
    	//PieVectTable.CLA1_INT2 = &cla1_task2_isr;    
     //PieVectTable.ECAP1_INT = &ecap1_isr;
     PieVectTable.ADCINT1 = &adc_isr;
+	PieVectTable.TINT0 = &cpu_timer0_isr;
 	EDIS;
 
 	//PieCtrlRegs.PIEIER2.bit.INTx1 = 1;  // Enable PIE Group 2, INT 1(ePWM1 TZINT)
@@ -25,6 +26,9 @@ void vInitialInterrupts(void)
 	//PieCtrlRegs.PIEIER11.bit.INTx2 = 1;	// Enable INT 11.2 in the PIE (CLA Task2)
 	//PieCtrlRegs.PIEIER4.bit.INTx1 = 1;  // Enable PIE Group 4, INT 1(eCAP1 INT)
 	PieCtrlRegs.PIEIER1.bit.INTx1 = 1;    //Enable PIE Group 1, INT 1(ADCIN1)
+	PieCtrlRegs.PIEIER1.bit.INTx7 = 1; //Enable INT 7(CPU TImer0)
+	// Enable the PIE Vector Table
+	PieCtrlRegs.PIECTRL.bit.ENPIE = 1;
 }
 
 /*=================================================================
@@ -39,10 +43,10 @@ void vInitialInterrupts(void)
 * CALLED BY:main()
 *
 *=================================================================*/
-void EnableInterrupts(void)
+void EnableINT(void)
 {
 	//EPwm1Regs.ETSEL.bit.INTEN = 1;	// Enable ePWM1 INT
-	CpuTimer0Regs.TCR.bit.TIE = 0;		//Enable CPUTIMER0
+	//CpuTimer0Regs.TCR.bit.TIE = 0;		//Enable CPUTIMER0
 	EALLOW;
 	//Cla1Regs.MIER.all = M_INT2;			// Enable Task 8,2,1
 	

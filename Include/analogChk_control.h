@@ -1,7 +1,7 @@
 #ifndef _ANALOGCHK_CONTROL_H
 #define _ANALOGCHK_CONTROL_H
 
-#include "Flash2803x_API.h"
+
 #include "config.h"
 #include <stdbool.h>
 
@@ -22,11 +22,11 @@ typedef union {
 #define RESOLUTION        ((1<<15) - 1)
 #define ADC_RESOLUTION    ((1<<12) - 1)
 
-#define HV_RANGE          (720.0)// HV voltage measurable range, V
+#define HV_RANGE          (723.3)// HV voltage measurable range, V
 
 #define HV_VOLT(x)        ((Uint16)((double)x*RESOLUTION/HV_RANGE))
 
-#define LH_RANGE          (18.0)
+#define LH_RANGE          (21.3)
 
 #define LV_VOLT(x)        ((Uint16)((double)x*RESOLUTION/LH_RANGE))
 

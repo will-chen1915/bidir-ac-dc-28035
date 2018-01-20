@@ -18,14 +18,6 @@
 extern "C" {
 #endif
 
-#define EPWM1_TIMER_TBPRD   100//60m/300k=200
-#define EPWM1_MAX_CMPA     	99//
-#define EPWM1_MIN_CMPA       1
-
-#define EPWM6_TIMER_TBPRD   667//500//1000//740//370   csm 090914
-#define EPWM6_MAX_CMPA      666 //1078//475//950//700//352
-#define EPWM6_MIN_CMPA       30//1//25
-
 // TBCTL (Time-Base Control)
 //==========================
 // CTRMODE bits
@@ -51,7 +43,7 @@ extern "C" {
 // PHSDIR bit
 #define	TB_DOWN			0x0
 #define	TB_UP			0x1
-#define	TB_UP_DOWN	    0x2
+
 // CMPCTL (Compare Control)
 //==========================
 // LOADAMODE and LOADBMODE bits
@@ -70,10 +62,6 @@ extern "C" {
 #define	AQ_CLEAR		0x1
 #define	AQ_SET			0x2
 #define	AQ_TOGGLE		0x3
-//AQCSFRC(Action-qualifier Continuous S/W Force Register)
-#define	AQC_NO_ACTION	0x0
-#define	AQC_FORCE_LOW	0x1
-#define	AQC_FORCE_HIGH	0x2
 
 // DBCTL (Dead-Band Control)
 //==========================
@@ -148,10 +136,10 @@ extern "C" {
 
 // ETSEL (Event Trigger Select)
 //=============================
-#define ET_DCAEVT1SOC   0x0
+#define	ET_DCAEVT1SOC   0x0
 #define	ET_CTR_ZERO	    0x1
 #define	ET_CTR_PRD	    0x2
-#define ET_CTR_PRDZERO  0x3
+#define	ET_CTR_PRDZERO  0x3
 #define	ET_CTRU_CMPA	0x4
 #define	ET_CTRD_CMPA	0x5
 #define	ET_CTRU_CMPB	0x6
@@ -180,9 +168,6 @@ extern "C" {
 #define	HR_CTR_ZERO		0x0
 #define	HR_CTR_PRD		0x1
 #define HR_CTR_ZERO_PRD 0x2
-
-#define HR_CONV_MAN		0x00 
-#define HR_CONV_AUTO	0x01
 
 #define HR_NORM_B       0x0
 #define HR_INVERT_B     0x1

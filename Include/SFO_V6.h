@@ -10,16 +10,19 @@
 //
 //  Ver | dd mmm yyyy | Who  | Description of changes
 // =====|=============|======|===============================================
-//  0.01| 09 Jan 2004 | TI   | New module
-//  0.02| 22 Jun 2007 | TI   | New version (V5) with support for more channels
 //  0.03| 11 Aug 2008 | TI   | New version (V6) with calibration logic separate
 //                           | from each ePWM channel.
+//  0.04| 03 Aug 2009 | TI   | Minor update to set MEP_ScaleFactor limit to 255
+//                           | instead of 254.
+//                           | Now updates HRMSTEP register for
+//                           | auto-conversion only of MEP_ScaleFactor is <= 255
+//                           |
 //###########################################################################
 
 
 //============================================================================
-// Description:		This header provides the function call interface
-// 			        for the scale factor optimizer
+// Description:     This header provides the function call interface
+//                  for the scale factor optimizer
 //============================================================================
 
 
@@ -39,13 +42,13 @@ extern "C" {
 //============================================================================
 // USER MUST UPDATE THIS CONSTANT FOR NUMBER OF HRPWM CHANNELS USED
 //============================================================================
-#define PWM_CH	8	// Equal # of HRPWM channels PLUS 1
-                    // i.e. PWM_CH is 8 for 7 channels, 7 for 6 channels, etc.
+#define PWM_CH  5   // Equal # of HRPWM channels PLUS 1
+                    // i.e. PWM_CH is 9 for 8 channels, 7 for 6 channels, etc.
 //============================================================================
 // Function prototypes for MEP SFO
 //============================================================================
 
-extern int SFO(void);             // SFO V6  Calibration Function
+int SFO(void);             // SFO V6  Calibration Function
 //============================================================================
 // Useful Defines when Using SFO Functions
 //============================================================================

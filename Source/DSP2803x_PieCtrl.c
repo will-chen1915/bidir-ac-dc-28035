@@ -1,17 +1,18 @@
 // TI File $Revision: /main/1 $
-// Checkin $Date: December 1, 2004   11:12:03 $
+// Checkin $Date: December 5, 2008   18:01:06 $
 //###########################################################################
 //
-// FILE:	DSP280x_PieCtrl.c
+// FILE:	DSP2803x_PieCtrl.c
 //
-// TITLE:	DSP280x Device PIE Control Register Initialization Functions.
+// TITLE:	DSP2803x Device PIE Control Register Initialization Functions.
 //
 //###########################################################################
-// $TI Release: DSP280x V1.30 $
-// $Release Date: February 10, 2006 $
+// $TI Release: 2803x C/C++ Header Files V1.21 $
+// $Release Date: December 1, 2009 $
 //###########################################################################
 
-#include "DSP2803x_Device.h"     // DSP280x Headerfile Include File
+#include "DSP2803x_Device.h"     // DSP2803x Headerfile Include File
+#include "DSP2803x_Examples.h"   // DSP2803x Examples Include File
 
 //---------------------------------------------------------------------------
 // InitPieCtrl: 
@@ -54,9 +55,26 @@ void InitPieCtrl(void)
 	PieCtrlRegs.PIEIFR11.all = 0;
 	PieCtrlRegs.PIEIFR12.all = 0;
 
-
 }	
 
+//---------------------------------------------------------------------------
+// EnableInterrupts: 
+//---------------------------------------------------------------------------
+// This function enables the PIE module and CPU interrupts
+//
+void EnableInterrupts()
+{
+
+    // Enable the PIE
+    PieCtrlRegs.PIECTRL.bit.ENPIE = 1;
+    		
+	// Enables PIE to drive a pulse into the CPU 
+	PieCtrlRegs.PIEACK.all = 0xFFFF;  
+
+	// Enable Interrupts at the CPU level 
+    EINT;
+
+}
 
 //===========================================================================
 // End of file.

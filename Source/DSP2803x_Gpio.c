@@ -113,8 +113,8 @@ void InitGpio(void)
 
 	// GPIO25---LED3
 	GpioCtrlRegs.GPAMUX2.bit.GPIO16= 0;	// GPIO25 as gpio 
-	GpioCtrlRegs.GPADIR.bit.GPIO25 = 1;	    // GPIO25 as Output
-	GpioCtrlRegs.GPAPUD.bit.GPIO25 = 0;	    // Pullup's enabled
+	GpioCtrlRegs.GPADIR.bit.GPIO16 = 1;	    // GPIO25 as Output
+	GpioCtrlRegs.GPAPUD.bit.GPIO16 = 0;	    // Pullup's enabled
 
 	#if 0
 	// GPIO44---LE3

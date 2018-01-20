@@ -192,7 +192,7 @@ typedef union
 #include "DSP2803x_EPwm.h"               // Enhanced PWM
 #include "DSP2803x_EQep.h"               // Enhanced QEP
 #include "DSP2803x_Gpio.h"               // General Purpose I/O Registers
-#include "DSP2803x_HRCap.h"              // High Resolution Capture
+//#include "DSP2803x_HRCap.h"              // High Resolution Capture
 #include "DSP2803x_I2c.h"                // I2C Registers
 #include "DSP2803x_Lin.h"                // LIN Registers
 #include "DSP2803x_NmiIntrupt.h"         // NMI Interrupt Registers
@@ -205,21 +205,11 @@ typedef union
 #include "DSP2803x_ePwm_defines.h"           // pwm define
 #include "SFO_V6.h"
 #include "IQmathLib.h"
-#include "Flash2803x_API.h"
-#include "Flash2803x_API_Config.h"
-#include "Flash2803x_API_Library.h"
-//#include "VmaxPower_isr.h"
-//#include "VmaxPower_RS485.h"
-#include "PubFunc.h"
-//#include "VmaxPower_constant.h"
-//#include "FlashUpdate.h"
-//#include "VmaxPower_main.h"
 #include "DSP2803x_GlobalPrototypes.h"             // Device Emulation Registers
-#include "CLAShared.h"
-//#include "VmaxPower_eeprom.h"
+
+
 #include "App_stateCtrl.h"
 #include "hptsc.h"
-
 #include "analogChk_control.h"
 #include "App_stateCtrl.h"
 #include "power_loopCtrl.h"
@@ -228,12 +218,12 @@ typedef union
 #include "config.h"
 #include "main.h"
 #include "SCICommu_Ctrl.h"
+#include "comdefs.h"
+#include "Interrupt_Ctrl.h"
 #include <stdbool.h>
 #include<stdio.h>
 #include <stdint.h>
 
-#include "Cla.h"
-//#include "Cla_shared.h" 
 
 #if (DSP28_28035PN||DSP28_28034PN||DSP28_28033PN||DSP28_28032PN||DSP28_28031PN||DSP28_28030PN)
 #define DSP28_COMP1 1

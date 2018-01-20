@@ -1,3 +1,5 @@
+// TI File $Revision: /main/5 $
+// Checkin $Date: November 10, 2009   14:05:39 $
 //###########################################################################
 //
 // FILE:   DSP2803x_SysCtrl.h
@@ -5,8 +7,8 @@
 // TITLE:  DSP2803x Device System Control Register Definitions.
 //
 //###########################################################################
-// $TI Release: F2803x C/C++ Header Files and Peripheral Examples V126 $
-// $Release Date: November 30, 2011 $
+// $TI Release: 2803x C/C++ Header Files V1.21 $
+// $Release Date: December 1, 2009 $
 //###########################################################################
 
 #ifndef DSP2803x_SYS_CTRL_H
@@ -162,7 +164,8 @@ struct PCLKCR3_BITS  {       // bits  description
    Uint16 CPUTIMER0ENCLK:1;  // 8     Enable SYSCLKOUT to CPUTIMER0
    Uint16 CPUTIMER1ENCLK:1;  // 9     Enable SYSCLKOUT to CPUTIMER1
    Uint16 CPUTIMER2ENCLK:1;  // 10    Enable SYSCLKOUT to CPTIMER2
-   Uint16 rsvd2:3;           // 13:11 reserved
+   Uint16 rsvd2:2;           // 12:11 reserved
+   Uint16 GPIOINENCLK:1;     // 13    Enable SYSCLKOUT to GPIO
    Uint16 CLA1ENCLK:1;       // 14    Enable SYSCLKOUT to CLA1
    Uint16 rsvd3:1;           // 15    reserved
 };
@@ -170,18 +173,6 @@ struct PCLKCR3_BITS  {       // bits  description
 union PCLKCR3_REG {
    Uint16              all;
    struct PCLKCR3_BITS bit;
-};
-
-struct PCLKCR2_BITS {       // bits   description
-    Uint16 rsvd1:8;
-	Uint16 HRCAP1ENCLK:1;
-	Uint16 HRCAP2ENCLK:1;
-	Uint16 rsvd2:5;
-};
-
-union PCLKCR2_REG {
-   Uint16              all;
-   struct PCLKCR2_BITS bit;
 };
 
 // PLL control register bit definitions:
@@ -219,28 +210,26 @@ struct SYS_CTRL_REGS {
    union   INTOSC1TRIM_REG INTOSC1TRIM; // 4: Internal Oscillator 1 Trim
    Uint16                  rsvd1;       // 5: reserved
    union   INTOSC2TRIM_REG INTOSC2TRIM; // 6: Internal Oscillator 2 Trim
-   Uint16                  rsvd2[2];    // 8-7
-   union   PCLKCR2_REG     PCLKCR2;     // 9: Peripheral clock control regsiter 2
-   Uint16                  rsvd3;       // 10
+   Uint16                  rsvd2[4];    // 7-10
    union   LOSPCP_REG      LOSPCP;      // 11: Low-speed peripheral clock pre-scaler
    union   PCLKCR0_REG     PCLKCR0;     // 12: Peripheral clock control register
    union   PCLKCR1_REG     PCLKCR1;     // 13: Peripheral clock control register
    union   LPMCR0_REG      LPMCR0;      // 14: Low-power mode control register 0
-   Uint16                  rsvd4;       // 15: reserved
+   Uint16                  rsvd3;       // 15: reserved
    union   PCLKCR3_REG     PCLKCR3;     // 16: Peripheral clock register
    union   PLLCR_REG       PLLCR;       // 17: PLL control register
    // No bit definitions are defined for SCSR because
    // a read-modify-write instruction can clear the WDOVERRIDE bit
    Uint16                  SCSR;        // 18: System control and status register
    Uint16                  WDCNTR;      // 19: WD counter register
-   Uint16                  rsvd5;       // 20
+   Uint16                  rsvd4;       // 20
    Uint16                  WDKEY;       // 21: WD reset key register
-   Uint16                  rsvd6[3];    // 22-24
+   Uint16                  rsvd5[3];    // 22-24
    // No bit definitions are defined for WDCR because
    // the proper value must be written to the WDCHK field
    // whenever writing to this register.
    Uint16                  WDCR;        // 25: WD timer control register
-   Uint16                  rsvd7[6];    // 26-30
+   Uint16                  rsvd6[6];    // 26-30
 };
 
 //---------------------------------------------------------------------------

@@ -92,11 +92,14 @@ void SCICommu_Control ( void )
 {
 	//SCI_DoRx();
 	static HptscTicks_t ts_SCI = 0;
-//	if (hptsc_IsElapsedRepetitive(&ts_SCI, K32_SCI_INTERVAL))
-//	{
+if (hptsc_IsElapsedRepetitive(&ts_SCI, K32_SCI_INTERVAL))
+	{
 		if(Flag_Txd)
-			{SCI_DoTx();}
-//	}
+		{
+			SCI_DoTx();
+//			LEDCtrl_LED3Toggle();
+		}
+	}
 
 }
 

@@ -20,7 +20,7 @@
 void main(void)
 
 {
-    //Clear all interrupt, initialize PIE vector table:Disable CPU interrupt 
+	//Clear all interrupt, initialize PIE vector table:Disable CPU interrupt
 	DINT;
 	DisableDog();
 	InitSysCtrl();
@@ -32,17 +32,8 @@ void main(void)
 	InitPieCtrl();
 	InitPieVectTable();
     // This function Initial and  enables the PIE  interrupts
-	vInitialInterrupts();
-    //ram initialize
-	//InitRAM(); //TODO
+	InitialInterrupts();
 
-
-
-//	MemCopy(&IsrRamfuncsLoadStart, &IsrRamfuncsLoadEnd, &IsrRamfuncsRunStart);
-
-    //MemCopy(&AppRamfuncsLoadStart, &AppRamfuncsLoadEnd, &AppRamfuncsRunStart);
-
-//	InitFlash();
 	memcpy(&RamfuncsRunStart,&RamfuncsLoadStart,&RamfuncsLoadEnd - &RamfuncsLoadStart);	
 	InitFlash();
 
@@ -50,25 +41,22 @@ void main(void)
 	InitPeripherals();
 
 	StartCpuTimer0();
-
-	//EALLOW;
-	//EPwm1Regs.HRMSTEP = 113;
-	//EDIS;
-
- 	//App_DataInit();
-	//App_CputoClaVar_init();//cla
+	StartCpuTimer1();
 	App_initStateCtrl();
-	EnableInterrupts();
+	Set_PID_Coff();
+	EnableINT();
+	
     //EnableDog();
-	Disable_SYNCPWMCtrl();
-
+	//Enable_MainPWMCtrl();
 	for(;;)
     {
-		IO_UpdSignal();
+		//LEDCtrl_LED3On();
+		//LEDCtrl_LED3Off();
+//		IO_UpdSignal();
 		analog_monitor();
 		SCICommu_Control();
 		//App_StateCtrl();
-		//ParametersCtrl();
+		ParametersCtrl();
 		
 		//Thermal_Main();// Temperature Monitor
 		//Fan_CtrlMain();

@@ -30,7 +30,7 @@ u16FaultRegType u16FaultReg = {0};
 
 Uint16 u16HVoltInst;
 
-
+Uint16 u16HVCal = HV_VOLT(43.5);
 void analog_HVmetering(void)
 {
 	static HptscTicks_t ts_HV = 0;
@@ -39,7 +39,8 @@ void analog_HVmetering(void)
 	if (hptsc_IsElapsedRepetitive(&ts_HV, K32_HV_INTERVAL))
 	{
 		u16HVoltTemp = AdcResult.ADCRESULT1 << 3;//Q15
-		u16HVoltInst = (u16HVoltInst + u16HVoltTemp)>>1;//Q15		
+		u16HVoltInst = (u16HVoltInst + u16HVoltTemp)>>1;//Q15
+		//LEDCtrl_LED3Toggle();
 	}
 
 }

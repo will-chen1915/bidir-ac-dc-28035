@@ -7,10 +7,19 @@
 
 #define CPU_SYSCLK (uint32_t)60000000
 
-#define DIVIDER_TIMER0(x)  (x-1)
+#define DIVIDER_TIMER(x)  (x-1)
+
 /*CPU timer0 clock frequency config*/
-#define CPU_TIMER0_DIVIDER              DIVIDER_TIMER0(200)
-#define CPU_TIME0_FREQUENCY            (Uint32)(CPU_SYSCLK/(CPU_TIMER0_DIVIDER+1))
+#define CPU_TIMER0_DIVIDER               DIVIDER_TIMER(1)//means no divide for SYSCLK
+#define CPU_TIMER0_PERIOD_USec           (40.0)//us
+#define CPU_TIME0_PERIOD_REGISTER_VALUE  ((Uint32)(CPU_TIMER0_PERIOD_USec*CPU_SYSCLK/(CPU_TIMER0_DIVIDER+1)/1000000))
+#define T0_ms(x)                         (Uint32)((float)x*1000/CPU_TIMER0_PERIOD_USec)
+
+
+/*CPU timer1 clock frequency config*/
+#define CPU_TIMER1_DIVIDER              DIVIDER_TIMER(200)
+#define CPU_TIME1_FREQUENCY            (Uint32)(CPU_SYSCLK/(CPU_TIMER1_DIVIDER+1))
+
 
 
 #define TRUE     1

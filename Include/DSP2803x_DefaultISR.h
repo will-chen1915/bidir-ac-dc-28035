@@ -48,8 +48,6 @@ interrupt void USER10_ISR(void);    // User Defined trap 10
 interrupt void USER11_ISR(void);    // User Defined trap 11
 interrupt void USER12_ISR(void);    // User Defined trap 12
 
-extern interrupt void USER_ISR(void);
-
 // Group 1 PIE Interrupt Service Routines:
 interrupt void  ADCINT1_ISR(void);   // ADC INT1 ISR - 1.1 OR 10.1
 interrupt void  ADCINT2_ISR(void);   // ADC INT2 ISR - 1.2 OR 10.2
@@ -97,7 +95,7 @@ interrupt void I2CINT1A_ISR(void);       // I2C-A
 interrupt void I2CINT2A_ISR(void);       // I2C-A
 
 // Group 9 PIE Interrupt Service Routines:
-//interrupt void SCIRXINTA_ISR(void);      // SCI-A
+interrupt void SCIRXINTA_ISR(void);      // SCI-A
 interrupt void SCITXINTA_ISR(void);      // SCI-A
 interrupt void LIN0INTA_ISR (void);      // LIN-A
 interrupt void LIN1INTA_ISR (void);      // LIN-A
@@ -134,6 +132,8 @@ interrupt void LUF_ISR(void);            // Latched underflow flag
 interrupt void PIE_RESERVED(void);       // Reserved for test
 interrupt void rsvd_ISR(void);           // for test
 interrupt void INT_NOTUSED_ISR(void);    // for unused interrupts
+
+interrupt void USER_ISR(void);
 
 #ifdef __cplusplus
 }

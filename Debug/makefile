@@ -4,36 +4,36 @@
 
 SHELL = cmd.exe
 
-CG_TOOL_ROOT := D:/TI/ccsv6/tools/compiler/c2000_6.2.7
+CG_TOOL_ROOT := c:/ti/ccsv6/tools/compiler/c2000_6.2.7
 
 ORDERED_OBJS += \
 $(GEN_CMDS__FLAG) \
-"./Source/App_stateCtrl.obj" \
-"./Source/DSP2803x_Adc.obj" \
-"./Source/DSP2803x_CSMPasswords.obj" \
-"./Source/DSP2803x_CpuTimers.obj" \
-"./Source/DSP2803x_DefaultIsr.obj" \
-"./Source/DSP2803x_ECan.obj" \
-"./Source/DSP2803x_EPwm.obj" \
-"./Source/DSP2803x_GlobalVariableDefs.obj" \
-"./Source/DSP2803x_Gpio.obj" \
-"./Source/DSP2803x_I2C.obj" \
-"./Source/DSP2803x_InitPeripherals.obj" \
-"./Source/DSP2803x_MemCopy.obj" \
-"./Source/DSP2803x_PieCtrl.obj" \
-"./Source/DSP2803x_PieVect.obj" \
-"./Source/DSP2803x_Sci.obj" \
-"./Source/DSP2803x_Spi.obj" \
-"./Source/DSP2803x_SysCtrl.obj" \
-"./Source/DSP280x_usDelay.obj" \
-"./Source/Interrupt_Ctrl.obj" \
-"./Source/SCICommu_Ctrl.obj" \
-"./Source/Signal_IOCtrl.obj" \
-"./Source/analogChk_control.obj" \
-"./Source/main.obj" \
-"./Source/power_loopCtrl.obj" \
-"../DSP2803x_Headers_nonBIOS.cmd" \
-"../F28035.cmd" \
+"./source/App_stateCtrl.obj" \
+"./source/DSP2803x_Adc.obj" \
+"./source/DSP2803x_CodeStartBranch.obj" \
+"./source/DSP2803x_CpuTimers.obj" \
+"./source/DSP2803x_DefaultIsr.obj" \
+"./source/DSP2803x_DisInt.obj" \
+"./source/DSP2803x_EPwm.obj" \
+"./source/DSP2803x_GlobalVariableDefs.obj" \
+"./source/DSP2803x_Gpio.obj" \
+"./source/DSP2803x_I2C.obj" \
+"./source/DSP2803x_InitPeripherals.obj" \
+"./source/DSP2803x_MemCopy.obj" \
+"./source/DSP2803x_PieCtrl.obj" \
+"./source/DSP2803x_PieVect.obj" \
+"./source/DSP2803x_Sci.obj" \
+"./source/DSP2803x_SysCtrl.obj" \
+"./source/DSP2803x_usDelay.obj" \
+"./source/Interrupt_Ctrl.obj" \
+"./source/SCICommu_Ctrl.obj" \
+"./source/Signal_IOCtrl.obj" \
+"./source/analogChk_control.obj" \
+"./source/main.obj" \
+"./source/power_loopCtrl.obj" \
+"../source/IQmath.lib" \
+"../CMD/DSP2803x_Headers_nonBIOS.cmd" \
+"../CMD/F28035_FLASH.cmd" \
 -l"libc.a" \
 
 -include ../makefile.init
@@ -43,10 +43,10 @@ RMDIR := RMDIR /S/Q
 
 # All of the sources participating in the build are defined here
 -include sources.mk
--include subdir_vars.mk
--include Source/subdir_vars.mk
--include subdir_rules.mk
--include Source/subdir_rules.mk
+-include source/subdir_vars.mk
+-include CMD/subdir_vars.mk
+-include source/subdir_rules.mk
+-include CMD/subdir_rules.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
@@ -134,42 +134,42 @@ endif
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXE_OUTPUTS += \
-28035_v01.out \
+F28035.out \
 
 EXE_OUTPUTS__QUOTED += \
-"28035_v01.out" \
+"F28035.out" \
 
 BIN_OUTPUTS += \
-28035_v01.hex \
+F28035.hex \
 
 BIN_OUTPUTS__QUOTED += \
-"28035_v01.hex" \
+"F28035.hex" \
 
 
 # All Target
-all: 28035_v01.out
+all: F28035.out
 
 # Tool invocations
-28035_v01.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
+F28035.out: $(OBJS) $(CMD_SRCS) $(LIB_SRCS) $(GEN_CMDS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: C2000 Linker'
-	"D:/TI/ccsv6/tools/compiler/c2000_6.2.7/bin/cl2000" -v28 -ml -mt --cla_support=cla0 -g --diag_warning=225 --display_error_number --diag_wrap=off -z -m"28035_v01.map" --stack_size=0x300 --warn_sections -i"D:/TI/ccsv6/tools/compiler/c2000_6.2.7/lib" -i"D:/TI/ccsv6/tools/compiler/c2000_6.2.7/include" --reread_libs --display_error_number --diag_wrap=off --xml_link_info="28035_v01_linkInfo.xml" --rom_model -o "28035_v01.out" $(ORDERED_OBJS)
+	"c:/ti/ccsv6/tools/compiler/c2000_6.2.7/bin/cl2000" -v28 -ml -mt --cla_support=cla0 -g --diag_warning=225 --display_error_number -z -m"F28035.map" --stack_size=0x300 --warn_sections -i"c:/ti/ccsv6/tools/compiler/c2000_6.2.7/lib" -i"c:/ti/ccsv6/tools/compiler/c2000_6.2.7/include" --reread_libs --display_error_number --xml_link_info="F28035_linkInfo.xml" --rom_model -o "F28035.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
-28035_v01.hex: $(EXE_OUTPUTS)
+F28035.hex: $(EXE_OUTPUTS)
 	@echo 'Invoking: C2000 Hex Utility'
-	"D:/TI/ccsv6/tools/compiler/c2000_6.2.7/bin/hex2000"  -o "28035_v01.hex" $(EXE_OUTPUTS__QUOTED)
+	"c:/ti/ccsv6/tools/compiler/c2000_6.2.7/bin/hex2000"  -o "F28035.hex" $(EXE_OUTPUTS__QUOTED)
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
 	-$(RM) $(EXE_OUTPUTS__QUOTED)$(BIN_OUTPUTS__QUOTED)
-	-$(RM) "Source\DSP2803x_Adc.pp" "Source\DSP2803x_CpuTimers.pp" "Source\DSP2803x_DefaultIsr.pp" "Source\DSP2803x_ECan.pp" "Source\DSP2803x_EPwm.pp" "Source\DSP2803x_GlobalVariableDefs.pp" "Source\DSP2803x_Gpio.pp" "Source\DSP2803x_I2C.pp" "Source\DSP2803x_InitPeripherals.pp" "Source\DSP2803x_MemCopy.pp" "Source\DSP2803x_PieCtrl.pp" "Source\DSP2803x_PieVect.pp" "Source\DSP2803x_Sci.pp" "Source\DSP2803x_Spi.pp" "Source\DSP2803x_SysCtrl.pp" "Source\Interrupt_Ctrl.pp" "Source\SCICommu_Ctrl.pp" "Source\main.pp" 
-	-$(RM) "Source\App_stateCtrl.pp" "Source\Signal_IOCtrl.pp" "Source\analogChk_control.pp" "Source\power_loopCtrl.pp" 
-	-$(RM) "Source\App_stateCtrl.obj" "Source\DSP2803x_Adc.obj" "Source\DSP2803x_CSMPasswords.obj" "Source\DSP2803x_CpuTimers.obj" "Source\DSP2803x_DefaultIsr.obj" "Source\DSP2803x_ECan.obj" "Source\DSP2803x_EPwm.obj" "Source\DSP2803x_GlobalVariableDefs.obj" "Source\DSP2803x_Gpio.obj" "Source\DSP2803x_I2C.obj" "Source\DSP2803x_InitPeripherals.obj" "Source\DSP2803x_MemCopy.obj" "Source\DSP2803x_PieCtrl.obj" "Source\DSP2803x_PieVect.obj" "Source\DSP2803x_Sci.obj" "Source\DSP2803x_Spi.obj" "Source\DSP2803x_SysCtrl.obj" "Source\DSP280x_usDelay.obj" "Source\Interrupt_Ctrl.obj" "Source\SCICommu_Ctrl.obj" "Source\Signal_IOCtrl.obj" "Source\analogChk_control.obj" "Source\main.obj" "Source\power_loopCtrl.obj" 
-	-$(RM) "Source\DSP2803x_CSMPasswords.pp" "Source\DSP280x_usDelay.pp" 
+	-$(RM) "source\DSP2803x_Adc.pp" "source\DSP2803x_CpuTimers.pp" "source\DSP2803x_DefaultIsr.pp" "source\DSP2803x_EPwm.pp" "source\DSP2803x_GlobalVariableDefs.pp" "source\DSP2803x_Gpio.pp" "source\DSP2803x_I2C.pp" "source\DSP2803x_InitPeripherals.pp" "source\DSP2803x_MemCopy.pp" "source\DSP2803x_PieCtrl.pp" "source\DSP2803x_PieVect.pp" "source\DSP2803x_Sci.pp" "source\DSP2803x_SysCtrl.pp" "source\Interrupt_Ctrl.pp" "source\SCICommu_Ctrl.pp" "source\main.pp" 
+	-$(RM) "source\App_stateCtrl.pp" "source\Signal_IOCtrl.pp" "source\analogChk_control.pp" "source\power_loopCtrl.pp" 
+	-$(RM) "source\App_stateCtrl.obj" "source\DSP2803x_Adc.obj" "source\DSP2803x_CodeStartBranch.obj" "source\DSP2803x_CpuTimers.obj" "source\DSP2803x_DefaultIsr.obj" "source\DSP2803x_DisInt.obj" "source\DSP2803x_EPwm.obj" "source\DSP2803x_GlobalVariableDefs.obj" "source\DSP2803x_Gpio.obj" "source\DSP2803x_I2C.obj" "source\DSP2803x_InitPeripherals.obj" "source\DSP2803x_MemCopy.obj" "source\DSP2803x_PieCtrl.obj" "source\DSP2803x_PieVect.obj" "source\DSP2803x_Sci.obj" "source\DSP2803x_SysCtrl.obj" "source\DSP2803x_usDelay.obj" "source\Interrupt_Ctrl.obj" "source\SCICommu_Ctrl.obj" "source\Signal_IOCtrl.obj" "source\analogChk_control.obj" "source\main.obj" "source\power_loopCtrl.obj" 
+	-$(RM) "source\DSP2803x_CodeStartBranch.pp" "source\DSP2803x_DisInt.pp" "source\DSP2803x_usDelay.pp" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

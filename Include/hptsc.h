@@ -13,13 +13,12 @@
 #if !defined _HPTSC_H_
 #define _HPTSC_H_
 
-#include <stdbool.h>
-#include "comdefs.h"
 #include "DSP2803x_Device.h"
+#include <stdbool.h>
 
 #define HPTSC_COUNTER_MSK 0xFFFFFFFF   
 /*HPTSC Config*/
-#define CONFIG_HPTSC_HZ   CPU_TIME0_FREQUENCY  //select timer0
+#define CONFIG_HPTSC_HZ   CPU_TIME1_FREQUENCY  //select timer1
 
 typedef unsigned long HptscTicks_t;
 
@@ -34,7 +33,7 @@ typedef unsigned long HptscTicks_t;
 
 static inline HptscTicks_t hptsc_Timestamp(void)
 {
-    HptscTicks_t now = CpuTimer0Regs.TIM.all;
+    HptscTicks_t now = CpuTimer1Regs.TIM.all;
 
     /*
      * The systick timer is a down counter, but we have to return

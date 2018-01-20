@@ -871,13 +871,13 @@ struct ECAN_REGS {
 
 /* eCAN Message ID (MSGID) bit definitions */
 struct  CANMSGID_BITS {        // bits  description
-   UINT16      EXTMSGID_L:16;  // 0:15
-   UINT16      EXTMSGID_H:2;   // 16:17
-   UINT16      STDMSGID:11;    // 18:28 
-   Uint16      AAM:1;          // 29   
+   Uint16      EXTMSGID_L:16;  // 0:15
+   Uint16      EXTMSGID_H:2;   // 16:17
+   Uint16      STDMSGID:11;    // 18:28
+   Uint16      AAM:1;          // 29
    Uint16      AME:1;          // 30
-   Uint16      IDE:1;          // 31   
- 
+   Uint16      IDE:1;          // 31
+
 };
 
 /* Allow access to the bit fields or entire register */
@@ -901,15 +901,6 @@ union CANMSGCTRL_REG {
    Uint32                  all;
    struct CANMSGCTRL_BITS  bit;
 };
-
-typedef	struct{         //zlx/20081203
-	union CANMSGID_REG	CanId;
-	unsigned int	CanData0;
-	unsigned int	CanData1;
-	unsigned int	CanData2;
-	unsigned int	CanData3;
-}CANFRAME;
-
 
 /* eCAN Message Data Register low (MDR_L) word definitions */
 struct  CANMDL_WORDS {      // bits  description
@@ -1127,7 +1118,7 @@ struct MOTO_REGS {
    Uint32 MOTO30;
    Uint32 MOTO31;
 };
-void InitECan(void);
+
 //---------------------------------------------------------------------------
 // eCAN External References & Function Declarations:
 //

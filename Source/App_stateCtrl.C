@@ -114,7 +114,7 @@ void PSUChargeStateCtrl(void)
 		case SHUT_DOWN:
 		{
 			Disable_MainPWMCtrl();
-			if((is_PFC_OK() == TRUE)&&(is_fault() == FALSE))
+			if(1/*(is_PFC_OK() == TRUE)&&(is_fault() == FALSE)*/)
 			{
 				if (hptsc_IsTimerExpired(&ts_ChgTimer))
 				{
@@ -129,15 +129,15 @@ void PSUChargeStateCtrl(void)
 		}
 		case SOFT_START:
 		{
-			if(is_OCP() == TRUE)
+			if(0/*is_OCP() == TRUE*/)
 			{
 				;
 			}
-			else if(is_LVOVP() == TRUE)
+			else if(0/*is_LVOVP() == TRUE*/)
 			{
 				;
 			}
-			else if(isHV_OVP() == TRUE)
+			else if(0/*isHV_OVP() == TRUE*/)
 			{
 				;
 			}
@@ -153,15 +153,15 @@ void PSUChargeStateCtrl(void)
 		}
 		case STABILIZITING:
 		{
-			if(is_OCP() == TRUE)
+			if(0/*is_OCP() == TRUE*/)
 			{
 				;
 			}
-			else if(is_LVOVP() == TRUE)
+			else if(0/*is_LVOVP() == TRUE*/)
 			{
 				;
 			}
-			else if(isHV_OVP() == TRUE)
+			else if(0/*isHV_OVP() == TRUE*/)
 			{
 				;
 			}
@@ -174,15 +174,15 @@ void PSUChargeStateCtrl(void)
 		}	
 		case NORMAL_OPERATION:
 		{
-			if(is_OCP() == TRUE)
+			if(0/*is_OCP() == TRUE*/)
 			{
 				;
 			}
-			else if(is_LVOVP() == TRUE)
+			else if(0/*is_LVOVP() == TRUE*/)
 			{
 				;			
 			}
-			else if(isHV_OVP() == TRUE)
+			else if(0/*isHV_OVP() == TRUE*/)
 			{
 				;			
 			}
@@ -321,7 +321,7 @@ void App_StateCtrl(void)
                 initPSUChargeStateCtrl();
 			    PSUMode = CHARGE_MODE;
 			}
-			else if(1)
+			else if(0)
 			{
 			    initPSUDischargeStateCtrl();
 			    PSUMode = DISCHARGE_MODE;

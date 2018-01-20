@@ -104,8 +104,8 @@ struct PIE_VECT_TABLE {
       PINT     rsvd4_4;
       PINT     rsvd4_5;
       PINT     rsvd4_6;
-      PINT     HRCAP1_INT; // HRCAP-1
-      PINT     HRCAP2_INT; // HRCAP-2
+      PINT     rsvd4_7;
+      PINT     rsvd4_8;
 
 // Group 5 PIE Peripheral Vectors:
       PINT     EQEP1_INT; // EQEP-1

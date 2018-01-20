@@ -45,8 +45,8 @@ void InitCpuTimers(void)
     // Initialize address pointers to respective timer registers:
     CpuTimer0.RegsAddr = &CpuTimer0Regs;
     // Initialize timer period to maximum:
-    CpuTimer0Regs.PRD.all  = HPTSC_COUNTER_MSK;
-    // Initialize pre-scale counter to divide by 200 (SYSCLKOUT):60000000/200=300KHz
+    CpuTimer0Regs.PRD.all  = CPU_TIME0_PERIOD_REGISTER_VALUE;
+
     CpuTimer0Regs.TPR.bit.TDDR= CPU_TIMER0_DIVIDER;
 	CpuTimer0Regs.TPR.bit.PSC = 0;
     CpuTimer0Regs.TPRH.all = 0;
@@ -56,6 +56,10 @@ void InitCpuTimers(void)
     CpuTimer0Regs.TCR.bit.TSS = 1;
     // Reload all counter register with period value:
     CpuTimer0Regs.TCR.bit.TRB = 1;
+	//Enable interrupt
+	CpuTimer0Regs.TCR.bit.TIE = 1;
+	//Clear interrupt flag
+	CpuTimer0Regs.TCR.bit.TIF = 1;
     // Reset interrupt counters:
     CpuTimer0.InterruptCount = 0;            	
 	
@@ -66,17 +70,22 @@ void InitCpuTimers(void)
 //
 // For this reason, the code to manipulate these two timers is
 // commented out and not used in these examples.
-    #if 0
+
     // Initialize address pointers to respective timer registers:
 	CpuTimer1.RegsAddr = &CpuTimer1Regs;
 //	CpuTimer2.RegsAddr = &CpuTimer2Regs;
 	// Initialize timer period to maximum:
-	CpuTimer1Regs.PRD.all  = 0x752A;//0.5MS//0xEA54; //0xEA54*16.67ns=1ms
+	CpuTimer1Regs.PRD.all  = HPTSC_COUNTER_MSK;
 //	CpuTimer2Regs.PRD.all  = 0xFFFFFFFF;
+	// Initialize pre-scale counter to divide by 200 (SYSCLKOUT):60000000/200=300KHz(input clock)
+	CpuTimer1Regs.TPR.bit.TDDR= CPU_TIMER1_DIVIDER;
+	CpuTimer1Regs.TPR.bit.PSC = 0;
+	CpuTimer1Regs.TPRH.all = 0;
+
 		//Timer1 Free Run
 	CpuTimer1Regs.TCR.bit.FREE = 1;
-	// Make sure timers are started:
-	CpuTimer1Regs.TCR.bit.TSS = 0;             
+	// Make sure timers are stopped:
+	CpuTimer1Regs.TCR.bit.TSS = 1;             
 //	CpuTimer2Regs.TCR.bit.TSS = 1;             
 	// Reload all counter register with period value:
 	CpuTimer1Regs.TCR.bit.TRB = 1;             
@@ -84,7 +93,7 @@ void InitCpuTimers(void)
 	// Reset interrupt counters:
 	CpuTimer1.InterruptCount = 0;
 //	CpuTimer2.InterruptCount = 0;
-    #endif
+
 }	
 	
 //---------------------------------------------------------------------------

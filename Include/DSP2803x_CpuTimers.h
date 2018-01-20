@@ -19,8 +19,6 @@
 extern "C" {
 #endif
 
-#include "Flash2803x_API.h"
-
 //---------------------------------------------------------------------------
 // CPU Timer Register Bit Definitions:
 //
@@ -108,9 +106,6 @@ struct CPUTIMER_VARS {
    float   CPUFreqInMHz;
    float   PeriodInUSec;
 };
-
-#define DIVIDER_TIMER0(x)  (x-1)
-
 
 //---------------------------------------------------------------------------
 // Function prototypes and external definitions:
