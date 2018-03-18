@@ -1,0 +1,15 @@
+---- u16LVoutRefNormal Matches (14 in 3 files) ----
+App_stateCtrl.C (source):	u16LVoutRefNormal = K16_LVOLT_CHARGE_NORMAL;	
+App_stateCtrl.C (source):	u16LVoutRefNormal = K16_LVOLT_DISCHARGE_NORMAL;
+power_loopCtrl.C (source):Uint16 u16LVoutRefNormal = 0;
+power_loopCtrl.C (source):	if ( u16set_temp > u16LVoutRefNormal )
+power_loopCtrl.C (source):		u16set_temp = u16LVoutRefNormal;
+power_loopCtrl.C (source):/*every 1*40us=40us, u16LVoutRefNormal = 19998,    19998/2*0.04ms=400ms*/
+power_loopCtrl.C (source):            if(u16LVoutRef < u16LVoutRefNormal)
+power_loopCtrl.C (source):		        if(u16LVoutRef >= u16LVoutRefNormal)
+power_loopCtrl.C (source):		            u16LVoutRef = u16LVoutRefNormal;
+power_loopCtrl.C (source):	    if(u16LVoutRef < u16LVoutRefNormal)                   \
+power_loopCtrl.C (source):            if(u16LVoutRef > u16LVoutRefNormal)               \
+power_loopCtrl.C (source):                u16LVoutRef = u16LVoutRefNormal;              \
+power_loopCtrl.C (source):	if ( LV_ref > u16LVoutRefNormal )
+power_loopCtrl.h (include):extern Uint16 u16LVoutRefNormal;
